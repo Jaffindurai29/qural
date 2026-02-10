@@ -1,5 +1,5 @@
-import Hero from "./components/Hero";
-import SuccessStories from "./components/SuccessStories";
+import Hero from "./modules/Hero";
+import SuccessStories from "./modules/SuccessStories";
 
 export default function Home() {
   return (
