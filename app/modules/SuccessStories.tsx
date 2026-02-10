@@ -22,8 +22,8 @@ const imgIcon4 = "https://www.figma.com/api/mcp/asset/d5a90432-6d3d-4a08-b4df-05
 
 export default function SuccessStories() {
   return (
-    <section className="w-full min-h-screen bg-[#ed3543] flex justify-center items-center px-2 md:px-0 isolate z-0" data-name="2" data-node-id="163:47">
-      <div className="relative w-full max-w-[1600px] min-h-screen mx-auto">
+    <section className="w-full min-h-[2300px] bg-[#ed3543] flex justify-center items-center px-2 md:px-0 isolate z-0" data-name="2" data-node-id="163:47">
+      <div className="relative w-full max-w-[1600px] min-h-[2300px] mx-auto">
         {/* Figma background and decorative elements */}
         <div className="absolute left-[82px] w-[2182px] h-[2182px] top-[141px]" data-node-id="163:48">
           <img alt="" className="block max-w-none w-full h-full" src={imgEllipse2} />
