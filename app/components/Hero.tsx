@@ -13,186 +13,164 @@ const imgRectangle2 = "https://www.figma.com/api/mcp/asset/21c08f64-5396-453d-b6
 
 export default function Hero() {
     return (
-        <div className="bg-black relative w-full min-h-screen" data-name="Pexio" data-node-id="163:3">
-            {/* Decorative Background Ellipses */}
-            <div className="absolute flex h-[935.705px] items-center justify-center left-[-146px] top-[-161px] w-[896.198px]">
-                <div className="flex-none rotate-[46.53deg]">
-                    <div className="h-[124.867px] relative w-[1170.946px]" data-node-id="163:4">
-                        <div className="absolute inset-[-152.16%_-16.23%]">
-                            <img alt="" className="block max-w-none size-full" src={imgEllipse2} />
+        <div className="bg-black relative w-full min-h-screen overflow-hidden font-['Outfit:Regular',sans-serif]" data-name="Pexio" data-node-id="163:3">
+            {/* Background Elements - Absolute but anchored to center/scale properly */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                {/* Top Left Ellipses - Even Thicker & More Centered */}
+                <div className="absolute top-[-140px] left-[-20px] w-[700px] h-[750px] flex justify-center items-center scale-90">
+                    <div className="rotate-[46.53deg]">
+                        <div className="relative w-[900px] h-[450px] scale-y-150">
+                            <img alt="" className="block w-full h-full object-contain brightness-150" src={imgEllipse2} />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="absolute flex h-[935.705px] items-center justify-center left-[-176px] top-[-543px] w-[896.198px]">
-                <div className="flex-none rotate-[46.53deg]">
-                    <div className="h-[124.867px] relative w-[1170.946px]" data-node-id="163:5">
-                        <div className="absolute inset-[-152.16%_-16.23%]">
-                            <img alt="" className="block max-w-none size-full" src={imgEllipse2} />
+                <div className="absolute top-[-450px] left-[-40px] w-[700px] h-[750px] flex justify-center items-center scale-90">
+                    <div className="rotate-[46.53deg]">
+                        <div className="relative w-[900px] h-[650px] scale-y-150">
+                            <img alt="" className="block w-full h-full object-contain brightness-150" src={imgEllipse2} />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="absolute flex h-[935.705px] items-center justify-center left-[-594px] top-[-276px] w-[896.198px]">
-                <div className="flex-none rotate-[46.53deg]">
-                    <div className="h-[124.867px] relative w-[1170.946px]" data-node-id="163:6">
-                        <div className="absolute inset-[-152.16%_-16.23%]">
-                            <img alt="" className="block max-w-none size-full" src={imgEllipse2} />
+                <div className="absolute top-[-220px] left-[-380px] w-[700px] h-[750px] flex justify-center items-center scale-90">
+                    <div className="rotate-[46.53deg]">
+                        <div className="relative w-[900px] h-[450px] scale-y-150">
+                            <img alt="" className="block w-full h-full object-contain brightness-150" src={imgEllipse2} />
                         </div>
+                    </div>
+                </div>
+
+                {/* Bottom Center Ellipses - Scaled Down */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-[700px] w-[1200px] h-[1200px] opacity-40">
+                    <img alt="" className="block w-full h-full object-cover" src={imgEllipse7} />
+                </div>
+                <div className="absolute left-[20px] top-[800px] w-[1100px] h-[1100px] opacity-30">
+                    <img alt="" className="block w-full h-full object-cover" src={imgEllipse8} />
+                </div>
+                {/* Bottom Blur */}
+                <div className="absolute left-0 bottom-0 w-full h-[250px] bg-black blur-[60px]" />
+
+                {/* Vector Wave - Scaled Down Height */}
+                <div className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-[1200px] h-[380px] flex justify-center items-end">
+                    <div className="-scale-y-100 rotate-180 w-full h-full relative">
+                        <img alt="" className="block w-full h-full object-cover" src={imgVector} />
                     </div>
                 </div>
             </div>
 
-            {/* Navigation */}
-            <div className="-translate-x-1/2 absolute content-stretch flex font-['Outfit:Regular',sans-serif] font-normal gap-[70px] items-center leading-[normal] left-[calc(50%-0.5px)] text-[20px] top-[40px]" data-node-id="163:7">
-                <p className="relative shrink-0 text-white" data-node-id="163:8">
-                    Home
+            {/* Navigation Bar - Centered Container - Compact */}
+            <nav className="absolute top-[30px] left-0 right-0 z-50 flex justify-between items-center w-full max-w-[1200px] mx-auto px-[40px]">
+                {/* Logo Placeholder */}
+                <div className="w-[120px] hidden md:block">
+                    {/* Space for logo */}
+                </div>
+
+                {/* Centered Nav Links - Smaller Font */}
+                <div className="flex gap-[40px] text-[16px] text-[rgba(255,255,255,0.8)] font-['Outfit:Regular',sans-serif]">
+                    <a href="#" className="text-white hover:text-[#ed3543] transition-colors relative">Home</a>
+                    <a href="#" className="hover:text-white transition-colors relative">Feature</a>
+                    <a href="#" className="hover:text-white transition-colors relative">Pricing</a>
+                    <a href="#" className="hover:text-white transition-colors relative">Contact</a>
+                    <a href="#" className="hover:text-white transition-colors relative">Pages</a>
+                </div>
+
+                {/* Right Button - Compact */}
+                <button className="bg-[#f4f4f4] px-[18px] py-[6px] rounded-[6px] shadow-md flex items-center justify-center relative group hover:scale-105 transition-transform w-[150px]">
+                    <span className="text-[#ed3543] font-['Outfit:SemiBold',sans-serif] font-semibold text-[14px] relative z-10">Want to Upskill ?</span>
+                    <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0.5px_0.5px_0.5px_white,inset_-0.5px_-0.5px_0.5px_rgba(0,0,0,0.1)] pointer-events-none" />
+                </button>
+            </nav>
+
+            {/* Main Content - Centered Absolute Container - Tighter Spacing */}
+            <div className="absolute top-[160px] left-0 right-0 z-10 flex flex-col items-center pointer-events-none">
+
+                {/* Tagline Pill - Scaled Down */}
+                <div className="relative w-[500px] h-[40px] flex justify-center items-center pointer-events-auto">
+                    <div className="bg-[rgba(233,12,12,0.1)] backdrop-blur-sm px-[24px] py-[10px] rounded-[24px] border border-[rgba(233,12,12,0.1)]">
+                        <p className="text-white text-[16px] leading-none whitespace-nowrap">Where careers are engineered</p>
+                    </div>
+                    {/* Decorative Lines - Thicker & Longer */}
+                    <div className="absolute left-[380px] top-[5px] w-[240px] h-[30px] flex flex-col justify-between">
+                        <div className="w-full h-[6px] bg-white opacity-40 rounded-full" />
+                        <div className="w-full h-[6px] bg-white opacity-40 rounded-full" />
+                        <div className="w-full h-[6px] bg-white opacity-40 rounded-full" />
+                    </div>
+                    <div className="absolute right-[380px] top-[5px] w-[240px] h-[30px] flex flex-col justify-between">
+                        <div className="w-full h-[6px] bg-white opacity-40 rounded-full" />
+                        <div className="w-full h-[6px] bg-white opacity-40 rounded-full" />
+                        <div className="w-full h-[6px] bg-white opacity-40 rounded-full" />
+                    </div>
+                </div>
+
+                {/* Headline - H1 - Smaller */}
+                <h1 className="mt-[24px] font-['Outfit:SemiBold',sans-serif] font-semibold text-[48px] text-white leading-tight text-center pointer-events-auto">
+                    Engineering careers aren't accidental.
+                </h1>
+
+                {/* Headline - H2 (Accent) - Smaller */}
+                <h2 className="mt-[4px] font-['Outfit:SemiBold',sans-serif] font-semibold text-[56px] text-white leading-none text-center pointer-events-auto">
+                    <span className="align-middle text-[56px]">They're </span>
+                    <span className="text-[#ee3042] align-middle text-[56px]">ENGINEERED</span>.
+                </h2>
+
+                {/* Subtext - Smaller */}
+                <p className="mt-[16px] font-['Outfit:Regular',sans-serif] text-[20px] text-[rgba(255,255,255,0.9)] text-center pointer-events-auto">
+                    Building Talent. Powering Projects. Scaling Futures
                 </p>
-                <p className="relative shrink-0 text-[rgba(255,255,255,0.8)]" data-node-id="163:9">
-                    Feature
-                </p>
-                <p className="relative shrink-0 text-[rgba(255,255,255,0.8)]" data-node-id="163:10">
-                    Pricing
-                </p>
-                <p className="relative shrink-0 text-[rgba(255,255,255,0.8)]" data-node-id="163:11">
-                    Contact
-                </p>
-                <p className="relative shrink-0 text-[rgba(255,255,255,0.8)]" data-node-id="163:12">
-                    Pages
-                </p>
+
+                {/* Main CTA Button - "Looking for a Talent?" - Smaller */}
+                <div className="mt-[36px] w-[280px] h-[54px] relative group cursor-pointer pointer-events-auto rounded-[10px]">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#ed3543] to-[#bb1f36] rounded-[10px]" />
+                    <div className="absolute inset-0 opacity-40 mix-blend-plus-lighter rounded-[10px]" style={{ backgroundImage: `url('${imgFrame1321314585}')`, backgroundSize: '250px' }} />
+
+                    <div className="absolute inset-0 flex items-center justify-center border border-white rounded-[10px] shadow-[0px_16px_24px_rgba(229,0,92,0.15)] group-hover:shadow-[0px_20px_32px_rgba(229,0,92,0.25)] transition-shadow">
+                        <p className="font-['Outfit:SemiBold',sans-serif] font-semibold text-[20px] text-white relative z-10">Looking for a Talent ?</p>
+                    </div>
+                </div>
+
             </div>
 
-            {/* Want to Upskill Button */}
-            <div className="absolute bg-[#f4f4f4] content-stretch flex h-[47px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[8.418px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[33px]" data-name="Button" data-node-id="169:746">
-                <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[#ed3543] text-[16.836px]" data-node-id="169:747">{`Want to Upskill ? `}</p>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
-            </div>
-
-            {/* Looking for a Talent Button */}
-            <div className="-translate-x-1/2 absolute border border-solid border-white content-stretch flex h-[67px] items-center justify-center left-[calc(50%+0.5px)] p-[10px] rounded-[12px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] top-[537px] w-[345px]" data-node-id="169:743">
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[12px]">
-                    <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[12px] to-[#bb1f36]" />
-                    <div className="absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[12px]" style={{ backgroundImage: `url('${imgFrame1321314585}')` }} />
+            {/* Testimonial Cards - Adjusted Positions for Compact Layout */}
+            {/* Purple Card (Right) */}
+            <div className="absolute top-[550px] left-[70%] xl:left-[68%] 2xl:left-[66%] flex items-center gap-[20px] bg-[#8338ec] border-[1px] border-white p-[8px] rounded-tl-[10px] rounded-bl-[10px] rounded-tr-[20px] shadow-lg animate-float-slow z-20 scale-90 origin-right">
+                <div className="text-white text-[14px] font-['Outfit:Regular',sans-serif] leading-[18px] text-right">
+                    <p className="m-0">We design, deploy, and scale high-performance</p>
+                    <p className="m-0">BIM & EPC talent for global AEC firms.</p>
                 </div>
-                <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[24px] text-white" data-node-id="169:744">
-                    Looking for a Talent ?
-                </p>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
-            </div>
-
-            {/* Tagline Section */}
-            <div className="-translate-x-1/2 absolute h-[51px] left-1/2 top-[199px] w-[712px]" data-node-id="163:17">
-                <div className="-translate-x-1/2 absolute bg-[rgba(233,12,12,0.1)] content-stretch flex items-center justify-center left-[calc(50%+1.5px)] px-[31px] py-[13px] rounded-[30px] top-0" data-node-id="163:18">
-                    <p className="font-['Outfit:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[20px] text-white" data-node-id="163:19">
-                        Where careers are engineered
-                    </p>
-                </div>
-                <div className="absolute h-[30px] left-[528px] top-[11px] w-[210px]" data-node-id="163:20">
-                    <img alt="" className="block max-w-none size-full" src={imgGroup357} />
-                </div>
-                <div className="absolute h-[30px] left-[-25px] top-[11px] w-[212px]" data-node-id="163:23">
-                    <img alt="" className="block max-w-none size-full" src={imgGroup358} />
+                <div className="relative w-[30px] h-[30px] flex-shrink-0 rounded-full overflow-hidden border border-white/30">
+                    <img alt="" className="w-full h-full object-cover" src={imgEllipse1} />
                 </div>
             </div>
 
-            {/* Main Headline */}
-            <p className="absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] left-[calc(50%-549px)] text-[64px] text-white top-[282px]" data-node-id="163:26">
-                Engineering careers aren't accidental.
-            </p>
-
-            {/* Headline with Colored Accent */}
-            <p className="absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[0] left-[calc(50%-376px)] text-[0px] text-[74px] text-white top-[367px]" data-node-id="163:27">
-                <span className="leading-[normal]">{`They're `}</span>
-                <span className="leading-[normal] text-[#ee3042]">ENGINEERED</span>
-                <span className="leading-[normal]">.</span>
-            </p>
-
-            {/* Subheading */}
-            <p className="absolute font-['Outfit:Regular',sans-serif] font-normal leading-[normal] left-[calc(50%-265px)] text-[24px] text-white top-[468px]" data-node-id="163:28">
-                Building Talent. Powering Projects. Scaling Futures
-            </p>
-
-            {/* Background Ellipses Bottom */}
-            <div className="-translate-x-1/2 absolute left-1/2 size-[1556px] top-[864px]" data-node-id="163:29">
-                <img alt="" className="block max-w-none size-full" src={imgEllipse7} />
+            {/* Yellow Card (Lower Right) */}
+            <div className="absolute top-[650px] left-[60%] xl:left-[58%] 2xl:left-[56%] flex items-center gap-[20px] bg-[#fee440] border-[1px] border-white p-[8px] rounded-tl-[10px] rounded-bl-[10px] rounded-tr-[20px] shadow-lg animate-float-slower z-20 scale-90 origin-right">
+                <div className="text-[#343a40] text-[14px] font-['Outfit:Regular',sans-serif] leading-[18px] text-right">
+                    <p className="m-0">Qural Connects Talent, Industry and academia</p>
+                    <p className="m-0">into one engineered ecosystem.</p>
+                </div>
+                <div className="relative w-[30px] h-[30px] flex-shrink-0 rounded-full overflow-hidden border border-white/30">
+                    <img alt="" className="w-full h-full object-cover" src={imgEllipse1} />
+                </div>
             </div>
-            <div className="absolute left-[31px] size-[1389px] top-[947px]" data-node-id="163:30">
-                <img alt="" className="block max-w-none size-full" src={imgEllipse8} />
-            </div>
-            <div className="absolute bg-black blur-[75px] h-[318px] left-0 top-[889px] w-[1440px]" data-node-id="163:31" />
 
-            {/* Vector Wave */}
-            <div className="-translate-x-1/2 absolute bottom-[-10px] flex h-[474px] items-center justify-center left-[calc(53.13%-30.5px)] w-[1527px]">
-                <div className="-scale-y-100 flex-none rotate-180">
-                    <div className="h-[474px] relative w-[1527px]" data-name="Vector" data-node-id="170:767">
-                        <img alt="" className="block max-w-none size-full" src={imgVector} />
+            {/* Logo Badge (Bottom Right) - Smaller */}
+            <div className="absolute bottom-[6%] right-[2%] w-[120px] h-[120px] z-10 animate-pulse-slow hidden lg:block">
+                <img alt="" className="w-full h-full object-contain" src={imgGroup1000001535} />
+            </div>
+
+            {/* Scroll Indicators (Bottom Right) - Smaller */}
+            <div className="absolute bottom-[100px] right-[120px] hidden lg:block scale-90">
+                <div className="w-[40px] h-[40px] rounded-[30px] flex items-center justify-center -rotate-90 relative">
+                    <div className="absolute inset-0 border border-white/20 rounded-full" />
+                    <div className="w-[28px] h-[28px] rotate-90">
+                        <img alt="" className="w-full h-full" src={imgEllipse3} />
                     </div>
                 </div>
             </div>
-
-            {/* Yellow Testimonial Card */}
-            <div className="absolute bg-[#fee440] border-[1.313px] border-solid border-white content-stretch flex gap-[27.577px] items-center left-[calc(62.5%+19px)] p-[10.506px] rounded-bl-[13.132px] rounded-tl-[13.132px] rounded-tr-[26.264px] top-[770px]" data-node-id="173:884">
-                <div className="font-['Outfit:Regular',sans-serif] font-normal leading-[21.011px] relative shrink-0 text-[#343a40] text-[15.758px] whitespace-nowrap" data-node-id="173:882">
-                    <p className="mb-0">{`Qural Connects Talent, Industry and academia `}</p>
-                    <p>into one engineered ecosystem.</p>
-                </div>
-                <div className="relative shrink-0 size-[26.264px]" data-node-id="173:880">
-                    <div className="absolute inset-[-3.81%_-19.04%_-34.27%_-19.04%]">
-                        <img alt="" className="block max-w-none size-full" height="36.264" src={imgEllipse1} width="36.264" />
-                    </div>
-                </div>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_4px_4px_0px_rgba(0,0,0,0.25)]" />
-            </div>
-
-            {/* Purple Testimonial Card */}
-            <div className="absolute bg-[#8338ec] border-[1.313px] border-solid border-white content-stretch flex gap-[27.577px] items-center left-[calc(75%-66px)] p-[10.506px] rounded-bl-[13.132px] rounded-tl-[13.132px] rounded-tr-[26.264px] top-[647px]" data-node-id="173:922">
-                <div className="font-['Outfit:Regular',sans-serif] font-normal leading-[21.011px] relative shrink-0 text-[15.758px] text-white whitespace-nowrap" data-node-id="173:923">
-                    <p className="mb-0">We design, deploy, and scale high-performance</p>
-                    <p>{` BIM & EPC talent for global AEC firms. `}</p>
-                </div>
-                <div className="relative shrink-0 size-[26.264px]" data-node-id="173:924">
-                    <div className="absolute inset-[-3.81%_-19.04%_-34.27%_-19.04%]">
-                        <img alt="" className="block max-w-none size-full" height="36.264" src={imgEllipse1} width="36.264" />
-                    </div>
-                </div>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_4px_4px_0px_rgba(0,0,0,0.25)]" />
-            </div>
-
-            {/* Logo Badge */}
-            <div className="absolute inset-[79.3%_1.1%_12.3%_92.99%]" data-node-id="173:900">
-                <img alt="" className="block max-w-none size-full" src={imgGroup1000001535} />
-            </div>
-
-            {/* Scroll Indicators */}
-            <div className="absolute bottom-[122.87px] flex items-center justify-center right-[144.87px] size-[47.125px]">
-                <div className="-rotate-90 flex-none">
-                    <div className="content-stretch flex gap-[6.732px] items-center p-[6.732px] relative rounded-[40.393px] shadow-[0px_6.732px_6.732px_0px_rgba(0,0,0,0.25)] size-[47.125px]" data-node-id="173:916">
-                        <div className="absolute inset-[0_-0.11px_-0.11px_0]" data-node-id="173:917">
-                            <img alt="" className="block max-w-none size-full" src={imgRectangle1} />
-                        </div>
-                        <div className="flex items-center justify-center relative shrink-0 size-[33.661px]">
-                            <div className="flex-none rotate-90">
-                                <div className="relative size-[33.661px]" data-node-id="173:918">
-                                    <img alt="" className="block max-w-none size-full" height="33.661" src={imgEllipse3} width="33.661" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="absolute bottom-[238.87px] flex items-center justify-center right-[44.87px] size-[47.125px]">
-                <div className="-rotate-90 flex-none">
-                    <div className="content-stretch flex gap-[6.732px] items-center p-[6.732px] relative rounded-[40.393px] shadow-[0px_6.732px_6.732px_0px_rgba(0,0,0,0.25)] size-[47.125px]" data-node-id="173:919">
-                        <div className="absolute inset-[0_-0.11px_-0.11px_0]" data-node-id="173:920">
-                            <img alt="" className="block max-w-none size-full" src={imgRectangle2} />
-                        </div>
-                        <div className="flex items-center justify-center relative shrink-0 size-[33.661px]">
-                            <div className="flex-none rotate-90">
-                                <div className="relative size-[33.661px]" data-node-id="173:921">
-                                    <img alt="" className="block max-w-none size-full" height="33.661" src={imgEllipse3} width="33.661" />
-                                </div>
-                            </div>
-                        </div>
+            <div className="absolute bottom-[200px] right-[36px] hidden lg:block scale-90">
+                <div className="w-[40px] h-[40px] rounded-[30px] flex items-center justify-center -rotate-90 relative">
+                    <div className="absolute inset-0 border border-white/20 rounded-full" />
+                    <div className="w-[28px] h-[28px] rotate-90">
+                        <img alt="" className="w-full h-full" src={imgEllipse3} />
                     </div>
                 </div>
             </div>
