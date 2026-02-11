@@ -51,7 +51,7 @@ export default function ProfileCard({
           <img
             src={companyLogo}
             alt="Company"
-            className="h-[28px] w-auto object-contain brightness-0 invert"
+            className="h-[28px] w-auto object-contain"
           />
         </div>
 

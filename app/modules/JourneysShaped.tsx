@@ -1,86 +1,126 @@
+"use client";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ProfileCard from '../components/ProfileCard';
 
 const imgCompanyLogo = "/company.png";
 const imgLearnerProfile = "/profile.jpg";
 
+const categories = [
+    { id: 'upskilling', label: 'Upskilling' },
+    { id: 'hiring', label: 'Talent Hiring' },
+    { id: 'academy', label: 'Academy' }
+];
+
+const profileData = {
+    upskilling: [
+        { name: "Rahul K", before: "Site Engineer", after: "Electrical BIM Modeler - Dubai", logo: "/company.png" },
+        { name: "Priya S", before: "Junior BIM Modeler", after: "BIM Engineer - UK", logo: "/company.png" },
+        { name: "Padmini Kadhirvel", before: "Mechanical Graduate", after: "BIM Professional - Global Project", logo: "/company.png" }
+    ],
+    hiring: [
+        { name: "Arun M", before: "Unemployed", after: "Structural Modeler", logo: "/company.png" },
+        { name: "Sneha R", before: "Graduate Trainee", after: "BIM Coordinator", logo: "/company.png" },
+        { name: "Karthik P", before: "Quantity Surveyor", after: "BIM Manager", logo: "/company.png" }
+    ],
+    academy: [
+        { name: "Leaners 1", before: "Student", after: "BIM Certified", logo: "/company.png" },
+        { name: "Leaners 2", before: "Architect Student", after: "Revit Master", logo: "/company.png" },
+        { name: "Leaners 3", before: "Civil Student", after: "BIM Specialist", logo: "/company.png" }
+    ]
+};
+
 export default function JourneysShaped() {
+    const [activeTab, setActiveTab] = useState('upskilling');
+
     return (
-        <div id="journey" className="relative w-full h-screen flex items-center justify-center bg-[#ed3543] isolate overflow-hidden">
-            {/* Scaled Content Container */}
-            <div className="relative w-[1280px] h-full shrink-0 origin-center scale-[0.4] sm:scale-[0.5] md:scale-[0.6] lg:scale-[0.7] xl:scale-[0.8] 2xl:scale-100 transition-transform duration-300 flex flex-col items-center justify-center">
+        <div id="journey" className="relative w-full min-h-screen flex items-center justify-center bg-[#ed3543] py-20 px-4 isolate overflow-hidden">
+            {/* 1. Background Decoration - Spanning Ring Image (Bottom Half) */}
+            <div className="absolute top-0 left-[65%] -translate-x-1/2 w-[1200px] pointer-events-none overflow-visible">
+                <img
+                    src="/Ellipse 2.png"
+                    alt="Ring"
+                    className="w-full h-auto -translate-y-1/2 opacity-80 shrink-0"
+                />
+            </div>
+
+            <div className="relative w-full max-w-[1400px] flex flex-col items-center gap-10">
 
                 {/* Title Section */}
-                <div className="flex flex-col items-center gap-2">
-                    <h1 className="font-['Outfit'] font-semibold text-[64px] text-white text-center leading-tight">
+                <div className="flex flex-col items-center gap-4">
+                    <h1 className="font-['Outfit'] font-bold text-4xl md:text-6xl text-white text-center leading-tight">
                         Journeys shaped at Qural
                     </h1>
                     {/* Handwritten Underline */}
-                    <div className="w-[370px] h-[30px] relative">
-                        <svg viewBox="0 0 371 30" fill="none" className="w-full h-full opacity-100">
+                    <div className="w-[200px] md:w-[350px] h-[15px] relative">
+                        <svg viewBox="0 0 371 30" fill="none" className="w-full h-full">
                             <path d="M5 25C100 15 250 15 365 10" stroke="#FFBC11" strokeWidth="6" strokeLinecap="round" />
-                            <path d="M10 28C110 20 230 20 360 15" stroke="#FFBC11" strokeWidth="4" strokeLinecap="round" />
                         </svg>
                     </div>
                 </div>
 
+                {/* Category Tabs */}
+                <div className="flex flex-wrap justify-center gap-4 bg-white rounded-2xl p-2 shadow-2xl">
+                    {categories.map((cat) => (
+                        <button
+                            key={cat.id}
+                            onClick={() => setActiveTab(cat.id)}
+                            className={`flex items-center gap-3 px-6 py-3 rounded-xl font-['Outfit'] font-bold transition-all ${activeTab === cat.id
+                                ? 'bg-[#ffebed] text-[#ed3543] shadow-md scale-105'
+                                : 'text-gray-500 hover:bg-gray-50'
+                                }`}
+                        >
+                            {cat.label}
+                        </button>
+                    ))}
+                </div>
+
                 {/* Profile Cards Grid */}
-                <div className="flex justify-center gap-6 px-10 w-full">
-                    <ProfileCard
-                        name="Padmini Kadhirvel"
-                        beforeRole="Diploma Civil"
-                        afterRole="Revit Structure Modeler"
-                        profileImage={imgLearnerProfile}
-                        companyLogo={imgCompanyLogo}
-                    />
-                    <ProfileCard
-                        name="Padmini Kadhirvel"
-                        beforeRole="Junior Architect"
-                        afterRole="Architectural BIM Modeler"
-                        profileImage={imgLearnerProfile}
-                        companyLogo={imgCompanyLogo}
-                    />
-                    <ProfileCard
-                        name="Padmini Kadhirvel"
-                        beforeRole="Career gap / Non-core job"
-                        afterRole="MEP Design Engineer (Electrical)"
-                        profileImage={imgLearnerProfile}
-                        companyLogo={imgCompanyLogo}
-                    />
+                <div className="w-full overflow-x-auto pb-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        key={activeTab}
+                        className="flex justify-center flex-wrap lg:flex-nowrap gap-6 min-w-max px-6 mx-auto"
+                    >
+                        {profileData[activeTab as keyof typeof profileData].map((profile, i) => (
+                            <ProfileCard
+                                key={i}
+                                name={profile.name}
+                                beforeRole={profile.before}
+                                afterRole={profile.after}
+                                profileImage={imgLearnerProfile}
+                                companyLogo={profile.logo}
+                            />
+                        ))}
+                    </motion.div>
                 </div>
 
                 {/* Action Row: Nav and CTA Buttons */}
-                <div className="mt-12 flex flex-col items-center gap-6 mb-6">
-                    <div className="flex items-center gap-4 md:gap-6">
-                        {/* Nav Left */}
-                        <button className="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/10 transition-colors shrink-0">
-                            <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                <div className="w-full flex flex-col items-center gap-10 mt-4">
+                    {/* Navigation Circles */}
+                    <div className="flex items-center gap-4">
+                        <button className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+                            <span className="text-xl">‹</span>
                         </button>
-
-                        {/* Glassy Red Button */}
-                        <button className="relative px-8 py-4 rounded-[12px] group overflow-hidden border border-white/20 shadow-lg cursor-pointer transition-all hover:scale-105 active:scale-95">
-                            <div className="absolute inset-0 bg-gradient-to-b from-[#ed3543] to-[#bb1f36]" />
-                            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="relative font-['Outfit'] font-semibold text-white text-[18px] whitespace-nowrap">
-                                Find Your Industry-Ready Path
-                            </span>
-                        </button>
-
-                        {/* White Button */}
-                        <button className="px-8 py-4 rounded-[12px] bg-[#f4f4f4] shadow-[0_4px_14px_rgba(0,0,0,0.1)] cursor-pointer transition-all hover:scale-105 active:scale-95 border-b-2 border-gray-200">
-                            <span className="font-['Outfit'] font-semibold text-[#ed3543] text-[18px] whitespace-nowrap">
-                                Get Career Guidance
-                            </span>
-                        </button>
-
-                        {/* Nav Right */}
-                        <button className="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/10 transition-colors shrink-0">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                        <button className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+                            <span className="text-xl">›</span>
                         </button>
                     </div>
+
+                    {/* Main CTA Pair */}
+                    <div className="flex flex-col md:flex-row items-center gap-6">
+                        <button className="relative bg-[#ed3543] border border-white/30 px-8 py-4 rounded-xl shadow-2xl hover:brightness-110 transition-all text-white font-['Outfit'] font-bold text-lg">
+                            Find Your Industry-Ready Path
+                        </button>
+                        <button className="bg-white px-8 py-4 rounded-xl shadow-2xl hover:bg-gray-50 transition-all text-[#ed3543] font-['Outfit'] font-bold text-lg">
+                            Get Career Guidance
+                        </button>
+                    </div>
+
+                    <p className="text-white/80 font-['Outfit'] text-center">
+                        From learning to readiness — guided every step of the way.
+                    </p>
                 </div>
             </div>
         </div>
