@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit, Patrick_Hand } from "next/font/google";
+import { Architects_Daughter, Geist, Geist_Mono, Inter, Manrope, Outfit, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
