@@ -41,17 +41,114 @@ export default function QuralEcosystem() {
     }, []);
 
     return (
-        <section className="w-full bg-black py-32 relative overflow-hidden h-[800px] flex items-center justify-center border-t border-gray-900" data-section="qural-ecosystem">
+        <section className="w-full bg-[#030303] py-32 relative overflow-hidden h-[800px] flex items-center justify-center border-t border-gray-900" data-section="qural-ecosystem">
 
-            {/* Background Hex Pattern */}
-            <div className="absolute top-0 left-0 p-10 opacity-20">
-                <svg width="200" height="200" viewBox="0 0 100 100" fill="none" stroke="white" strokeWidth="0.5">
-                    <path d="M25 0 L75 0 L100 43 L75 86 L25 86 L0 43 Z" />
-                </svg>
-                {/* Repeating generic hex grid via CSS could be added here */}
+            {/* Honeycomb Background Design - Framed around center text */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="relative w-full h-full flex items-center justify-center opacity-[0.06]">
+                    {[
+                        { x: 0, y: 0, delay: 0 },         // Center (directly behind title)
+                        { x: 0, y: -180, delay: 0.1 },     // Top
+                        { x: 156, y: -90, delay: 0.2 },    // Top-Right
+                        { x: 156, y: 90, delay: 0.3 },     // Bottom-Right
+                        { x: 0, y: 180, delay: 0.4 },      // Bottom
+                        { x: -156, y: 90, delay: 0.5 },    // Bottom-Left
+                        { x: -156, y: -90, delay: 0.6 },   // Top-Left
+                    ].map((pos, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{
+                                opacity: 1,
+                                scale: 1,
+                                // Add a subtle breathing effect to the center hexagon
+                                scaleX: i === 0 ? [1, 1.02, 1] : 1,
+                                scaleY: i === 0 ? [1, 1.02, 1] : 1,
+                            }}
+                            transition={{
+                                opacity: { delay: 1 + pos.delay, duration: 1.5 },
+                                scale: { delay: 1 + pos.delay, duration: 1.5 },
+                                scaleX: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                                scaleY: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                            }}
+                            className="absolute"
+                            style={{
+                                left: `50%`,
+                                top: `50%`,
+                                width: '260px',
+                                height: '240px',
+                                x: `calc(-50% + ${pos.x}px)`,
+                                y: `calc(-50% + ${pos.y}px)`,
+                            }}
+                        >
+                            <svg width="100%" height="100%" viewBox="0 0 128 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.54206 55.347L32.7257 1.33548L95.093 1.33555L126.277 55.3472L95.0931 109.359L32.7253 109.36L1.54206 55.347Z"
+                                    stroke="white"
+                                    strokeWidth="0.8"
+                                    opacity={i === 0 ? 0.8 : 0.4}
+                                />
+                                {i === 0 && (
+                                    <path
+                                        d="M1.54206 55.347L32.7257 1.33548L95.093 1.33555L126.277 55.3472L95.0931 109.359L32.7253 109.36L1.54206 55.347Z"
+                                        stroke="#ed3543"
+                                        strokeWidth="2"
+                                        strokeOpacity="0.2"
+                                        className="animate-[pulse_4s_ease-in-out_infinite]"
+                                    />
+                                )}
+                            </svg>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
-            <div className="absolute inset-0 opacity-10"
-                style={{ backgroundImage: 'radial-gradient(#333 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+
+            {/* Corner Decorative Clusters */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {/* Top-Left Cluster */}
+                <div className="absolute -top-10 -left-10 opacity-[0.15]">
+                    <div className="relative w-40 h-40">
+                        {[{ x: 0, y: 0 }, { x: 60, y: 30 }, { x: 0, y: 60 }].map((pos, i) => (
+                            <div key={i} className="absolute" style={{ left: pos.x, top: pos.y, width: '80px' }}>
+                                <svg viewBox="0 0 128 111" fill="none"><path d="M1.54206 55.347L32.7257 1.33548L95.093 1.33555L126.277 55.3472L95.0931 109.359L32.7253 109.36L1.54206 55.347Z" stroke="white" strokeWidth="1.5" /></svg>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* Top-Right Cluster */}
+                <div className="absolute -top-10 -right-10 opacity-[0.15]">
+                    <div className="relative w-40 h-40">
+                        {[{ x: 0, y: 0 }, { x: -60, y: 30 }, { x: 0, y: 60 }].map((pos, i) => (
+                            <div key={i} className="absolute" style={{ right: -pos.x, top: pos.y, width: '80px' }}>
+                                <svg viewBox="0 0 128 111" fill="none"><path d="M1.54206 55.347L32.7257 1.33548L95.093 1.33555L126.277 55.3472L95.0931 109.359L32.7253 109.36L1.54206 55.347Z" stroke="white" strokeWidth="1.5" /></svg>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* Bottom-Left Cluster */}
+                <div className="absolute -bottom-10 -left-10 opacity-[0.15]">
+                    <div className="relative w-40 h-40">
+                        {[{ x: 0, y: 0 }, { x: 60, y: -30 }, { x: 0, y: -60 }].map((pos, i) => (
+                            <div key={i} className="absolute" style={{ left: pos.x, bottom: -pos.y, width: '80px' }}>
+                                <svg viewBox="0 0 128 111" fill="none"><path d="M1.54206 55.347L32.7257 1.33548L95.093 1.33555L126.277 55.3472L95.0931 109.359L32.7253 109.36L1.54206 55.347Z" stroke="white" strokeWidth="1.5" /></svg>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* Bottom-Right Cluster */}
+                <div className="absolute -bottom-10 -right-10 opacity-[0.15]">
+                    <div className="relative w-40 h-40">
+                        {[{ x: 0, y: 0 }, { x: -60, y: -30 }, { x: 0, y: -60 }].map((pos, i) => (
+                            <div key={i} className="absolute" style={{ right: -pos.x, bottom: -pos.y, width: '80px' }}>
+                                <svg viewBox="0 0 128 111" fill="none"><path d="M1.54206 55.347L32.7257 1.33548L95.093 1.33555L126.277 55.3472L95.0931 109.359L32.7253 109.36L1.54206 55.347Z" stroke="white" strokeWidth="1.5" /></svg>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                style={{ backgroundImage: 'radial-gradient(#444 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
             </div>
 
             {/* Central Text */}

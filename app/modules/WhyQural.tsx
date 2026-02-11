@@ -1,17 +1,17 @@
 
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// Assets (Using placeholders where specific assets are missing)
-const imgBee = "/bee.png"; // Placeholder for the bee illustration
-// If user provides the actual asset later, we swap this out.
+import HexagonNumber from '../components/HexagonNumber';
 
 const sections = [
     {
         id: 'students',
-        title: 'Students (Industry - Academia Gap)',
-        leftText: 'Industry - Academia gap in industry-ready skills.',
+        number: '1',
+        title: 'Students',
+        subtitle: 'Industry - Academia Gap',
+        image: '/bee.png',
+        leftText: 'Industry -\nAcademia gap\nin industry-ready skills.',
         content: {
             tag: 'From Campus to Career',
             heading: 'Learning ends before readiness begins.',
@@ -19,176 +19,198 @@ const sections = [
             ctaPrimary: 'Explore the Approach',
             ctaSecondary: 'Get Career Clarity',
             footer: 'Trusted by 4,000+ engineering learners'
-        },
-        isOpen: true // Default open state as per design
+        }
     },
     {
         id: 'corporates',
-        title: 'Corporates (Talent Deployment)',
-        leftText: 'Companies struggle to find the right talent for projects',
+        number: '2',
+        title: 'Corporates',
+        subtitle: 'Talent Deployment',
+        image: '/bee.png',
+        leftText: 'Companies struggle\nto find the\nright talent for projects',
         content: {
-            // Placeholder content for closed sections until expanded instructions
             tag: 'Rapid Deployment',
             heading: 'Deploy talent that is ready from Day 1.',
-            description: 'Skip the training period. Our talent is vetted and trained on live projects.',
+            description: 'Skip the training period. Our talent is vetted and trained on live projects to meet your specific needs immediately.',
             ctaPrimary: 'Hire Talent',
             ctaSecondary: 'Partner with Us',
             footer: 'Trusted by top AEC firms'
-        },
-        isOpen: false
+        }
     },
     {
         id: 'colleges',
-        title: 'Colleges (Curriculum / Placements / Skills)',
-        leftText: 'Curriculum misaligned with skills and placement outcomes.',
+        number: '3',
+        title: 'Colleges',
+        subtitle: 'Upskilling & Placements',
+        image: '/bee.png',
+        leftText: 'Curriculum\nmisaligned with\nskills and\nplacement outcomes.',
         content: {
-            // Placeholder content
             tag: 'Bridge the Gap',
             heading: 'Upskill students for better placements.',
-            description: 'Align your curriculum with industry demands to improve placement records.',
+            description: 'Align your curriculum with industry demands to improve placement records and institutional reputation.',
             ctaPrimary: 'Institutional Partnership',
             ctaSecondary: 'Syllabus Review',
             footer: 'Partnered with 50+ institutions'
-        },
-        isOpen: false
+        }
     }
 ];
 
 export default function WhyQural() {
     const [activeSection, setActiveSection] = useState<string | null>('students');
 
-    const toggleSection = (id: string) => {
-        setActiveSection(activeSection === id ? null : id);
-    };
-
     return (
-        <section className="w-full bg-white py-24 flex flex-col items-center overflow-hidden" data-section="why-qural">
+        <section className="w-full bg-white py-24 flex flex-col items-center relative" data-section="why-qural">
+            {/* Background Pattern */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03] -z-10"
+                style={{
+                    backgroundImage: 'url(/Group-polygon.svg)',
+                    backgroundSize: '300px',
+                    backgroundRepeat: 'repeat',
+                }}
+            />
+
+            {/* Background Decoration Accents */}
+            <div className="absolute top-20 right-[-5%] opacity-10 pointer-events-none select-none -z-10">
+                <img src="/Group-polygon.svg" alt="" className="w-[500px]" />
+            </div>
+            <div className="absolute bottom-20 left-[-5%] opacity-10 pointer-events-none select-none -z-10 rotate-180">
+                <img src="/Group-polygon.svg" alt="" className="w-[500px]" />
+            </div>
 
             {/* Header */}
-            <div className="text-center mb-16 px-4">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-['Outfit']">
+            <div className="text-center mb-20 px-4">
+                <h2 className="text-5xl md:text-6xl font-bold text-[#1a1a1a] mb-6 font-['Outfit']">
                     Why <span className="text-[#ed3543]">QURAL</span> exists?
                 </h2>
-                <p className="text-xl text-gray-600 font-['DM_Sans']">
+                <p className="text-2xl text-gray-800 font-['DM_Sans']">
                     The gap isn't a lack of talent. It's readiness.
                 </p>
             </div>
 
-            {/* Accordion Container */}
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+            {/* Content List */}
+            <div className="w-full max-w-6xl mx-auto px-6">
                 {sections.map((section) => {
                     const isActive = activeSection === section.id;
 
                     return (
-                        <div key={section.id}
-                            className={`border-b border-gray-100 last:border-0 py-6 transition-all duration-300 ${isActive ? '' : 'hover:bg-gray-50/50 cursor-pointer'}`}
-                            onClick={() => !isActive && toggleSection(section.id)}
-                        >
-                            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-12 relative">
-
-                                {/* Left Side Text (Context) */}
-                                <div className="w-full md:w-1/4 text-gray-500 font-['DM_Sans'] text-sm md:text-base leading-relaxed pl-2 border-l-2 border-transparent md:border-l-0 md:pl-0">
+                        <div key={section.id} className="border-t border-gray-200 last:border-b py-0">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start py-10 relative">
+                                {/* Left Context Text */}
+                                <div className="hidden md:block md:col-span-3 text-gray-500 font-['DM_Sans'] text-lg leading-snug whitespace-pre-line pt-2">
                                     {section.leftText}
-                                    {/* Mobile visual cue for active state */}
-                                    {isActive && <div className="md:hidden h-full w-1 bg-[#ed3543] absolute left-0 top-0 rounded-full" />}
                                 </div>
 
-
-                                {/* Main Content Area */}
-                                <div className="w-full md:w-3/4">
-
-                                    {/* Header Row (Always Visible) */}
-                                    <div className="flex justify-between items-center w-full mb-4">
-                                        <h3 className={`text-2xl md:text-3xl font-['Outfit'] transition-colors duration-300 ${isActive ? 'font-bold text-gray-900' : 'font-normal text-gray-400'}`}>
-                                            {section.title}
-                                        </h3>
-
-                                        {/* Arrow Icon */}
-                                        <div className={`transform transition-transform duration-300 ${isActive ? 'rotate-90' : 'rotate-0'}`}>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12 5V19M19 12H5" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                                    className={`${isActive ? 'hidden' : 'block'}`} /> {/* Plus icon when closed? Or arrow? User showed arrow. */}
-                                                {/* Arrow Right */}
-                                                <path d="M9 18L15 12L9 6" stroke={isActive ? "#ed3543" : "#9CA3AF"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
+                                {/* Main Title Row */}
+                                <div
+                                    className="md:col-span-9 flex items-center justify-between cursor-pointer group"
+                                    onClick={() => setActiveSection(isActive ? null : section.id)}
+                                >
+                                    <div className="flex items-center gap-6">
+                                        <div className="flex flex-col">
+                                            <div className="flex items-baseline gap-4">
+                                                <h3 className={`text-6xl md:text-8xl font-['Patrick_Hand'] transition-colors ${isActive ? 'text-[#1a1a1a]' : 'text-gray-300'}`}>
+                                                    {section.title}
+                                                </h3>
+                                                <HexagonNumber number={section.number} className="scale-125" />
+                                            </div>
+                                            <p className={`text-xl font-['DM_Sans'] transition-colors ${isActive ? 'text-[#1a1a1a]' : 'text-gray-400'}`}>
+                                                {section.subtitle}
+                                            </p>
                                         </div>
                                     </div>
 
-                                    {/* Expandable Content */}
-                                    <AnimatePresence>
-                                        {isActive && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                                                className="overflow-hidden"
-                                            >
-                                                <div className="pt-4 pb-8 flex flex-col md:flex-row gap-8 items-center">
+                                    {/* Arrow */}
+                                    <div className={`transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`}>
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 20H30M30 20L20 10M30 20L20 30" stroke={isActive ? "#1a1a1a" : "#d1d1d1"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                    {/* Illustration (Bee) - only appears for students section specifically in design, but maybe others have images? 
-                                        Design shows bee on the left of the card. */}
-                                                    {section.id === 'students' && (
-                                                        <motion.div
-                                                            initial={{ x: -20, opacity: 0 }}
-                                                            animate={{ x: 0, opacity: 1 }}
-                                                            transition={{ delay: 0.2 }}
-                                                            className="w-full md:w-1/3 flex justify-center md:justify-end"
-                                                        >
-                                                            <img src={imgBee} alt="Ready Bee" className="w-48 md:w-64 h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500" />
-                                                        </motion.div>
-                                                    )}
+                            {/* Expandable Content */}
+                            <AnimatePresence>
+                                {isActive && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                                    >
+                                        <div className="pb-16 flex flex-col md:flex-row gap-12 items-center">
+                                            {/* Vertical line continuation for the grid-like feel */}
+                                            <div className="hidden md:block md:col-span-3"></div>
 
-                                                    {/* Content Card (Red Gradient) */}
-                                                    <div className={`relative rounded-3xl p-8 md:p-10 shadow-2xl text-white overflow-hidden w-full ${section.id === 'students' ? 'md:w-2/3' : 'md:w-full'}`}
+                                            <div className="w-full relative px-4 md:px-0">
+                                                <div className="relative flex flex-col md:flex-row items-center">
+                                                    {/* Section Image - Floating on the left to match image */}
+                                                    <motion.div
+                                                        initial={{ x: -20, opacity: 0 }}
+                                                        animate={{ x: 0, opacity: 1 }}
+                                                        className="md:absolute -left-12 lg:-left-24 z-20 w-48 md:w-64 pointer-events-none mt-8 md:mt-0"
+                                                    >
+                                                        <img
+                                                            src={section.image}
+                                                            alt={section.title}
+                                                            className="w-full h-auto drop-shadow-2xl animate-float-slow"
+                                                            onError={(e) => {
+                                                                (e.target as HTMLImageElement).src = "https://cdn-icons-png.flaticon.com/512/3220/3220353.png"; // Fallback
+                                                            }}
+                                                        />
+                                                    </motion.div>
+
+                                                    {/* Content Card */}
+                                                    <div
+                                                        className="w-full rounded-[40px] p-8 md:p-14 text-white shadow-2xl relative overflow-hidden flex flex-col items-center text-center"
                                                         style={{
-                                                            background: 'linear-gradient(135deg, #FF6B6B 0%, #ed3543 50%, #C41C30 100%)',
-                                                            boxShadow: '0 20px 40px -10px rgba(237, 53, 67, 0.4)'
+                                                            background: 'linear-gradient(135deg, #FF5F6D 0%, #ed3543 100%)',
+                                                            boxShadow: '0 30px 60px -15px rgba(237, 53, 67, 0.4)'
                                                         }}
                                                     >
-                                                        {/* Decorative Background Noise/Pattern */}
-                                                        <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
+                                                        {/* Polygon Pattern Overlay */}
+                                                        <div
+                                                            className="absolute inset-0 pointer-events-none opacity-20"
+                                                            style={{
+                                                                backgroundImage: 'url(/Group-polygon.svg)',
+                                                                backgroundSize: '200px',
+                                                                backgroundRepeat: 'repeat',
+                                                                mixBlendMode: 'soft-light'
+                                                            }}
+                                                        />
+                                                        {/* Top Badge */}
+                                                        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-5 py-2 rounded-full border border-white/30 text-sm font-medium mb-8">
+                                                            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                                                            {section.content.tag}
+                                                        </div>
 
-                                                        <div className="relative z-10 flex flex-col items-start gap-4">
-                                                            {/* Top Tag */}
-                                                            <div className="bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/30 text-sm font-['Outfit'] font-medium mb-2 inline-flex items-center gap-2">
-                                                                <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
-                                                                {section.content.tag}
-                                                            </div>
+                                                        <h4 className="text-3xl md:text-5xl font-bold font-['Outfit'] mb-6 leading-tight max-w-2xl">
+                                                            {section.content.heading}
+                                                        </h4>
 
-                                                            {/* Heading */}
-                                                            <h4 className="text-3xl md:text-4xl font-bold font-['Outfit'] leading-tight mb-2">
-                                                                {section.content.heading}
-                                                            </h4>
+                                                        <p className="text-lg md:text-xl text-white/90 font-['DM_Sans'] mb-12 max-w-2xl leading-relaxed">
+                                                            {section.content.description}
+                                                        </p>
 
-                                                            {/* Description */}
-                                                            <p className="text-lg text-white/90 font-['DM_Sans'] leading-relaxed mb-8 max-w-2xl">
-                                                                {section.content.description}
-                                                            </p>
+                                                        <div className="flex flex-wrap justify-center gap-5 mb-12">
+                                                            <button className="bg-white text-[#ed3543] px-8 py-4 rounded-2xl font-bold font-['Outfit'] text-lg shadow-xl shadow-red-900/20 hover:scale-105 transition-transform">
+                                                                {section.content.ctaPrimary}
+                                                            </button>
+                                                            <button className="bg-white/10 backdrop-blur-sm border border-white/40 text-white px-8 py-4 rounded-2xl font-bold font-['Outfit'] text-lg hover:bg-white/20 transition-all">
+                                                                {section.content.ctaSecondary}
+                                                            </button>
+                                                        </div>
 
-                                                            {/* CTAs */}
-                                                            <div className="flex flex-wrap gap-4 w-full">
-                                                                <button className="bg-white text-[#ed3543] px-8 py-3 rounded-xl font-bold font-['Outfit'] shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-                                                                    {section.content.ctaPrimary}
-                                                                </button>
-                                                                <button className="bg-white/10 backdrop-blur-sm text-white border border-white/40 px-8 py-3 rounded-xl font-bold font-['Outfit'] hover:bg-white/20 transition-all duration-300">
-                                                                    {section.content.ctaSecondary}
-                                                                </button>
-                                                            </div>
-
-                                                            {/* Footer */}
-                                                            <div className="mt-8 pt-6 border-t border-white/20 w-full text-white/70 text-sm font-['DM_Sans'] flex items-center gap-2">
-                                                                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                                                                {section.content.footer}
-                                                            </div>
+                                                        <div className="pt-8 border-t border-white/20 flex items-center justify-center gap-3 text-white/70 font-['DM_Sans'] w-full">
+                                                            <span>Trusted by 4,000+ engineering learners</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     );
                 })}

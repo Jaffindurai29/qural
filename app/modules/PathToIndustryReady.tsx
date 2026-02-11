@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 // Placeholder Assets
 const imgBee = "/bee.png";
-const imgCourseThumb = "https://placehold.co/600x400/png?text=BIM+Project+Render";
+const imgCourseThumb = "/block.jpg";
 
 const courses = [
     {

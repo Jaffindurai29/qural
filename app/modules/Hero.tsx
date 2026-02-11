@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 const imgFrame1321314585 = "https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e";
 const imgEllipse1 = "https://www.figma.com/api/mcp/asset/7ad97e0b-b0d4-4d95-b410-1b2f393129d6";
 const imgEllipse3 = "https://www.figma.com/api/mcp/asset/0c4f921c-37bd-4b16-92ea-ef392ac2b058";
@@ -159,6 +160,18 @@ export default function Hero() {
 
     return (
         <div className="bg-black relative size-full font-['Outfit:Regular',sans-serif] min-h-screen overflow-hidden group" data-name="Pexio" data-node-id="163:3">
+            {/* Logo */}
+            <Link href="/" className="absolute left-[70px] -top-[10px] z-50">
+                <Image
+                    src="/logo.svg"
+                    alt="Qural Logo"
+                    width={166}
+                    height={110}
+                    className="w-[166px] h-auto"
+                    priority
+                />
+            </Link>
+
             {/* Figma Absolute Background Ellipses */}
             <div className="absolute flex h-[935.705px] items-center justify-center left-[-146px] top-[-161px] w-[896.198px]">
                 <div className="flex-none rotate-[46.53deg]">
