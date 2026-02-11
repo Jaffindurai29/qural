@@ -62,7 +62,7 @@ const RatingStars = ({ rating }: { rating: number }) => (
 
 export default function PathToIndustryReady() {
     return (
-        <section className="w-full bg-[#ed3543] py-24 relative overflow-hidden" data-section="path-to-industry-ready">
+        <section id="career-paths" className="w-full bg-[#ed3543] py-24 relative overflow-hidden" data-section="path-to-industry-ready">
 
             {/* Background Decor (Waves/Mesh) */}
             <div className="absolute inset-0 pointer-events-none opacity-10">

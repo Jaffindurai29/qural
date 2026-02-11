@@ -35,7 +35,7 @@ const features = [
 
 export default function BIMHRPartner() {
     return (
-        <section className="w-full bg-[#030303] py-24 relative overflow-hidden" data-section="bim-hr-partner">
+        <section id="hr-partner" className="w-full bg-[#030303] py-24 relative overflow-hidden" data-section="bim-hr-partner">
 
             {/* Background Pattern (Matching Home aesthetic but dark) */}
             <div

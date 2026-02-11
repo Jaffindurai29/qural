@@ -59,7 +59,7 @@ export default function WhyQural() {
     const [activeSection, setActiveSection] = useState<string | null>('students');
 
     return (
-        <section className="w-full bg-white py-24 flex flex-col items-center relative overflow-hidden" data-section="why-qural">
+        <section id="why-qural" className="w-full bg-white py-24 flex flex-col items-center relative overflow-hidden" data-section="why-qural">
             {/* Background Pattern */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-[0.03] -z-10"

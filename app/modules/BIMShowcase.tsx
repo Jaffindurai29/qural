@@ -58,7 +58,7 @@ export default function BIMShowcase() {
     };
 
     return (
-        <section className="w-full bg-white py-24 px-4 overflow-hidden mt-[-100px]" data-section="bim-showcase">
+        <section id="talent-pipeline" className="w-full bg-white py-24 px-4 overflow-hidden mt-[-100px]" data-section="bim-showcase">
             <div className="max-w-7xl mx-auto flex flex-col items-center">
 
                 {/* Header Text */}

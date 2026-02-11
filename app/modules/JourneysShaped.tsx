@@ -5,7 +5,7 @@ const imgLearnerProfile = "/profile.jpg";
 
 export default function JourneysShaped() {
     return (
-        <div className="relative w-full h-screen flex items-center justify-center bg-[#ed3543] isolate overflow-hidden">
+        <div id="journey" className="relative w-full h-screen flex items-center justify-center bg-[#ed3543] isolate overflow-hidden">
             {/* Scaled Content Container */}
             <div className="relative w-[1280px] h-full shrink-0 origin-center scale-[0.4] sm:scale-[0.5] md:scale-[0.6] lg:scale-[0.7] xl:scale-[0.8] 2xl:scale-100 transition-transform duration-300 flex flex-col items-center justify-center">
 

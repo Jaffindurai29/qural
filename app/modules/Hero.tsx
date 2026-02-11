@@ -53,6 +53,15 @@ const testimonials = [
         color: "bg-[#ef476f]",
         textColor: "text-white",
         delay: 0.4
+    },
+    {
+        id: 5,
+        text: "",
+        avatar: "/Qural Fab.svg",
+        position: "lg:top-[500px] lg:right-[30px] relative lg:absolute",
+        color: "",
+        textColor: "text-[#343a40]",
+        delay: 0.6
     }
 ];
 
@@ -64,68 +73,71 @@ interface TestimonialBubbleProps {
 }
 
 function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProps) {
-    const [randomY, setRandomY] = useState([0, 0]);
-    const [randomX, setRandomX] = useState([0, 0]);
-    const [durationY, setDurationY] = useState(10);
-    const [durationX, setDurationX] = useState(12);
+    // Generate a stable random duration for the float animation to avoid sync
+    const [floatDuration] = useState(() => Math.random() * 2 + 4); // 4-6s
+    const [floatDelay] = useState(() => Math.random() * 2);
 
-    useEffect(() => {
-        // Generate random paths on mount
-        const generatePath = () => Array.from({ length: 6 }, () => Math.floor(Math.random() * 40) - 20);
-
-        setRandomY([0, ...generatePath(), 0]);
-        setRandomX([0, ...generatePath(), 0]);
-        setDurationY(Math.random() * 5 + 10); // 10-15s
-        setDurationX(Math.random() * 5 + 12); // 12-17s
-    }, []);
+    const hasText = data.text.length > 0;
+    const isLogo = !hasText;
 
     return (
         <motion.div
             layout
-            onHoverStart={() => onInteract(true)}
-            onHoverEnd={() => onInteract(false)}
-            initial={{ borderRadius: 30, width: 50, height: 50, zIndex: 10 }}
+            onHoverStart={() => hasText && onInteract(true)}
+            onHoverEnd={() => hasText && onInteract(false)}
+            initial={{ borderRadius: 30, width: isLogo ? 70 : 50, height: isLogo ? 70 : 50, zIndex: 10, y: 0 }}
             animate={{
                 borderRadius: isActive ? 20 : 30,
-                width: isActive ? "auto" : 50,
-                height: isActive ? "auto" : 50,
-                y: isActive ? 0 : randomY,
-                x: isActive ? 0 : randomX,
-                zIndex: isActive ? 50 : 10
+                width: isActive && hasText ? "auto" : (isLogo ? 70 : 50),
+                height: isActive && hasText ? "auto" : (isLogo ? 70 : 50),
+                y: isActive ? 0 : [0, -15, 0], // Smooth sine wave float
+                zIndex: isActive ? 50 : 10,
+                scale: isActive ? 1.05 : 1
             }}
             transition={{
-                layout: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
-                width: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
-                height: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
-                y: { duration: isActive ? 0.6 : durationY, repeat: isActive ? 0 : Infinity, ease: "easeInOut", delay: isActive ? 0 : data.delay },
-                x: { duration: isActive ? 0.6 : durationX, repeat: isActive ? 0 : Infinity, ease: "easeInOut", delay: isActive ? 0 : data.delay * 1.5 },
-                zIndex: { delay: isActive ? 0 : 0.6 } // Keep z-index high while animating out
+                layout: { duration: 0.4, type: "spring", stiffness: 300, damping: 30 },
+                width: { duration: 0.4, type: "spring", stiffness: 300, damping: 30 },
+                height: { duration: 0.4, type: "spring", stiffness: 300, damping: 30 },
+                y: {
+                    duration: isActive ? 0.4 : floatDuration,
+                    repeat: isActive ? 0 : Infinity,
+                    ease: "easeInOut",
+                    delay: isActive ? 0 : floatDelay
+                },
+                zIndex: { delay: isActive ? 0 : 0.4 },
+                scale: { duration: 0.2 }
             }}
-            className={`${data.position} ${data.color} border-[1.313px] border-white border-solid flex items-center justify-end cursor-pointer shadow-lg overflow-hidden shrink-0`}
+            className={`${data.position} ${data.color} ${isLogo ? '' : 'border-2 border-white/40 shadow-xl hover:shadow-2xl backdrop-blur-sm hover:border-white/80'} flex items-center justify-center cursor-pointer transition-shadow overflow-visible shrink-0`}
         >
             <motion.div
                 layout
-                className="flex items-center gap-3 p-2 pl-3"
+                className={`flex items-center gap-3 ${hasText ? 'p-1.5 pl-3' : 'p-0'}`}
             >
-                <div
-                    className={`overflow-hidden ${data.textColor} font-['Outfit:Regular',sans-serif] text-[10px] leading-[1.2] whitespace-nowrap`}
-                >
-                    <motion.div
-                        initial={{ width: 0, opacity: 0 }}
-                        animate={{ width: isActive ? 180 : 0, opacity: isActive ? 1 : 0 }}
-                        transition={{
-                            width: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
-                            opacity: { duration: 0.4, delay: isActive ? 0.4 : 0 } // Wait for expansion to almost complete
-                        }}
-                        className="overflow-hidden"
+                {hasText && (
+                    <div
+                        className={`overflow-hidden ${data.textColor} font-outfit text-xs leading-relaxed whitespace-nowrap`}
                     >
-                        <p className="whitespace-normal w-[180px]">
-                            {data.text}
-                        </p>
-                    </motion.div>
-                </div>
-                <div className="relative shrink-0 size-[30px]">
-                    <img src={data.avatar} className="rounded-full size-full object-cover" alt="Avatar" />
+                        <motion.div
+                            initial={{ width: 0, opacity: 0 }}
+                            animate={{ width: isActive ? 180 : 0, opacity: isActive ? 1 : 0 }}
+                            transition={{
+                                width: { duration: 0.4, type: "spring", stiffness: 300, damping: 30 },
+                                opacity: { duration: 0.3, delay: isActive ? 0.2 : 0 }
+                            }}
+                            className="overflow-hidden"
+                        >
+                            <p className="whitespace-normal w-[180px]">
+                                {data.text}
+                            </p>
+                        </motion.div>
+                    </div>
+                )}
+                <div className={`relative shrink-0 ${isLogo ? 'size-[60px]' : 'size-[36px]'}`}>
+                    <img
+                        src={data.avatar}
+                        className={`${isLogo ? 'size-full object-contain' : 'rounded-full size-full object-cover border-2 border-white/20 p-0.5'}`}
+                        alt="Avatar"
+                    />
                 </div>
             </motion.div>
         </motion.div>
@@ -162,7 +174,7 @@ export default function Hero() {
     }, [isManual]);
 
     return (
-        <div className="bg-black relative w-full lg:size-full font-['Outfit:Regular',sans-serif] min-h-[95vh] lg:min-h-screen overflow-hidden group flex flex-col items-center lg:block" data-name="Pexio" data-node-id="163:3">
+        <div className="bg-black relative w-full lg:size-full font-outfit min-h-[95vh] lg:min-h-screen overflow-hidden group flex flex-col items-center lg:block" data-name="Pexio" data-node-id="163:3">
             {/* Logo */}
             <Link href="/" className="absolute left-4 top-4 lg:left-[70px] lg:-top-[10px] z-50">
                 <Image
@@ -213,17 +225,17 @@ export default function Hero() {
             </div>
 
             {/* Navigation Bar - Hidden on Mobile */}
-            <div className="hidden lg:flex -translate-x-1/2 absolute content-stretch font-['Outfit:Regular',sans-serif] font-normal gap-[70px] items-center leading-[normal] left-[calc(50%-0.5px)] text-[14px] top-[45px] z-50" data-node-id="163:7">
-                <Link href="/" className="relative shrink-0 text-white hover:text-white transition-colors" data-node-id="163:8">Home</Link>
-                <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:9">Feature</Link>
-                <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:10">Pricing</Link>
-                <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:11">Contact</Link>
-                <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:12">Pages</Link>
+            <div className="hidden lg:flex -translate-x-1/2 absolute content-stretch font-outfit font-normal gap-[70px] items-center leading-[normal] left-[calc(50%-0.5px)] text-[14px] top-[45px] z-50" data-node-id="163:7">
+                <Link href="#why-qural" className="relative shrink-0 text-white hover:text-white transition-colors" data-node-id="163:8">Why Qural</Link>
+                <Link href="#talent-pipeline" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:9">Talent Pipeline</Link>
+                <Link href="#hr-partner" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:10">HR Partner</Link>
+                <Link href="#career-paths" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:11">Career Paths</Link>
+                <Link href="#journey" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:12">Journeys</Link>
             </div>
 
             {/* Right Button - Hidden on Mobile */}
-            <button className="hidden lg:flex absolute bg-[#f4f4f4] content-stretch h-[47px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[8.418px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[33px] cursor-pointer hover:brightness-95 transition-all z-50" data-name="Button" data-node-id="169:746">
-                <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[#ed3543] text-[12px]" data-node-id="169:747">Want to Upskill ? </p>
+            <button className="hidden lg:flex absolute bg-[#f4f4f4] content-stretch h-[38px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[6px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[37px] cursor-pointer hover:brightness-95 transition-all z-50" data-name="Button" data-node-id="169:746">
+                <p className="font-outfit font-semibold leading-[normal] relative shrink-0 text-[#ed3543] text-[12px]" data-node-id="169:747">Want to Upskill ? </p>
                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
             </button>
 
@@ -236,7 +248,7 @@ export default function Hero() {
                         <img alt="" className="block max-w-none size-full" src={imgGroup358} />
                     </div>
                     <div className="bg-[rgba(233,12,12,0.1)] content-stretch flex items-center justify-center px-[20px] lg:px-[30px] py-[6px] lg:py-[8px] rounded-[30px]" data-node-id="163:18">
-                        <p className="font-['Outfit:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[12px] lg:text-[14px] text-white" data-node-id="163:19">Where careers are engineered</p>
+                        <p className="font-outfit font-normal leading-[normal] relative shrink-0 text-[12px] lg:text-[14px] text-white" data-node-id="163:19">Where careers are engineered</p>
                     </div>
                     <div className="h-[18px] w-[100px] lg:h-[24px] lg:w-[220px] hidden sm:block" data-node-id="163:20">
                         <img alt="" className="block max-w-none size-full" src={imgGroup357} />
@@ -245,15 +257,15 @@ export default function Hero() {
 
                 {/* Headline */}
                 <div className="flex flex-col items-center text-center lg:block lg:text-left relative">
-                    <p className="lg:absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[1.2] lg:leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[32px] lg:text-[40px] text-white lg:top-[200px] px-4" data-node-id="163:26">
+                    <p className="lg:absolute font-outfit font-semibold leading-[1.2] lg:leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[32px] lg:text-[40px] text-white lg:top-[200px] px-4" data-node-id="163:26">
                         Engineering careers aren’t accidental.
                     </p>
-                    <p className="mt-2 lg:mt-0 lg:absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[32px] lg:text-[40px] text-white lg:top-[250px] px-4" data-node-id="163:27">
+                    <p className="mt-2 lg:mt-0 lg:absolute font-outfit font-semibold leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[32px] lg:text-[40px] text-white lg:top-[250px] px-4" data-node-id="163:27">
                         <span className="leading-[normal]">They’re </span>
                         <span className="leading-[normal] text-[#ee3042]">ENGINEERED</span>
                         <span className="leading-[normal]">.</span>
                     </p>
-                    <p className="mt-4 lg:mt-0 lg:absolute font-['Outfit:Regular',sans-serif] font-normal leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[14px] lg:text-[14px] text-white lg:top-[305px] px-8 text-center" data-node-id="163:28">
+                    <p className="mt-4 lg:mt-0 lg:absolute font-outfit font-normal leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[14px] lg:text-[14px] text-white lg:top-[305px] px-8 text-center" data-node-id="163:28">
                         Building Talent. Powering Projects. Scaling Futures
                     </p>
                 </div>
@@ -264,7 +276,7 @@ export default function Hero() {
                         <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                         <div className="absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[10px]" style={{ backgroundImage: `url('${imgFrame1321314585}')` }} />
                     </div>
-                    <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[16px] text-white" data-node-id="169:744">Looking for a Talent ?</p>
+                    <p className="font-outfit font-semibold leading-[normal] relative shrink-0 text-[16px] text-white" data-node-id="169:744">Looking for a Talent ?</p>
                     <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                 </button>
             </div>
@@ -310,15 +322,21 @@ export default function Hero() {
                         transition={{ type: "spring", bounce: 0, duration: 0.4 }}
                         className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 lg:hidden"
                     >
-                        <nav className="flex flex-col items-center gap-6 text-2xl font-['Outfit:SemiBold',sans-serif]">
-                            {['Home', 'Feature', 'Pricing', 'Contact', 'Pages'].map((item) => (
+                        <nav className="flex flex-col items-center gap-6 text-2xl font-outfit font-semibold">
+                            {[
+                                { name: 'Why Qural', href: '#why-qural' },
+                                { name: 'Talent Pipeline', href: '#talent-pipeline' },
+                                { name: 'HR Partner', href: '#hr-partner' },
+                                { name: 'Career Paths', href: '#career-paths' },
+                                { name: 'Journeys', href: '#journey' }
+                            ].map((item) => (
                                 <Link
-                                    key={item}
-                                    href="/"
+                                    key={item.name}
+                                    href={item.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="text-white/80 hover:text-[#ed3543] transition-colors"
                                 >
-                                    {item}
+                                    {item.name}
                                 </Link>
                             ))}
                         </nav>
