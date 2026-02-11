@@ -24,7 +24,7 @@ const talentSlides = [
 
 const variants = {
     enter: (direction: number) => ({
-        x: direction > 0 ? '100%' : '-100%',
+        x: direction > 0 ? '50%' : '-50%',
         opacity: 0,
     }),
     center: {
@@ -34,7 +34,7 @@ const variants = {
     },
     exit: (direction: number) => ({
         zIndex: 0,
-        x: direction < 0 ? '100%' : '-100%',
+        x: direction < 0 ? '50%' : '-50%',
         opacity: 0,
     }),
 };
@@ -72,18 +72,20 @@ export default function BIMShowcase() {
                 </div>
 
                 {/* Main Slider Container */}
-                <div className="relative w-full max-w-5xl group">
-                    <div className="relative h-[600px] md:h-auto md:aspect-[25/8] w-full bg-[#f8f8f8] rounded-2xl md:rounded-3xl border border-black/5 overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
+                <div className="relative w-full max-w-6xl group">
+                    <div className="relative h-[600px] md:h-[450px] w-full bg-black rounded-[32px] overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
 
-                        {/* Global Texture Background */}
-                        <div
-                            className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none"
-                            style={{
-                                backgroundImage: 'url(/texture-bg.png)',
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center'
-                            }}
-                        />
+                        {/* Textured Background */}
+                        <div className="absolute inset-0 z-0">
+                            <div
+                                className="absolute inset-0 opacity-10 mix-blend-overlay"
+                                style={{
+                                    backgroundImage: 'url(/texture-bg.png)',
+                                    backgroundSize: '300px',
+                                    backgroundRepeat: 'repeat'
+                                }}
+                            />
+                        </div>
 
                         <AnimatePresence initial={false} custom={direction} mode="popLayout">
                             <motion.div
@@ -109,77 +111,113 @@ export default function BIMShowcase() {
                                         paginate(-1);
                                     }
                                 }}
-                                className="absolute inset-0 flex flex-col md:flex-row items-end md:items-center justify-end md:justify-normal pb-6 md:pb-0"
+                                className="absolute inset-0 flex flex-col md:flex-row items-center justify-between p-6 md:p-10"
                             >
-                                {/* Left Side: Building Structure Visual */}
-                                <div className="absolute left-0 top-0 md:bottom-0 h-[45%] md:h-full w-full md:w-[60%] overflow-hidden bg-black">
-                                    <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-black/40 to-black z-10" />
-
-                                    {/* Combined Building Images */}
-                                    <div className="relative w-full h-full filter contrast-125 brightness-110">
+                                {/* Left Side: Wireframe Visual */}
+                                <div className="absolute left-0 top-0 bottom-0 w-full md:w-[60%] overflow-hidden pointer-events-none">
+                                    <div className="relative w-full h-full transform scale-110 md:scale-125 md:translate-x-[0%]">
+                                        {/* Red Wireframe Visuals shifted right */}
                                         <img
                                             src="/h1.png"
                                             alt="House Structure 1"
-                                            className="absolute inset-0 w-full h-full object-contain object-left scale-95 -translate-x-4 translate-y-6 opacity-40"
+                                            className="absolute inset-0 w-full h-full object-contain object-right scale-95 translate-x-8 translate-y-6 opacity-80"
+                                            style={{
+                                                filter: 'invert(16%) sepia(96%) saturate(6871%) hue-rotate(352deg) brightness(97%) contrast(117%)',
+                                                mixBlendMode: 'screen'
+                                            }}
                                         />
                                         <img
                                             src="/h2.png"
                                             alt="House Structure 2"
-                                            className="absolute inset-0 w-full h-full object-contain object-left scale-100 translate-x-2 -translate-y-2 opacity-80"
+                                            className="absolute inset-0 w-full h-full object-contain object-right scale-100 translate-x-14 -translate-y-2 opacity-30"
+                                            style={{
+                                                filter: 'brightness(0) invert(1)',
+                                                mixBlendMode: 'screen'
+                                            }}
                                         />
                                     </div>
 
-                                    {/* Red Wireframe Effect Overlay */}
-                                    <div className="absolute inset-0 bg-[#ed3543]/20 mix-blend-screen opacity-70 z-20 pointer-events-none" />
+                                    {/* Vignette to fade wireframe edges */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black/80 z-10" />
                                 </div>
 
-                                {/* Right Side: Talent Info Card */}
-                                <div className="relative z-20 md:ml-auto w-full max-w-lg px-4 md:px-0">
+                                {/* Right Side: Job Card */}
+                                <div className="relative z-20 w-full md:w-[500px] md:ml-auto">
+                                    {/* Connection Line (Dotted Blue) */}
+                                    <div className="hidden md:block absolute top-[80px] -left-[180px] w-[180px] h-px z-0">
+                                        <svg width="100%" height="20" className="overflow-visible">
+                                            <path
+                                                d="M 0 10 L 180 10"
+                                                stroke="#3b82f6"
+                                                strokeWidth="1.5"
+                                                strokeDasharray="4 4"
+                                                fill="none"
+                                                opacity="0.6"
+                                            />
+                                            <circle cx="0" cy="10" r="3" fill="#3b82f6" />
+                                            <circle cx="180" cy="10" r="3" fill="#3b82f6" />
+                                        </svg>
+                                    </div>
+
+                                    {/* Background Card Stack Effect */}
+                                    <div className="absolute top-4 left-[20px] w-[95%] h-full bg-white/5 rounded-2xl -z-10 transform rotate-3 border border-white/10" />
+                                    <div className="absolute top-2 left-[10px] w-[98%] h-full bg-white/10 rounded-2xl -z-10 transform rotate-1 border border-white/10" />
+
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.2 }}
-                                        className="bg-white rounded-xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-black/5"
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.1 }}
+                                        className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl relative z-10"
                                     >
                                         <div className="flex justify-between items-start mb-6">
-                                            <span className="text-black/40 text-[10px] uppercase font-bold tracking-widest font-mono">
+                                            <span className="text-[#0a0a0a]/60 text-xs font-medium font-['Outfit'] mt-1">
                                                 Pre-screened by Qural
                                             </span>
-                                            <div className="flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-full">
-                                                <User className="w-3 h-3 text-blue-600" />
-                                                <span className="text-blue-600 text-[10px] font-bold uppercase tracking-tight">Verified Unit</span>
+                                            <div className="flex items-center gap-1.5 bg-[#eff6ff] px-3 py-1.5 rounded-full">
+                                                <div className="w-4 h-4 rounded-full bg-[#bfdbfe] flex items-center justify-center">
+                                                    <User className="w-2.5 h-2.5 text-[#1d4ed8]" />
+                                                </div>
+                                                <span className="text-[#1d4ed8] text-[11px] font-bold uppercase tracking-tight font-['Outfit']">Premium Job</span>
                                             </div>
                                         </div>
 
-                                        <h3 className="text-black text-2xl font-bold font-['Outfit'] mb-4 leading-tight">
+                                        <h3 className="text-[#0a0a0a] text-xl md:text-2xl font-bold font-['Outfit'] mb-6 leading-tight">
                                             {talentSlides[currentIndex].title}
                                         </h3>
 
-                                        <div className="space-y-3 mb-8">
-                                            <div>
-                                                <span className="text-black/40 text-xs font-['Outfit'] block">Experience</span>
-                                                <span className="text-black text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].experience}</span>
+                                        <div className="space-y-4 mb-8">
+                                            <div className="flex items-baseline gap-2 pb-3 border-b border-gray-100">
+                                                <span className="text-[#0a0a0a]/50 text-sm font-['Outfit'] w-24 shrink-0">Experience :</span>
+                                                <span className="text-[#0a0a0a] text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].experience}</span>
                                             </div>
-                                            <div>
-                                                <span className="text-black/40 text-xs font-['Outfit'] block">Skills</span>
-                                                <span className="text-black text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].skills}</span>
+                                            <div className="flex items-baseline gap-2 pb-3 border-b border-gray-100">
+                                                <span className="text-[#0a0a0a]/50 text-sm font-['Outfit'] w-24 shrink-0">Skills :</span>
+                                                <span className="text-[#0a0a0a] text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].skills}</span>
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-4">
-                                            <div className="flex-1 px-4 py-3 border border-gray-200 rounded-lg flex items-center gap-2 group/input hover:border-black/20 transition-colors">
-                                                <div className="w-4 h-4 rounded-sm border border-gray-300 flex items-center justify-center text-[10px] text-gray-400">#</div>
-                                                <span className="text-gray-400 text-sm font-['Outfit']">Attach Queries</span>
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="flex-1 h-12 px-4 border border-[#e5e7eb] rounded-lg flex items-center gap-3 cursor-text hover:border-[#ed3543] transition-colors bg-white">
+                                                <div className="w-5 h-6 border-[1.5px] border-[#ef4444] rounded-[3px] flex items-center justify-center relative opacity-70">
+                                                    <div className="absolute -top-1 right-[-4px] bg-white px-[1px]">
+                                                        <div className="w-1 h-1 bg-[#ef4444] rounded-full" />
+                                                    </div>
+                                                    <div className="w-2 h-0.5 bg-[#ef4444]" />
+                                                </div>
+                                                <span className="text-gray-400 text-sm font-['Outfit']">Attach Resume</span>
                                             </div>
-                                            <button className="bg-[#ed3543] text-white px-8 py-3 rounded-lg font-bold font-['Outfit'] text-sm hover:bg-[#d02534] transition-all transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-red-500/10">
+                                            <button className="h-12 px-8 bg-gradient-to-r from-[#ed3543] to-[#ef4444] text-white rounded-lg font-bold font-['Outfit'] text-sm shadow-[0_4px_14px_rgba(237,53,67,0.3)] hover:shadow-[0_6px_20px_rgba(237,53,67,0.4)] hover:-translate-y-0.5 transition-all">
                                                 Submit
                                             </button>
                                         </div>
 
-                                        <div className="mt-4 flex items-center gap-2">
-                                            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                            <span className="text-green-600 text-[10px] font-medium font-['Outfit'] uppercase tracking-wide">
-                                                Available for immediate deployment
+                                        <div className="flex items-center gap-2">
+                                            <div className="relative flex h-2 w-2">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                            </div>
+                                            <span className="text-[#059669] text-xs font-medium font-['Outfit']">
+                                                We'll connect you with the right BIM talent.
                                             </span>
                                         </div>
                                     </motion.div>
@@ -189,25 +227,30 @@ export default function BIMShowcase() {
                     </div>
 
                     {/* Navigation Buttons */}
-                    <div className="mt-8 flex justify-center gap-4">
+                    <div className="mt-8 flex justify-center items-center gap-6">
                         <button
                             onClick={() => paginate(-1)}
-                            className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-black/40 hover:text-black hover:border-black/30 transition-all"
+                            className="w-12 h-12 rounded-full border border-[#e5e7eb] bg-white flex items-center justify-center text-[#9ca3af] hover:text-[#ed3543] hover:border-[#ed3543] hover:shadow-lg transition-all"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
-                        <div className="flex gap-2 items-center">
+
+                        <div className="flex gap-2">
                             {talentSlides.map((_, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => jumpTo(idx)}
-                                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-[#ed3543] w-4' : 'bg-black/10'}`}
+                                    className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex
+                                        ? 'bg-[#ed3543] w-6'
+                                        : 'bg-[#e5e7eb] w-2 hover:bg-[#d1d5db]'
+                                        }`}
                                 />
                             ))}
                         </div>
+
                         <button
                             onClick={() => paginate(1)}
-                            className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-black/40 hover:text-black hover:border-black/30 transition-all"
+                            className="w-12 h-12 rounded-full border border-[#e5e7eb] bg-white flex items-center justify-center text-[#9ca3af] hover:text-[#ed3543] hover:border-[#ed3543] hover:shadow-lg transition-all"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </button>
