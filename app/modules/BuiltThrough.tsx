@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function BuiltThrough() {
     return (
-        <div className="relative w-full max-w-[1600px] min-h-screen mx-auto flex items-center justify-center overflow-hidden">
+        <div className="relative w-full max-w-[1600px] min-h-screen mx-auto flex flex-col lg:block items-center justify-center overflow-hidden">
             {/* 1. Honeycomb Pattern Background */}
             <div className="absolute inset-0 pointer-events-none opacity-20">
                 {/* Decorative Polygons - Scattered for background texture */}
@@ -24,7 +24,7 @@ export default function BuiltThrough() {
             </div>
 
             {/* 2. Vertical 'Qural' Text - Right aligned */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center select-none z-10 w-[110px] md:w-[140px] lg:w-[160px] gap-2">
+            <div className="absolute right-[-20px] lg:right-0 top-1/2 -translate-y-1/2 flex flex-col items-center select-none z-10 w-[90px] md:w-[140px] lg:w-[160px] gap-2 opacity-50 lg:opacity-100">
                 <img src="/qural/Q.svg" alt="Q" className="w-full relative z-10" />
                 <img src="/qural/U.svg" alt="U" className="w-[75%] relative z-10" />
                 <img src="/qural/R.svg" alt="R" className="w-[75%] relative z-10" />
@@ -33,12 +33,12 @@ export default function BuiltThrough() {
             </div>
 
             {/* 3. Bee Image - Overlapping the text elements */}
-            <div className="absolute left-[5%] md:left-[10%] lg:left-[15%] top-[40%] md:top-[35%] z-20 w-[200px] md:w-[280px] lg:w-[360px] pointer-events-none">
+            <div className="absolute left-[-20px] lg:left-[15%] top-[5%] lg:top-[35%] z-20 w-[150px] md:w-[280px] lg:w-[360px] pointer-events-none opacity-80 lg:opacity-100">
                 <img src="/bee.png" alt="Bee" className="w-full h-auto drop-shadow-2xl transform hover:scale-105 transition-transform duration-500" />
             </div>
 
             {/* 4. Content Area (Right Side) */}
-            <div className="absolute right-[5%] lg:right-[15%] top-1/2 -translate-y-1/2 w-[90%] md:w-[50%] lg:w-[45%] flex flex-col gap-10 z-30">
+            <div className="relative lg:absolute right-auto lg:right-[15%] top-auto lg:top-1/2 translate-y-0 lg:-translate-y-1/2 w-full lg:w-[45%] flex flex-col gap-10 z-30 px-6 lg:px-0 pt-32 lg:pt-0 pb-10 lg:pb-0">
                 {/* Title */}
                 <h1 className="font-['Outfit:SemiBold',sans-serif] text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
                     Built through <span className="bg-white px-3 py-1 rounded-full inline-flex items-center gap-2 transform -rotate-1 shadow-sm whitespace-nowrap">outcomes <span className="text-2xl">🔥</span></span>,
@@ -81,7 +81,7 @@ export default function BuiltThrough() {
             </div>
 
             {/* Social Icons (Floating left bottom) - Keeping placeholder spots relative to the Qural text */}
-            <div className="absolute left-[8%] md:left-[13%] bottom-10 flex flex-col gap-4 z-40">
+            <div className="relative lg:absolute left-auto lg:left-[13%] bottom-auto lg:bottom-10 flex lg:flex-col flex-row gap-4 z-40 mb-10 lg:mb-0 justify-center w-full lg:w-auto">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white shadow-lg cursor-pointer hover:scale-110 transition-transform">
                     {/* LinkedIn Icon SVG equivalent */}
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>

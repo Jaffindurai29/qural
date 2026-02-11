@@ -22,19 +22,43 @@ const talentSlides = [
     }
 ];
 
-export default function BIMShowcase() {
-    const [currentIndex, setCurrentIndex] = useState(0);
+const variants = {
+    enter: (direction: number) => ({
+        x: direction > 0 ? '100%' : '-100%',
+        opacity: 0,
+    }),
+    center: {
+        zIndex: 1,
+        x: 0,
+        opacity: 1,
+    },
+    exit: (direction: number) => ({
+        zIndex: 0,
+        x: direction < 0 ? '100%' : '-100%',
+        opacity: 0,
+    }),
+};
 
-    const nextSlide = () => {
-        setCurrentIndex((prev) => (prev + 1) % talentSlides.length);
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+};
+
+export default function BIMShowcase() {
+    const [[currentIndex, direction], setPage] = useState([0, 0]);
+
+    const paginate = (newDirection: number) => {
+        const nextIndex = (currentIndex + newDirection + talentSlides.length) % talentSlides.length;
+        setPage([nextIndex, newDirection]);
     };
 
-    const prevSlide = () => {
-        setCurrentIndex((prev) => (prev - 1 + talentSlides.length) % talentSlides.length);
+    const jumpTo = (index: number) => {
+        const newDirection = index > currentIndex ? 1 : -1;
+        setPage([index, newDirection]);
     };
 
     return (
-        <section className="w-full bg-white py-24 px-4 overflow-hidden" data-section="bim-showcase">
+        <section className="w-full bg-white py-24 px-4 overflow-hidden mt-[-100px]" data-section="bim-showcase">
             <div className="max-w-7xl mx-auto flex flex-col items-center">
 
                 {/* Header Text */}
@@ -49,7 +73,7 @@ export default function BIMShowcase() {
 
                 {/* Main Slider Container */}
                 <div className="relative w-full max-w-5xl group">
-                    <div className="relative aspect-[21/9] md:aspect-[25/8] w-full bg-[#f8f8f8] rounded-2xl md:rounded-3xl border border-black/5 overflow-hidden flex items-center shadow-2xl">
+                    <div className="relative h-[600px] md:h-auto md:aspect-[25/8] w-full bg-[#f8f8f8] rounded-2xl md:rounded-3xl border border-black/5 overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
 
                         {/* Global Texture Background */}
                         <div
@@ -61,18 +85,35 @@ export default function BIMShowcase() {
                             }}
                         />
 
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence initial={false} custom={direction} mode="popLayout">
                             <motion.div
                                 key={currentIndex}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.6, ease: "easeInOut" }}
-                                className="absolute inset-0 flex items-center"
+                                custom={direction}
+                                variants={variants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    x: { type: "spring", stiffness: 300, damping: 30 },
+                                    opacity: { duration: 0.2 }
+                                }}
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                dragElastic={1}
+                                onDragEnd={(e, { offset, velocity }) => {
+                                    const swipe = swipePower(offset.x, velocity.x);
+
+                                    if (swipe < -swipeConfidenceThreshold) {
+                                        paginate(1);
+                                    } else if (swipe > swipeConfidenceThreshold) {
+                                        paginate(-1);
+                                    }
+                                }}
+                                className="absolute inset-0 flex flex-col md:flex-row items-end md:items-center justify-end md:justify-normal pb-6 md:pb-0"
                             >
                                 {/* Left Side: Building Structure Visual */}
-                                <div className="absolute left-0 top-0 bottom-0 w-[60%] overflow-hidden bg-black">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/40 to-black z-10" />
+                                <div className="absolute left-0 top-0 md:bottom-0 h-[45%] md:h-full w-full md:w-[60%] overflow-hidden bg-black">
+                                    <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent via-black/40 to-black z-10" />
 
                                     {/* Combined Building Images */}
                                     <div className="relative w-full h-full filter contrast-125 brightness-110">
@@ -93,7 +134,7 @@ export default function BIMShowcase() {
                                 </div>
 
                                 {/* Right Side: Talent Info Card */}
-                                <div className="relative z-20 ml-auto w-full max-w-lg">
+                                <div className="relative z-20 md:ml-auto w-full max-w-lg px-4 md:px-0">
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -150,7 +191,7 @@ export default function BIMShowcase() {
                     {/* Navigation Buttons */}
                     <div className="mt-8 flex justify-center gap-4">
                         <button
-                            onClick={prevSlide}
+                            onClick={() => paginate(-1)}
                             className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-black/40 hover:text-black hover:border-black/30 transition-all"
                         >
                             <ChevronLeft className="w-5 h-5" />
@@ -159,13 +200,13 @@ export default function BIMShowcase() {
                             {talentSlides.map((_, idx) => (
                                 <button
                                     key={idx}
-                                    onClick={() => setCurrentIndex(idx)}
+                                    onClick={() => jumpTo(idx)}
                                     className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-[#ed3543] w-4' : 'bg-black/10'}`}
                                 />
                             ))}
                         </div>
                         <button
-                            onClick={nextSlide}
+                            onClick={() => paginate(1)}
                             className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center text-black/40 hover:text-black hover:border-black/30 transition-all"
                         >
                             <ChevronRight className="w-5 h-5" />

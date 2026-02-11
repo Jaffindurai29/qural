@@ -1,9 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+
 const imgFrame1321314585 = "https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e";
 const imgEllipse1 = "https://www.figma.com/api/mcp/asset/7ad97e0b-b0d4-4d95-b410-1b2f393129d6";
 const imgEllipse3 = "https://www.figma.com/api/mcp/asset/0c4f921c-37bd-4b16-92ea-ef392ac2b058";
@@ -20,7 +22,7 @@ const testimonials = [
         id: 1,
         text: "We design, deploy, and scale high-performance BIM & EPC talent for global AEC firms.",
         avatar: imgEllipse1,
-        position: "top-[400px] right-[20px]",
+        position: "lg:top-[400px] lg:right-[20px] relative lg:absolute",
         color: "bg-[#8338ec]",
         textColor: "text-white",
         delay: 0
@@ -29,7 +31,7 @@ const testimonials = [
         id: 2,
         text: "Qural Connects Talent, Industry and academia into one engineered ecosystem.",
         avatar: imgEllipse1,
-        position: "top-[550px] right-[140px]",
+        position: "lg:top-[550px] lg:right-[140px] relative lg:absolute",
         color: "bg-[#fee440]",
         textColor: "text-[#343a40]",
         delay: 0.5
@@ -38,7 +40,7 @@ const testimonials = [
         id: 3,
         text: "Designing tomorrow’s infrastructure today.",
         avatar: imgEllipse3,
-        position: "top-[440px] right-[240px]",
+        position: "lg:top-[440px] lg:right-[240px] relative lg:absolute",
         color: "bg-[#06d6a0]",
         textColor: "text-[#343a40]",
         delay: 0.2
@@ -47,7 +49,7 @@ const testimonials = [
         id: 4,
         text: "Building the future of AEC innovation.",
         avatar: imgEllipse3,
-        position: "top-[620px] right-[40px]",
+        position: "lg:top-[620px] lg:right-[40px] relative lg:absolute",
         color: "bg-[#ef476f]",
         textColor: "text-white",
         delay: 0.4
@@ -99,7 +101,7 @@ function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProp
                 x: { duration: isActive ? 0.6 : durationX, repeat: isActive ? 0 : Infinity, ease: "easeInOut", delay: isActive ? 0 : data.delay * 1.5 },
                 zIndex: { delay: isActive ? 0 : 0.6 } // Keep z-index high while animating out
             }}
-            className={`absolute ${data.position} ${data.color} border-[1.313px] border-white border-solid flex items-center justify-end cursor-pointer shadow-lg overflow-hidden`}
+            className={`${data.position} ${data.color} border-[1.313px] border-white border-solid flex items-center justify-end cursor-pointer shadow-lg overflow-hidden shrink-0`}
         >
             <motion.div
                 layout
@@ -132,6 +134,7 @@ function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProp
 
 export default function Hero() {
     const [activeId, setActiveId] = useState<number | null>(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isManual, setIsManual] = useState(false);
     const nextIndexRef = useRef(0); // Track sequence
 
@@ -159,21 +162,29 @@ export default function Hero() {
     }, [isManual]);
 
     return (
-        <div className="bg-black relative size-full font-['Outfit:Regular',sans-serif] min-h-screen overflow-hidden group" data-name="Pexio" data-node-id="163:3">
+        <div className="bg-black relative w-full lg:size-full font-['Outfit:Regular',sans-serif] min-h-[95vh] lg:min-h-screen overflow-hidden group flex flex-col items-center lg:block" data-name="Pexio" data-node-id="163:3">
             {/* Logo */}
-            <Link href="/" className="absolute left-[70px] -top-[10px] z-50">
+            <Link href="/" className="absolute left-4 top-4 lg:left-[70px] lg:-top-[10px] z-50">
                 <Image
                     src="/logo.svg"
                     alt="Qural Logo"
                     width={166}
                     height={110}
-                    className="w-[166px] h-auto"
+                    className="w-[120px] lg:w-[166px] h-auto"
                     priority
                 />
             </Link>
 
-            {/* Figma Absolute Background Ellipses */}
-            <div className="absolute flex h-[935.705px] items-center justify-center left-[-146px] top-[-161px] w-[896.198px]">
+            {/* Mobile Menu Toggle */}
+            <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden absolute top-6 right-4 z-50 text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+            >
+                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+
+            {/* Figma Absolute Background Ellipses - Scaled/Hidden on mobile */}
+            <div className="absolute flex h-[460px] lg:h-[935.705px] items-center justify-center left-[-100px] lg:left-[-146px] top-[-80px] lg:top-[-161px] w-[450px] lg:w-[896.198px] opacity-60 lg:opacity-100 pointer-events-none">
                 <div className="flex-none rotate-[46.53deg]">
                     <div className="h-[124.867px] relative w-[1170.946px]" data-node-id="163:4">
                         <div className="absolute inset-[-152.16%_-16.23%]">
@@ -182,7 +193,7 @@ export default function Hero() {
                     </div>
                 </div>
             </div>
-            <div className="absolute flex h-[935.705px] items-center justify-center left-[-176px] top-[-543px] w-[896.198px]">
+            <div className="absolute flex h-[460px] lg:h-[935.705px] items-center justify-center left-[-120px] lg:left-[-176px] top-[-250px] lg:top-[-543px] w-[450px] lg:w-[896.198px] opacity-60 lg:opacity-100 pointer-events-none">
                 <div className="flex-none rotate-[46.53deg]">
                     <div className="h-[124.867px] relative w-[1170.946px]" data-node-id="163:5">
                         <div className="absolute inset-[-152.16%_-16.23%]">
@@ -191,7 +202,7 @@ export default function Hero() {
                     </div>
                 </div>
             </div>
-            <div className="absolute flex h-[935.705px] items-center justify-center left-[-594px] top-[-276px] w-[896.198px]">
+            <div className="absolute flex h-[460px] lg:h-[935.705px] items-center justify-center left-[-300px] lg:left-[-594px] top-[-140px] lg:top-[-276px] w-[450px] lg:w-[896.198px] opacity-60 lg:opacity-100 pointer-events-none">
                 <div className="flex-none rotate-[46.53deg]">
                     <div className="h-[124.867px] relative w-[1170.946px]" data-node-id="163:6">
                         <div className="absolute inset-[-152.16%_-16.23%]">
@@ -200,84 +211,128 @@ export default function Hero() {
                     </div>
                 </div>
             </div>
-            {/* Navigation Bar */}
-            <div className="-translate-x-1/2 absolute content-stretch flex font-['Outfit:Regular',sans-serif] font-normal gap-[70px] items-center leading-[normal] left-[calc(50%-0.5px)] text-[14px] top-[45px]" data-node-id="163:7">
+
+            {/* Navigation Bar - Hidden on Mobile */}
+            <div className="hidden lg:flex -translate-x-1/2 absolute content-stretch font-['Outfit:Regular',sans-serif] font-normal gap-[70px] items-center leading-[normal] left-[calc(50%-0.5px)] text-[14px] top-[45px] z-50" data-node-id="163:7">
                 <Link href="/" className="relative shrink-0 text-white hover:text-white transition-colors" data-node-id="163:8">Home</Link>
                 <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:9">Feature</Link>
                 <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:10">Pricing</Link>
                 <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:11">Contact</Link>
                 <Link href="/" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:12">Pages</Link>
             </div>
-            {/* Right Button */}
-            <button className="absolute bg-[#f4f4f4] content-stretch flex h-[47px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[8.418px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[33px] cursor-pointer hover:brightness-95 transition-all" data-name="Button" data-node-id="169:746">
+
+            {/* Right Button - Hidden on Mobile */}
+            <button className="hidden lg:flex absolute bg-[#f4f4f4] content-stretch h-[47px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[8.418px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[33px] cursor-pointer hover:brightness-95 transition-all z-50" data-name="Button" data-node-id="169:746">
                 <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[#ed3543] text-[12px]" data-node-id="169:747">Want to Upskill ? </p>
                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
             </button>
-            {/* Tagline Pill and Decorative Lines */}
-            {/* Tagline Pill and Decorative Lines */}
-            <div className="-translate-x-1/2 absolute flex items-center justify-center gap-[32px] left-1/2 top-[150px] w-auto" data-node-id="163:17">
-                <div className="h-[24px] w-[220px]" data-node-id="163:23">
-                    <img alt="" className="block max-w-none size-full" src={imgGroup358} />
+
+            {/* Mobile Content Container */}
+            <div className="flex flex-col items-center justify-center w-full z-20 mt-32 lg:mt-0 lg:block lg:static">
+
+                {/* Tagline Pill and Decorative Lines */}
+                <div className="relative flex items-center justify-center gap-[15px] lg:gap-[32px] lg:absolute lg:-translate-x-1/2 lg:left-1/2 lg:top-[150px] w-auto lg:w-auto mb-6 lg:mb-0" data-node-id="163:17">
+                    <div className="h-[18px] w-[100px] lg:h-[24px] lg:w-[220px] hidden sm:block" data-node-id="163:23">
+                        <img alt="" className="block max-w-none size-full" src={imgGroup358} />
+                    </div>
+                    <div className="bg-[rgba(233,12,12,0.1)] content-stretch flex items-center justify-center px-[20px] lg:px-[30px] py-[6px] lg:py-[8px] rounded-[30px]" data-node-id="163:18">
+                        <p className="font-['Outfit:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[12px] lg:text-[14px] text-white" data-node-id="163:19">Where careers are engineered</p>
+                    </div>
+                    <div className="h-[18px] w-[100px] lg:h-[24px] lg:w-[220px] hidden sm:block" data-node-id="163:20">
+                        <img alt="" className="block max-w-none size-full" src={imgGroup357} />
+                    </div>
                 </div>
-                <div className="bg-[rgba(233,12,12,0.1)] content-stretch flex items-center justify-center px-[30px] py-[8px] rounded-[30px]" data-node-id="163:18">
-                    <p className="font-['Outfit:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[14px] text-white" data-node-id="163:19">Where careers are engineered</p>
+
+                {/* Headline */}
+                <div className="flex flex-col items-center text-center lg:block lg:text-left relative">
+                    <p className="lg:absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[1.2] lg:leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[32px] lg:text-[40px] text-white lg:top-[200px] px-4" data-node-id="163:26">
+                        Engineering careers aren’t accidental.
+                    </p>
+                    <p className="mt-2 lg:mt-0 lg:absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[32px] lg:text-[40px] text-white lg:top-[250px] px-4" data-node-id="163:27">
+                        <span className="leading-[normal]">They’re </span>
+                        <span className="leading-[normal] text-[#ee3042]">ENGINEERED</span>
+                        <span className="leading-[normal]">.</span>
+                    </p>
+                    <p className="mt-4 lg:mt-0 lg:absolute font-['Outfit:Regular',sans-serif] font-normal leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[14px] lg:text-[14px] text-white lg:top-[305px] px-8 text-center" data-node-id="163:28">
+                        Building Talent. Powering Projects. Scaling Futures
+                    </p>
                 </div>
-                <div className="h-[24px] w-[220px]" data-node-id="163:20">
-                    <img alt="" className="block max-w-none size-full" src={imgGroup357} />
-                </div>
+
+                {/* Main CTA Button */}
+                <button className="relative mt-8 lg:mt-0 lg:-translate-x-1/2 lg:absolute border border-solid border-white content-stretch flex h-[56px] items-center justify-center lg:left-[calc(50%+0.5px)] p-[8px] rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] lg:top-[350px] w-[280px] lg:w-[300px] cursor-pointer hover:brightness-95 transition-all z-20" data-node-id="169:743">
+                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
+                        <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
+                        <div className="absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[10px]" style={{ backgroundImage: `url('${imgFrame1321314585}')` }} />
+                    </div>
+                    <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[16px] text-white" data-node-id="169:744">Looking for a Talent ?</p>
+                    <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
+                </button>
             </div>
-            {/* Headline */}
-            {/* Headline */}
-            <p className="absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] left-1/2 -translate-x-1/2 whitespace-nowrap text-[40px] text-white top-[200px]" data-node-id="163:26">Engineering careers aren’t accidental.</p>
-            <p className="absolute font-['Outfit:SemiBold',sans-serif] font-semibold leading-[0] left-1/2 -translate-x-1/2 whitespace-nowrap text-[0px] text-[40px] text-white top-[250px]" data-node-id="163:27">
-                <span className="leading-[normal]">They’re </span>
-                <span className="leading-[normal] text-[#ee3042]">ENGINEERED</span>
-                <span className="leading-[normal]">.</span>
-            </p>
-            <p className="absolute font-['Outfit:Regular',sans-serif] font-normal leading-[normal] left-1/2 -translate-x-1/2 whitespace-nowrap text-[14px] text-white top-[305px]" data-node-id="163:28">Building Talent. Powering Projects. Scaling Futures</p>
-            {/* Main CTA Button */}
-            {/* Main CTA Button */}
-            {/* Main CTA Button */}
-            <button className="-translate-x-1/2 absolute border border-solid border-white content-stretch flex h-[56px] items-center justify-center left-[calc(50%+0.5px)] p-[8px] rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] top-[350px] w-[300px] cursor-pointer hover:brightness-95 transition-all z-10" data-node-id="169:743">
-                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
-                    <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
-                    <div className="absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[10px]" style={{ backgroundImage: `url('${imgFrame1321314585}')` }} />
-                </div>
-                <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[16px] text-white" data-node-id="169:744">Looking for a Talent ?</p>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
-            </button>
-            {/* Testimonials */}
-            {testimonials.map((t) => (
-                <TestimonialBubble
-                    key={t.id}
-                    data={t}
-                    isActive={activeId === t.id}
-                    onInteract={(active) => {
-                        setIsManual(active);
-                        setActiveId(active ? t.id : null);
-                    }}
-                />
-            ))}
+
+            {/* Testimonials - Stacked on Mobile, Absolute on Desktop */}
+            <div className="relative w-full flex flex-wrap justify-center gap-4 mt-16 px-4 pb-20 lg:pb-0 lg:mt-0 lg:block lg:static z-20">
+                {testimonials.map((t) => (
+                    <TestimonialBubble
+                        key={t.id}
+                        data={t}
+                        isActive={activeId === t.id}
+                        onInteract={(active) => {
+                            setIsManual(active);
+                            setActiveId(active ? t.id : null);
+                        }}
+                    />
+                ))}
+            </div>
 
             {/* Decorative Images and Vectors */}
-            <div className="-translate-x-1/2 absolute left-1/2 size-[1556px] top-[864px]" data-node-id="163:29">
-                <img alt="" className="block max-w-none size-full" src={imgEllipse7} />
+            <div className="-translate-x-1/2 absolute left-1/2 w-[120%] h-[300px] -bottom-10 lg:w-auto lg:h-auto lg:size-[1556px] lg:top-[664px] lg:bottom-auto opacity-50 lg:opacity-100 pointer-events-none" data-node-id="163:29">
+                <img alt="" className="block size-full object-cover lg:object-fill" src={imgEllipse7} />
             </div>
-            <div className="absolute left-[31px] size-[1389px] top-[947px]" data-node-id="163:30">
-                <img alt="" className="block max-w-none size-full" src={imgEllipse8} />
+            <div className="hidden lg:block absolute lg:left-[31px] lg:size-[1389px] lg:top-[947px] lg:opacity-100 pointer-events-none" data-node-id="163:30">
+                <img alt="" className="block size-full object-contain lg:object-fill" src={imgEllipse8} />
             </div>
-            <div className="absolute bg-black blur-[75px] h-[318px] left-0 top-[889px] w-[1440px]" data-node-id="163:31" />
-            <div className="-translate-x-1/2 absolute bottom-[-10px] flex h-[474px] items-center justify-center left-[calc(53.13%-30.5px)] w-[1527px]">
-                <div className="-scale-y-100 flex-none rotate-180">
-                    <div className="h-[474px] relative w-[1527px]" data-name="Vector" data-node-id="170:767">
-                        <img alt="" className="block max-w-none size-full" src={imgVector} />
+            <div className="absolute bg-black blur-[75px] h-[318px] left-0 top-[889px] w-full lg:w-[1440px] pointer-events-none" data-node-id="163:31" />
+            <div className="-translate-x-1/2 absolute bottom-[-10px] lg:bottom-[-10px] flex h-[200px] lg:h-[474px] items-center justify-center left-1/2 lg:left-[calc(53.13%-30.5px)] w-full lg:w-[1527px] pointer-events-none">
+                <div className="-scale-y-100 flex-none rotate-180 w-full lg:w-auto h-full">
+                    <div className="h-full relative w-full lg:w-[1527px]" data-name="Vector" data-node-id="170:767">
+                        <img alt="" className="block size-full object-cover lg:object-fill" src={imgVector} />
                     </div>
                 </div>
             </div>
-            {/* <div className="absolute bottom-[50px] right-[50px] w-auto h-auto z-10" data-node-id="173:900">
-                <img alt="" className="block max-w-none h-[50px] w-auto" src={imgGroup1000001535} />
-            </div> */}
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: '100%' }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: '100%' }}
+                        transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 lg:hidden"
+                    >
+                        <nav className="flex flex-col items-center gap-6 text-2xl font-['Outfit:SemiBold',sans-serif]">
+                            {['Home', 'Feature', 'Pricing', 'Contact', 'Pages'].map((item) => (
+                                <Link
+                                    key={item}
+                                    href="/"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-white/80 hover:text-[#ed3543] transition-colors"
+                                >
+                                    {item}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        <div className="mt-8">
+                            <button className="bg-[#ed3543] text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-red-500/20 hover:scale-105 transition-transform">
+                                Want to Upskill?
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
         </div>
     );
 }
+

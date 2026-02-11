@@ -59,7 +59,7 @@ export default function WhyQural() {
     const [activeSection, setActiveSection] = useState<string | null>('students');
 
     return (
-        <section className="w-full bg-white py-24 flex flex-col items-center relative" data-section="why-qural">
+        <section className="w-full bg-white py-24 flex flex-col items-center relative overflow-hidden" data-section="why-qural">
             {/* Background Pattern */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-[0.03] -z-10"
@@ -79,8 +79,8 @@ export default function WhyQural() {
             </div>
 
             {/* Header */}
-            <div className="text-center mb-20 px-4">
-                <h2 className="text-5xl md:text-6xl font-bold text-[#1a1a1a] mb-6 font-['Outfit']">
+            <div className="text-center mt-[-60px] mb-10 px-4">
+                <h2 className="text-5xl md:text-6xl font-bold text-[#1a1a1a] mb-3 font-['Outfit']">
                     Why <span className="text-[#ed3543]">QURAL</span> exists?
                 </h2>
                 <p className="text-2xl text-gray-800 font-['DM_Sans']">
