@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Crown, User } from 'lucide-react';
 
 const talentSlides = [
     {
@@ -218,7 +218,7 @@ export default function BIMShowcase() {
                                             </span>
                                             <div className="flex items-center gap-1.5 bg-[#eff6ff] px-3 py-1.5 rounded-full">
                                                 <div className="w-4 h-4 rounded-full bg-[#bfdbfe] flex items-center justify-center">
-                                                    <User className="w-2.5 h-2.5 text-[#1d4ed8]" />
+                                                    <Crown className="w-2.5 h-2.5 text-[#1d4ed8]" />
                                                 </div>
                                                 <span className="text-[#1d4ed8] text-[11px] font-bold uppercase tracking-tight font-['Outfit']">Premium Job</span>
                                             </div>
@@ -265,7 +265,7 @@ export default function BIMShowcase() {
                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                                             </div>
-                                            <span className="text-[#059669] text-xs font-medium font-['Outfit']">
+                                            <span className="text-red-500 text-xs font-medium font-['Outfit']">
                                                 We'll connect you with the right BIM talent.
                                             </span>
                                         </div>

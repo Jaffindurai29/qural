@@ -1,37 +1,28 @@
 "use client";
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import ProfileCard from '../components/ProfileCard';
 
-const imgCompanyLogo = "/company.png";
-const imgLearnerProfile = "/profile.jpg";
-
-const categories = [
-    { id: 'upskilling', label: 'Upskilling' },
-    { id: 'hiring', label: 'Talent Hiring' },
-    { id: 'academy', label: 'Academy' }
+const profileData = [
+    { name: "Rahul K", before: "Graduate", after: "Electrical BIM Professional", profileImg: "/person/p1.png", logo: "/company/c1.png" },
+    { name: "Majharulla R", before: "Job Seeker", after: "Electrical BIM Professional", profileImg: "/person/p2.png", logo: "/company/c2.png" },
+    { name: "Noorul Ameen A", before: "Site Engineer", after: "Electrical BIM Professional", profileImg: "/person/p3.png", logo: "/company/c3.png" },
+    { name: "Kasthuri", before: "Job Seeker", after: "Electrical BIM Coordinator", profileImg: "/person/p4.png", logo: "/company/c4.png" },
+    { name: "Suresh", before: "Site Engineer", after: "Mechanical BIM Professional", profileImg: "/person/p5.png", logo: "/company/c5.png" },
+    { name: "Shanmugan", before: "Job Seeker", after: "Mechanical BIM Professional", profileImg: "/person/p6.png", logo: "/company/c6.png" },
+    { name: "Meyyarasan", before: "Graduate", after: "Electrical BIM Professional", profileImg: "/person/p7.png", logo: "/company/c7.png" }
 ];
 
-const profileData = {
-    upskilling: [
-        { name: "Rahul K", before: "Site Engineer", after: "Electrical BIM Modeler - Dubai", logo: "/company.png" },
-        { name: "Priya S", before: "Junior BIM Modeler", after: "BIM Engineer - UK", logo: "/company.png" },
-        { name: "Padmini Kadhirvel", before: "Mechanical Graduate", after: "BIM Professional - Global Project", logo: "/company.png" }
-    ],
-    hiring: [
-        { name: "Arun M", before: "Unemployed", after: "Structural Modeler", logo: "/company.png" },
-        { name: "Sneha R", before: "Graduate Trainee", after: "BIM Coordinator", logo: "/company.png" },
-        { name: "Karthik P", before: "Quantity Surveyor", after: "BIM Manager", logo: "/company.png" }
-    ],
-    academy: [
-        { name: "Leaners 1", before: "Student", after: "BIM Certified", logo: "/company.png" },
-        { name: "Leaners 2", before: "Architect Student", after: "Revit Master", logo: "/company.png" },
-        { name: "Leaners 3", before: "Civil Student", after: "BIM Specialist", logo: "/company.png" }
-    ]
-};
-
 export default function JourneysShaped() {
-    const [activeTab, setActiveTab] = useState('upskilling');
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % profileData.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev - 1 + profileData.length) % profileData.length);
+    };
 
     return (
         <div id="journey" className="relative w-full min-h-screen flex items-center justify-center bg-[#ed3543] py-20 px-4 isolate overflow-hidden">
@@ -59,51 +50,44 @@ export default function JourneysShaped() {
                     </div>
                 </div>
 
-                {/* Category Tabs */}
-                <div className="flex flex-wrap justify-center gap-4 bg-white rounded-2xl p-2 shadow-2xl">
-                    {categories.map((cat) => (
-                        <button
-                            key={cat.id}
-                            onClick={() => setActiveTab(cat.id)}
-                            className={`flex items-center gap-3 px-6 py-3 rounded-xl font-['Outfit'] font-bold transition-all ${activeTab === cat.id
-                                ? 'bg-[#ffebed] text-[#ed3543] shadow-md scale-105'
-                                : 'text-gray-500 hover:bg-gray-50'
-                                }`}
-                        >
-                            {cat.label}
-                        </button>
-                    ))}
-                </div>
 
-                {/* Profile Cards Grid */}
-                <div className="w-full overflow-x-auto pb-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        key={activeTab}
-                        className="flex justify-center flex-wrap lg:flex-nowrap gap-6 min-w-max px-6 mx-auto"
-                    >
-                        {profileData[activeTab as keyof typeof profileData].map((profile, i) => (
-                            <ProfileCard
-                                key={i}
-                                name={profile.name}
-                                beforeRole={profile.before}
-                                afterRole={profile.after}
-                                profileImage={imgLearnerProfile}
-                                companyLogo={profile.logo}
-                            />
-                        ))}
-                    </motion.div>
+                {/* Profile Cards Grid Area */}
+                <div className="w-full overflow-hidden pb-5 px-6">
+                    <div className="relative w-full overflow-visible">
+                        <motion.div
+                            animate={{ x: `-${currentIndex * (400 + 24)}px` }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            className="flex gap-6 mx-auto"
+                        >
+                            {profileData.map((profile, i) => (
+                                <div key={i} className="shrink-0">
+                                    <ProfileCard
+                                        name={profile.name}
+                                        beforeRole={profile.before}
+                                        afterRole={profile.after}
+                                        profileImage={profile.profileImg}
+                                        companyLogo={profile.logo}
+                                    />
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
                 </div>
 
                 {/* Action Row: Nav and CTA Buttons */}
-                <div className="w-full flex flex-col items-center gap-10 mt-4">
+                <div className="w-full flex flex-col items-center gap-10 -mt-8">
                     {/* Navigation Circles */}
                     <div className="flex items-center gap-4">
-                        <button className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+                        <button
+                            onClick={prevSlide}
+                            className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all z-30"
+                        >
                             <span className="text-xl">‹</span>
                         </button>
-                        <button className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+                        <button
+                            onClick={nextSlide}
+                            className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all z-30"
+                        >
                             <span className="text-xl">›</span>
                         </button>
                     </div>

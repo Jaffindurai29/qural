@@ -45,14 +45,16 @@ export default function ProfileCard({
 
         {/* Name & Company */}
         <div className="absolute top-[135px] inset-x-0 flex flex-col items-center gap-2 z-20">
-          <h3 className="font-['Outfit'] font-bold text-[20px] font-bold text-white text-center">
+          <h3 className="font-['Outfit'] font-bold text-[22px] text-white text-center leading-tight">
             {name}
           </h3>
-          <img
-            src={companyLogo}
-            alt="Company"
-            className="h-[28px] w-auto object-contain"
-          />
+          <div className="h-[32px] w-full flex items-center justify-center px-4">
+            <img
+              src={companyLogo}
+              alt="Company"
+              className="h-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+            />
+          </div>
         </div>
 
         {/* Transformation Section */}
