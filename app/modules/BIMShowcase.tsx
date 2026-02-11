@@ -6,19 +6,75 @@ import { ChevronLeft, ChevronRight, User } from 'lucide-react';
 const talentSlides = [
     {
         id: 1,
-        title: "Electrical BIM Modeler - Dubai",
-        experience: "2+ Years",
-        skills: "Revit | Navisworks | BIM Coordination",
+        title: "Electrical BIM Modeler – Dubai",
+        experience: "2 Years",
+        skills: "Revit | Navisworks",
         image: "/h1.png",
         location: "Dubai, UAE"
     },
     {
         id: 2,
-        title: "Structural BIM Engineer",
-        experience: "4+ Years",
-        skills: "Tekla | Revit | Robot Structural",
+        title: "Mechanical BIM Modeler – UK (London)",
+        experience: "4 Years",
+        skills: "HVAC | Clash Detection | BIM 360",
+        image: "/h2.png",
+        location: "London, UK"
+    },
+    {
+        id: 3,
+        title: "Structural BIM Modeler – India (Trichy)",
+        experience: "4 Years",
+        skills: "Tekla | Structural Detailing | Coordination",
+        image: "/h1.png",
+        location: "Trichy, India"
+    },
+    {
+        id: 4,
+        title: "BIM Coordinator – USA (Texas)",
+        experience: "6 Years",
+        skills: "Digital Delivery | Model Audits",
+        image: "/h2.png",
+        location: "Texas, USA"
+    },
+    {
+        id: 5,
+        title: "BIM Engineer – Qatar (Doha)",
+        experience: "3 Years",
+        skills: "LOD 400 | Construction BIM",
+        image: "/h1.png",
+        location: "Doha, Qatar"
+    },
+    {
+        id: 6,
+        title: "BIM Specialist – Saudi Arabia (Riyadh)",
+        experience: "5 Years",
+        skills: "Mega Projects | 4D BIM",
         image: "/h2.png",
         location: "Riyadh, KSA"
+    },
+    {
+        id: 7,
+        title: "BIM Modeler – Bahrain (Manama)",
+        experience: "2+ Years",
+        skills: "MEP & Architecture",
+        image: "/h1.png",
+        location: "Manama, Bahrain"
+    },
+    {
+        id: 8,
+        title: "BIM Modeler – India (Bangalore)",
+        experience: "2 Years",
+        skills: "Revit | BIM Coordination",
+        image: "/h2.png",
+        location: "Bangalore, India"
+    },
+    {
+        id: 9,
+        title: "BIM Modeler – India (Chennai)",
+        experience: "3 Years",
+        skills: "MEP & Clash Review",
+        image: "/h1.png",
+        location: "Chennai, India"
     }
 ];
 
@@ -193,8 +249,14 @@ export default function BIMShowcase() {
                                                 </div>
                                                 <span className="text-gray-400 text-sm font-['Outfit']">Attach Resume</span>
                                             </div>
-                                            <button className="h-12 px-8 bg-gradient-to-r from-[#ed3543] to-[#ef4444] text-white rounded-lg font-bold font-['Outfit'] text-sm shadow-[0_4px_14px_rgba(237,53,67,0.3)] hover:shadow-[0_6px_20px_rgba(237,53,67,0.4)] hover:-translate-y-0.5 transition-all">
-                                                Submit
+                                            <button className="relative border border-solid border-white content-stretch flex items-center justify-center h-12 px-8 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
+                                                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
+                                                    <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
+                                                </div>
+                                                <p className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-sm text-white z-10">
+                                                    Submit
+                                                </p>
+                                                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                                             </button>
                                         </div>
 

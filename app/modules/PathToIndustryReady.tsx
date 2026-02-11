@@ -141,9 +141,15 @@ export default function PathToIndustryReady() {
                                 </div>
 
                                 {/* CTA Button */}
-                                <button className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2">
-                                    Explore this path
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                <button className="relative w-full border border-solid border-white content-stretch flex items-center justify-center px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden group">
+                                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
+                                        <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
+                                    </div>
+                                    <div className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-white z-10 flex items-center gap-2">
+                                        Explore this path
+                                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </div>
+                                    <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                                 </button>
                             </div>
                         </motion.div>

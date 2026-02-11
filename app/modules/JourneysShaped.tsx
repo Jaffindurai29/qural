@@ -110,11 +110,21 @@ export default function JourneysShaped() {
 
                     {/* Main CTA Pair */}
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <button className="relative bg-[#ed3543] border border-white/30 px-8 py-4 rounded-xl shadow-2xl hover:brightness-110 transition-all text-white font-['Outfit'] font-bold text-lg">
-                            Find Your Industry-Ready Path
+                        <button className="relative border border-solid border-white content-stretch flex items-center justify-center px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
+                            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
+                                <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
+                            </div>
+                            <p className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-lg text-white z-10">
+                                Find Your Industry-Ready Path
+                            </p>
+                            <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                         </button>
-                        <button className="bg-white px-8 py-4 rounded-xl shadow-2xl hover:bg-gray-50 transition-all text-[#ed3543] font-['Outfit'] font-bold text-lg">
-                            Get Career Guidance
+
+                        <button className="relative bg-[#f4f4f4] px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all outline-none">
+                            <span className="font-['Outfit'] font-bold text-[#ed3543] text-lg relative z-10">
+                                Get Career Guidance
+                            </span>
+                            <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
                         </button>
                     </div>
 

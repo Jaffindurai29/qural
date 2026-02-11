@@ -113,9 +113,15 @@ export default function BIMHRPartner() {
                             </div>
 
                             <div className="pt-6">
-                                <button className="px-10 py-5 bg-[#ed3543] hover:bg-[#ff4d5a] text-white font-bold rounded-2xl transition-all duration-300 shadow-[0_20px_40px_-10px_rgba(237,53,67,0.4)] hover:shadow-[0_25px_50px_-12px_rgba(237,53,67,0.5)] flex items-center group">
-                                    Speak to a BIM Hiring Expert
-                                    <ArrowRight className="ml-3 group-hover:translate-x-1 transition-transform" size={20} />
+                                <button className="relative border border-solid border-white content-stretch flex items-center justify-center px-10 py-5 rounded-[12px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden group">
+                                    <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[12px]">
+                                        <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[12px] to-[#bb1f36]" />
+                                    </div>
+                                    <div className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-white z-10 flex items-center">
+                                        Speak to a BIM Hiring Expert
+                                        <ArrowRight className="ml-3 group-hover:translate-x-1 transition-transform" size={20} />
+                                    </div>
+                                    <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                                 </button>
                             </div>
                         </div>
