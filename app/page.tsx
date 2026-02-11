@@ -6,6 +6,7 @@ import PathToIndustryReady from "./modules/PathToIndustryReady";
 import QuralEcosystem from "./modules/QuralEcosystem";
 import QuestionsThatMatter from "./modules/QuestionsThatMatter";
 import BIMShowcase from "./modules/BIMShowcase";
+import BIMHRPartner from "./modules/BIMHRPartner";
 
 
 export default function Home() {
@@ -19,9 +20,9 @@ export default function Home() {
         <JourneysShaped />
       </section>
       <PathToIndustryReady />
-
       <QuralEcosystem />
       <QuestionsThatMatter />
+      <BIMHRPartner />
     </>
   );
 }
