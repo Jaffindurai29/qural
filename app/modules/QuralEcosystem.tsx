@@ -1,6 +1,6 @@
 
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // Placeholder Assets
@@ -23,6 +23,23 @@ const voices = [
 ];
 
 export default function QuralEcosystem() {
+    const [stars, setStars] = useState<{ left: string; top: string; duration: number; delay: number }[]>([]);
+    const [voiceDelays, setVoiceDelays] = useState<{ duration: number; delay: number }[]>([]);
+
+    useEffect(() => {
+        setStars([...Array(5)].map(() => ({
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            duration: 2 + Math.random(),
+            delay: Math.random() * 2
+        })));
+
+        setVoiceDelays(voices.map(() => ({
+            duration: 3 + Math.random() * 2,
+            delay: Math.random() * 2
+        })));
+    }, []);
+
     return (
         <section className="w-full bg-black py-32 relative overflow-hidden h-[800px] flex items-center justify-center border-t border-gray-900" data-section="qural-ecosystem">
 
@@ -74,10 +91,10 @@ export default function QuralEcosystem() {
                         }}
                         // @ts-ignore
                         transition={{
-                            duration: 3 + Math.random() * 2,
+                            duration: voiceDelays[index]?.duration || 3,
                             repeat: Infinity,
                             ease: "easeInOut",
-                            delay: Math.random() * 2
+                            delay: voiceDelays[index]?.delay || 0
                         }}
                     >
                         <div className="relative">
@@ -94,17 +111,17 @@ export default function QuralEcosystem() {
             </div>
 
             {/* Star Sparkles */}
-            {[...Array(5)].map((_, i) => (
+            {stars.map((star, i) => (
                 <motion.div
                     key={i}
                     className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
                     style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
+                        left: star.left,
+                        top: star.top,
                     }}
                     animate={{ opacity: [0, 1, 0] }}
                     // @ts-ignore
-                    transition={{ duration: 2 + Math.random(), repeat: Infinity, delay: Math.random() * 2 }}
+                    transition={{ duration: star.duration, repeat: Infinity, delay: star.delay }}
                 />
             ))}
 

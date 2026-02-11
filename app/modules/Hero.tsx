@@ -1,3 +1,7 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 const imgFrame1321314585 = "https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e";
 const imgEllipse1 = "https://www.figma.com/api/mcp/asset/7ad97e0b-b0d4-4d95-b410-1b2f393129d6";
@@ -8,13 +12,153 @@ const imgGroup358 = "https://www.figma.com/api/mcp/asset/bd80fbc3-edad-43a7-aa05
 const imgEllipse7 = "https://www.figma.com/api/mcp/asset/5d9b1024-3ff9-47fb-9958-eeaa1cd963cd";
 const imgEllipse8 = "https://www.figma.com/api/mcp/asset/4b1ccbdb-0547-455a-8e22-e19db7392d94";
 const imgVector = "https://www.figma.com/api/mcp/asset/d97d5497-7a91-4de4-8c2e-1e7c1a3816a2";
-const imgGroup1000001535 = "https://www.figma.com/api/mcp/asset/f5621caa-ae3e-4d63-a885-8f52db144cfd";
-const imgRectangle1 = "https://www.figma.com/api/mcp/asset/5642420d-7030-4750-96b7-6d118b6918ce";
-const imgRectangle2 = "https://www.figma.com/api/mcp/asset/b981893d-258d-440c-bebc-b12c1ad53519";
+
+// Testimonial Data
+const testimonials = [
+    {
+        id: 1,
+        text: "We design, deploy, and scale high-performance BIM & EPC talent for global AEC firms.",
+        avatar: imgEllipse1,
+        position: "top-[400px] right-[20px]",
+        color: "bg-[#8338ec]",
+        textColor: "text-white",
+        delay: 0
+    },
+    {
+        id: 2,
+        text: "Qural Connects Talent, Industry and academia into one engineered ecosystem.",
+        avatar: imgEllipse1,
+        position: "top-[550px] right-[140px]",
+        color: "bg-[#fee440]",
+        textColor: "text-[#343a40]",
+        delay: 0.5
+    },
+    {
+        id: 3,
+        text: "Designing tomorrow’s infrastructure today.",
+        avatar: imgEllipse3,
+        position: "top-[440px] right-[240px]",
+        color: "bg-[#06d6a0]",
+        textColor: "text-[#343a40]",
+        delay: 0.2
+    },
+    {
+        id: 4,
+        text: "Building the future of AEC innovation.",
+        avatar: imgEllipse3,
+        position: "top-[620px] right-[40px]",
+        color: "bg-[#ef476f]",
+        textColor: "text-white",
+        delay: 0.4
+    }
+];
+
+// Add props interface
+interface TestimonialBubbleProps {
+    data: typeof testimonials[0];
+    isActive: boolean;
+    onInteract: (active: boolean) => void;
+}
+
+function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProps) {
+    const [randomY, setRandomY] = useState([0, 0]);
+    const [randomX, setRandomX] = useState([0, 0]);
+    const [durationY, setDurationY] = useState(10);
+    const [durationX, setDurationX] = useState(12);
+
+    useEffect(() => {
+        // Generate random paths on mount
+        const generatePath = () => Array.from({ length: 6 }, () => Math.floor(Math.random() * 40) - 20);
+
+        setRandomY([0, ...generatePath(), 0]);
+        setRandomX([0, ...generatePath(), 0]);
+        setDurationY(Math.random() * 5 + 10); // 10-15s
+        setDurationX(Math.random() * 5 + 12); // 12-17s
+    }, []);
+
+    return (
+        <motion.div
+            layout
+            onHoverStart={() => onInteract(true)}
+            onHoverEnd={() => onInteract(false)}
+            initial={{ borderRadius: 30, width: 50, height: 50, zIndex: 10 }}
+            animate={{
+                borderRadius: isActive ? 20 : 30,
+                width: isActive ? "auto" : 50,
+                height: isActive ? "auto" : 50,
+                y: isActive ? 0 : randomY,
+                x: isActive ? 0 : randomX,
+                zIndex: isActive ? 50 : 10
+            }}
+            transition={{
+                layout: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
+                width: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
+                height: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
+                y: { duration: isActive ? 0.6 : durationY, repeat: isActive ? 0 : Infinity, ease: "easeInOut", delay: isActive ? 0 : data.delay },
+                x: { duration: isActive ? 0.6 : durationX, repeat: isActive ? 0 : Infinity, ease: "easeInOut", delay: isActive ? 0 : data.delay * 1.5 },
+                zIndex: { delay: isActive ? 0 : 0.6 } // Keep z-index high while animating out
+            }}
+            className={`absolute ${data.position} ${data.color} border-[1.313px] border-white border-solid flex items-center justify-end cursor-pointer shadow-lg overflow-hidden`}
+        >
+            <motion.div
+                layout
+                className="flex items-center gap-3 p-2 pl-3"
+            >
+                <div
+                    className={`overflow-hidden ${data.textColor} font-['Outfit:Regular',sans-serif] text-[10px] leading-[1.2] whitespace-nowrap`}
+                >
+                    <motion.div
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: isActive ? 180 : 0, opacity: isActive ? 1 : 0 }}
+                        transition={{
+                            width: { duration: 0.6, type: "spring", stiffness: 100, damping: 15 },
+                            opacity: { duration: 0.4, delay: isActive ? 0.4 : 0 } // Wait for expansion to almost complete
+                        }}
+                        className="overflow-hidden"
+                    >
+                        <p className="whitespace-normal w-[180px]">
+                            {data.text}
+                        </p>
+                    </motion.div>
+                </div>
+                <div className="relative shrink-0 size-[30px]">
+                    <img src={data.avatar} className="rounded-full size-full object-cover" alt="Avatar" />
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+}
 
 export default function Hero() {
+    const [activeId, setActiveId] = useState<number | null>(null);
+    const [isManual, setIsManual] = useState(false);
+    const nextIndexRef = useRef(0); // Track sequence
+
+    // Centralized Auto-Hover Logic
+    useEffect(() => {
+        if (isManual) return; // Don't schedule if user is interacting
+
+        const interval = setInterval(() => {
+            if (!isManual) {
+                // Pick next bubble in sequence
+                const nextId = testimonials[nextIndexRef.current].id;
+                setActiveId(nextId);
+
+                // Advance sequence for next time
+                nextIndexRef.current = (nextIndexRef.current + 1) % testimonials.length;
+
+                // Close after 3s (faster cycle)
+                setTimeout(() => {
+                    setActiveId((prev) => prev === nextId ? null : prev);
+                }, 3000);
+            }
+        }, 4000); // Check every 4s
+
+        return () => clearInterval(interval);
+    }, [isManual]);
+
     return (
-        <div className="bg-black relative size-full font-['Outfit:Regular',sans-serif] min-h-screen overflow-hidden" data-name="Pexio" data-node-id="163:3">
+        <div className="bg-black relative size-full font-['Outfit:Regular',sans-serif] min-h-screen overflow-hidden group" data-name="Pexio" data-node-id="163:3">
             {/* Figma Absolute Background Ellipses */}
             <div className="absolute flex h-[935.705px] items-center justify-center left-[-146px] top-[-161px] w-[896.198px]">
                 <div className="flex-none rotate-[46.53deg]">
@@ -89,54 +233,19 @@ export default function Hero() {
                 <p className="font-['Outfit:SemiBold',sans-serif] font-semibold leading-[normal] relative shrink-0 text-[16px] text-white" data-node-id="169:744">Looking for a Talent ?</p>
                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
             </button>
-            {/* Testimonial Cards */}
-            {/* Testimonial Cards */}
-            {/* Yellow Card - Middle Right */}
-            {/* Purple Card - Top Right Edge */}
-            <div className="absolute bg-[#8338ec] border-[1.313px] border-solid border-white content-stretch flex gap-[16px] items-center right-[20px] p-[8px] rounded-bl-[10px] rounded-tl-[10px] rounded-tr-[20px] top-[400px] z-10 max-w-[280px]" data-node-id="173:922">
-                <div className="font-['Outfit:Regular',sans-serif] font-normal leading-[1.2] relative shrink-0 text-[10px] text-white" data-node-id="173:923">
-                    <p className="mb-0">We design, deploy, and scale high-performance</p>
-                    <p> BIM & EPC talent for global AEC firms. </p>
-                </div>
-                <div className="relative shrink-0 size-[22px]" data-node-id="173:924">
-                    <div className="absolute inset-[-3.81%_-19.04%_-34.27%_-19.04%]">
-                        <img alt="" className="block max-w-none size-full" height="30" src={imgEllipse1} width="30" />
-                    </div>
-                </div>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_4px_4px_0px_rgba(0,0,0,0.25)]" />
-            </div>
+            {/* Testimonials */}
+            {testimonials.map((t) => (
+                <TestimonialBubble
+                    key={t.id}
+                    data={t}
+                    isActive={activeId === t.id}
+                    onInteract={(active) => {
+                        setIsManual(active);
+                        setActiveId(active ? t.id : null);
+                    }}
+                />
+            ))}
 
-            {/* Green Bubble - Floating Inward */}
-            <div className="absolute top-[440px] flex items-center justify-center right-[240px] size-[40px] z-10">
-                <div className="-rotate-90 flex-none">
-                    <div className="content-stretch flex gap-[5px] items-center p-[5px] relative rounded-[40px] shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] size-[40px]" data-node-id="173:916">
-                        <div className="absolute inset-[0_-0.1px_-0.1px_0]" data-node-id="173:917">
-                            <img alt="" className="block max-w-none size-full" src={imgRectangle1} />
-                        </div>
-                        <div className="flex items-center justify-center relative shrink-0 size-[30px]">
-                            <div className="flex-none rotate-90">
-                                <div className="relative size-[30px]" data-node-id="173:918">
-                                    <img alt="" className="block max-w-none size-full" height="30" src={imgEllipse3} width="30" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Yellow Card - Middle Inward */}
-            <div className="absolute bg-[#fee440] border-[1.313px] border-solid border-white content-stretch flex gap-[16px] items-center right-[140px] p-[8px] rounded-bl-[10px] rounded-tl-[10px] rounded-tr-[20px] top-[550px] z-10 max-w-[280px]" data-node-id="173:884">
-                <div className="font-['Outfit:Regular',sans-serif] font-normal leading-[1.2] relative shrink-0 text-[#343a40] text-[10px]" data-node-id="173:882">
-                    <p className="mb-0">Qural Connects Talent, Industry and academia </p>
-                    <p>into one engineered ecosystem.</p>
-                </div>
-                <div className="relative shrink-0 size-[22px]" data-node-id="173:880">
-                    <div className="absolute inset-[-3.81%_-19.04%_-34.27%_-19.04%]">
-                        <img alt="" className="block max-w-none size-full" height="30" src={imgEllipse1} width="30" />
-                    </div>
-                </div>
-                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_4px_4px_0px_rgba(0,0,0,0.25)]" />
-            </div>
             {/* Decorative Images and Vectors */}
             <div className="-translate-x-1/2 absolute left-1/2 size-[1556px] top-[864px]" data-node-id="163:29">
                 <img alt="" className="block max-w-none size-full" src={imgEllipse7} />
@@ -155,23 +264,7 @@ export default function Hero() {
             {/* <div className="absolute bottom-[50px] right-[50px] w-auto h-auto z-10" data-node-id="173:900">
                 <img alt="" className="block max-w-none h-[50px] w-auto" src={imgGroup1000001535} />
             </div> */}
-            {/* Pink Bubble - Bottom Right Edge */}
-            <div className="absolute top-[620px] flex items-center justify-center right-[40px] size-[40px] z-10">
-                <div className="-rotate-90 flex-none">
-                    <div className="content-stretch flex gap-[5px] items-center p-[5px] relative rounded-[40px] shadow-[0px_6px_6px_0px_rgba(0,0,0,0.25)] size-[40px]" data-node-id="173:919">
-                        <div className="absolute inset-[0_-0.1px_-0.1px_0]" data-node-id="173:920">
-                            <img alt="" className="block max-w-none size-full" src={imgRectangle2} />
-                        </div>
-                        <div className="flex items-center justify-center relative shrink-0 size-[30px]">
-                            <div className="flex-none rotate-90">
-                                <div className="relative size-[30px]" data-node-id="173:921">
-                                    <img alt="" className="block max-w-none size-full" height="30" src={imgEllipse3} width="30" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     );
 }
