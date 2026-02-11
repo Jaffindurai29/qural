@@ -11,7 +11,7 @@ export default function JourneysShaped() {
 
                 {/* Title Section */}
                 <div className="flex flex-col items-center gap-2">
-                    <h1 className="font-['Outfit:SemiBold',sans-serif] font-semibold text-[64px] text-white text-center leading-tight">
+                    <h1 className="font-['Outfit'] font-semibold text-[64px] text-white text-center leading-tight">
                         Journeys shaped at Qural
                     </h1>
                     {/* Handwritten Underline */}
@@ -62,14 +62,14 @@ export default function JourneysShaped() {
                         <button className="relative px-8 py-4 rounded-[12px] group overflow-hidden border border-white/20 shadow-lg cursor-pointer transition-all hover:scale-105 active:scale-95">
                             <div className="absolute inset-0 bg-gradient-to-b from-[#ed3543] to-[#bb1f36]" />
                             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="relative font-['Outfit:SemiBold',sans-serif] font-semibold text-white text-[18px] whitespace-nowrap">
+                            <span className="relative font-['Outfit'] font-semibold text-white text-[18px] whitespace-nowrap">
                                 Find Your Industry-Ready Path
                             </span>
                         </button>
 
                         {/* White Button */}
                         <button className="px-8 py-4 rounded-[12px] bg-[#f4f4f4] shadow-[0_4px_14px_rgba(0,0,0,0.1)] cursor-pointer transition-all hover:scale-105 active:scale-95 border-b-2 border-gray-200">
-                            <span className="font-['Outfit:SemiBold',sans-serif] font-semibold text-[#ed3543] text-[18px] whitespace-nowrap">
+                            <span className="font-['Outfit'] font-semibold text-[#ed3543] text-[18px] whitespace-nowrap">
                                 Get Career Guidance
                             </span>
                         </button>

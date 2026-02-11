@@ -79,7 +79,7 @@ export default function BIMHRPartner() {
                         transition={{ delay: 0.1 }}
                         className="inline-block"
                     >
-                        <p className="text-xl md:text-2xl text-white/80 font-['DM_Sans'] bg-white/[0.03] px-6 py-2 rounded-full border border-white/10 backdrop-blur-sm">
+                        <p className="text-xl md:text-2xl text-white/80 font-['Outfit'] bg-white/[0.03] px-6 py-2 rounded-full border border-white/10 backdrop-blur-sm">
                             Fastest turnaround. <span className="text-[#ed3543] font-bold">Uncompromised talent quality.</span>
                         </p>
                     </motion.div>
@@ -95,7 +95,7 @@ export default function BIMHRPartner() {
                         transition={{ duration: 0.8 }}
                         className="lg:col-span-7"
                     >
-                        <div className="space-y-8 text-white/70 font-['DM_Sans'] text-lg md:text-xl leading-relaxed">
+                        <div className="space-y-8 text-white/70 font-['Outfit'] text-lg md:text-xl leading-relaxed">
                             <div className="p-8 bg-white/[0.03] rounded-[32px] border border-white/10 backdrop-blur-md relative overflow-hidden group shadow-2xl">
                                 <div className="absolute top-0 left-0 w-2 h-full bg-[#ed3543] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <p className="relative z-10 italic text-white/90">
@@ -152,7 +152,7 @@ export default function BIMHRPartner() {
                                                 {feature.title}
                                             </h4>
                                         </div>
-                                        <p className="text-white/40 text-sm font-['DM_Sans'] leading-relaxed group-hover:text-white/60 transition-colors">
+                                        <p className="text-white/40 text-sm font-['Outfit'] leading-relaxed group-hover:text-white/60 transition-colors">
                                             {feature.desc}
                                         </p>
                                     </div>

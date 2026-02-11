@@ -33,7 +33,7 @@ const testimonials = [
         avatar: imgEllipse1,
         position: "lg:top-[550px] lg:right-[140px] relative lg:absolute",
         color: "bg-[#fee440]",
-        textColor: "text-[#343a40]",
+        textColor: "text-black",
         delay: 0.5
     },
     {
@@ -42,7 +42,7 @@ const testimonials = [
         avatar: imgEllipse3,
         position: "lg:top-[440px] lg:right-[240px] relative lg:absolute",
         color: "bg-[#06d6a0]",
-        textColor: "text-[#343a40]",
+        textColor: "text-black",
         delay: 0.2
     },
     {

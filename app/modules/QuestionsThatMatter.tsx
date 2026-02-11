@@ -125,7 +125,7 @@ const QuestionCard = ({ item, isOpen, onToggle }: { item: any, isOpen: boolean, 
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden"
                             >
-                                <p className="text-gray-600 font-['DM_Sans'] text-sm leading-relaxed mt-2">
+                                <p className="text-gray-600 font-['Outfit'] text-sm leading-relaxed mt-2">
                                     {item.answer.split('industry readiness').map((part: string, i: number, arr: any[]) => (
                                         <React.Fragment key={i}>
                                             {part}

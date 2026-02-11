@@ -66,7 +66,7 @@ export default function BIMShowcase() {
                     <h2 className="text-[#0a0a0a] text-3xl md:text-5xl font-bold font-['Outfit'] mb-4 tracking-tight">
                         Build your BIM-ready talent pipeline
                     </h2>
-                    <p className="text-[#0a0a0a]/60 text-lg md:text-xl font-['DM_Sans']">
+                    <p className="text-[#0a0a0a]/60 text-lg md:text-xl font-['Outfit']">
                         Pre-trained engineers, ready to integrate into live projects.
                     </p>
                 </div>
@@ -157,19 +157,19 @@ export default function BIMShowcase() {
 
                                         <div className="space-y-3 mb-8">
                                             <div>
-                                                <span className="text-black/40 text-xs font-['DM_Sans'] block">Experience</span>
-                                                <span className="text-black text-sm font-semibold font-['DM_Sans']">{talentSlides[currentIndex].experience}</span>
+                                                <span className="text-black/40 text-xs font-['Outfit'] block">Experience</span>
+                                                <span className="text-black text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].experience}</span>
                                             </div>
                                             <div>
-                                                <span className="text-black/40 text-xs font-['DM_Sans'] block">Skills</span>
-                                                <span className="text-black text-sm font-semibold font-['DM_Sans']">{talentSlides[currentIndex].skills}</span>
+                                                <span className="text-black/40 text-xs font-['Outfit'] block">Skills</span>
+                                                <span className="text-black text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].skills}</span>
                                             </div>
                                         </div>
 
                                         <div className="flex items-center gap-4">
                                             <div className="flex-1 px-4 py-3 border border-gray-200 rounded-lg flex items-center gap-2 group/input hover:border-black/20 transition-colors">
                                                 <div className="w-4 h-4 rounded-sm border border-gray-300 flex items-center justify-center text-[10px] text-gray-400">#</div>
-                                                <span className="text-gray-400 text-sm font-['DM_Sans']">Attach Queries</span>
+                                                <span className="text-gray-400 text-sm font-['Outfit']">Attach Queries</span>
                                             </div>
                                             <button className="bg-[#ed3543] text-white px-8 py-3 rounded-lg font-bold font-['Outfit'] text-sm hover:bg-[#d02534] transition-all transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-red-500/10">
                                                 Submit
@@ -178,7 +178,7 @@ export default function BIMShowcase() {
 
                                         <div className="mt-4 flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                            <span className="text-green-600 text-[10px] font-medium font-['DM_Sans'] uppercase tracking-wide">
+                                            <span className="text-green-600 text-[10px] font-medium font-['Outfit'] uppercase tracking-wide">
                                                 Available for immediate deployment
                                             </span>
                                         </div>

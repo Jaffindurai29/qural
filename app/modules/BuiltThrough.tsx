@@ -1,6 +1,27 @@
 'use client';
+import { motion, useSpring, useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
-import React from 'react';
+const Counter = ({ value, suffix = "", duration = 2 }: { value: number, suffix?: string, duration?: number }) => {
+    const ref = useRef<HTMLSpanElement>(null);
+    const inView = useInView(ref, { once: true, margin: "-50px" });
+    const springValue = useSpring(0, { duration: duration * 1000, bounce: 0 });
+    const [displayValue, setDisplayValue] = useState(0);
+
+    useEffect(() => {
+        if (inView) {
+            springValue.set(value);
+        }
+    }, [inView, value, springValue]);
+
+    useEffect(() => {
+        return springValue.on("change", (latest) => {
+            setDisplayValue(Math.round(latest));
+        });
+    }, [springValue]);
+
+    return <span ref={ref}>{displayValue.toLocaleString()}{suffix}</span>;
+};
 
 export default function BuiltThrough() {
     return (
@@ -40,7 +61,7 @@ export default function BuiltThrough() {
             {/* 4. Content Area (Right Side) */}
             <div className="relative lg:absolute right-auto lg:right-[15%] top-auto lg:top-1/2 translate-y-0 lg:-translate-y-1/2 w-full lg:w-[45%] flex flex-col gap-10 z-30 px-6 lg:px-0 pt-32 lg:pt-0 pb-10 lg:pb-0">
                 {/* Title */}
-                <h1 className="font-['Outfit:SemiBold',sans-serif] text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
+                <h1 className="font-['Outfit'] text-3xl md:text-4xl lg:text-5xl text-black leading-tight">
                     Built through <span className="bg-white px-3 py-1 rounded-full inline-flex items-center gap-2 transform -rotate-1 shadow-sm whitespace-nowrap">outcomes <span className="text-2xl">🔥</span></span>,
                     <br />not promises.
                 </h1>
@@ -51,32 +72,40 @@ export default function BuiltThrough() {
 
                     {/* Card 1 */}
                     <div className="bg-white rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center text-center hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
-                        <p className="font-['Outfit:Bold',sans-serif] text-[#b71f38] text-5xl md:text-6xl lg:text-7xl">40k</p>
-                        <p className="font-['Outfit:Regular',sans-serif] text-[#606060] text-sm md:text-base mt-2">Talent Resumes & Profiles</p>
+                        <p className="font-['Outfit'] font-bold text-[#b71f38] text-5xl md:text-6xl lg:text-7xl">
+                            <Counter value={40} suffix="k" />
+                        </p>
+                        <p className="font-['Outfit'] text-[#606060] text-sm md:text-base mt-2">Talent Resumes & Profiles</p>
                     </div>
                     {/* Card 2 */}
                     <div className="bg-white rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center text-center hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
-                        <p className="font-['Outfit:Bold',sans-serif] text-[#ed3543] text-5xl md:text-6xl lg:text-7xl">9+</p>
-                        <p className="font-['Outfit:Regular',sans-serif] text-[#606060] text-sm md:text-base mt-2">Markets Operated</p>
+                        <p className="font-['Outfit'] font-bold text-[#ed3543] text-5xl md:text-6xl lg:text-7xl">
+                            <Counter value={9} suffix="+" />
+                        </p>
+                        <p className="font-['Outfit'] text-[#606060] text-sm md:text-base mt-2">Markets Operated</p>
                     </div>
                     {/* Card 3 */}
                     <div className="bg-white rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center text-center hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
-                        <p className="font-['Outfit:Bold',sans-serif] text-[#f05b4f] text-4xl md:text-5xl lg:text-6xl">2,800+</p>
-                        <p className="font-['Outfit:Regular',sans-serif] text-[#606060] text-sm md:text-base mt-2">BIM Professionals Deployed</p>
+                        <p className="font-['Outfit'] font-bold text-[#f05b4f] text-4xl md:text-5xl lg:text-6xl">
+                            <Counter value={2800} suffix="+" />
+                        </p>
+                        <p className="font-['Outfit'] text-[#606060] text-sm md:text-base mt-2">BIM Professionals Deployed</p>
                     </div>
                     {/* Card 4 */}
                     <div className="bg-white rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center text-center hover:-translate-y-1 transition-transform duration-300 border border-gray-100">
-                        <p className="font-['Outfit:Bold',sans-serif] text-[#b71f38] text-4xl md:text-5xl lg:text-6xl">4,900+</p>
-                        <p className="font-['Outfit:Regular',sans-serif] text-[#606060] text-sm md:text-base mt-2">Happy Learners</p>
+                        <p className="font-['Outfit'] font-bold text-[#b71f38] text-4xl md:text-5xl lg:text-6xl">
+                            <Counter value={4900} suffix="+" />
+                        </p>
+                        <p className="font-['Outfit'] text-[#606060] text-sm md:text-base mt-2">Happy Learners</p>
                     </div>
                 </div>
 
                 {/* CTC Stat - Clean Gradient Card */}
                 <div className="relative overflow-hidden bg-gradient-to-r from-red-50 to-white rounded-xl p-2 pr-6 flex items-center gap-4 border border-red-100 shadow-xl w-fit">
                     <div className="bg-[#b71f38] text-white px-4 py-3 rounded-lg shadow-sm">
-                        <span className="font-['Outfit:Bold',sans-serif] text-2xl md:text-3xl font-bold block whitespace-nowrap">₹170+ Crore</span>
+                        <span className="font-['Outfit'] text-2xl md:text-3xl font-bold block whitespace-nowrap">₹170+ Crore</span>
                     </div>
-                    <span className="font-['Outfit:Medium',sans-serif] text-gray-800 text-lg md:text-xl leading-tight">CTC Created<br />for Industry</span>
+                    <span className="font-['Outfit'] text-gray-800 text-lg md:text-xl leading-tight">CTC Created<br />for Industry</span>
                 </div>
             </div>
 

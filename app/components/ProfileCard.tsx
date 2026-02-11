@@ -45,7 +45,7 @@ export default function ProfileCard({
 
         {/* Name & Company */}
         <div className="absolute top-[135px] inset-x-0 flex flex-col items-center gap-2 z-20">
-          <h3 className="font-['Outfit:Bold',sans-serif] text-[20px] font-bold text-white text-center">
+          <h3 className="font-['Outfit'] font-bold text-[20px] font-bold text-white text-center">
             {name}
           </h3>
           <img
@@ -63,7 +63,7 @@ export default function ProfileCard({
             <div className="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center text-white text-[12px] font-bold shrink-0">
               O
             </div>
-            <span className="font-['Outfit:Medium',sans-serif] text-sm text-white">{beforeRole}</span>
+            <span className="font-['Outfit'] font-medium text-sm text-white">{beforeRole}</span>
           </div>
 
           {/* After QURAL Label & Connector */}
@@ -84,7 +84,7 @@ export default function ProfileCard({
             <div className="w-8 h-8 rounded-full bg-[#0dba4b] flex items-center justify-center text-white ring-4 ring-[#0dba4b]/20 shrink-0">
               <div className="w-4 h-4 border-2 border-white border-t-0 border-l-0 rotate-45 translate-y-[-1px]" />
             </div>
-            <span className="font-['Outfit:Bold',sans-serif] text-sm text-[#b71f38] font-bold">{afterRole}</span>
+            <span className="font-['Outfit'] font-bold text-sm text-[#b71f38] font-bold">{afterRole}</span>
           </div>
 
         </div>

@@ -75,7 +75,7 @@ export default function PathToIndustryReady() {
                 <h2 className="text-4xl md:text-6xl font-bold text-white font-['Outfit'] mb-4">
                     Paths to <br className="md:hidden" /> Industry-Ready Roles
                 </h2>
-                <p className="text-white/80 text-lg md:text-xl font-['DM_Sans'] max-w-2xl mx-auto">
+                <p className="text-white/80 text-lg md:text-xl font-['Outfit'] max-w-2xl mx-auto">
                     We transform engineering graduates into BIM-ready professionals across Architecture, Structure, and MEP Construction.
                 </p>
 
@@ -116,7 +116,7 @@ export default function PathToIndustryReady() {
                                 <h3 className="text-[#ed3543] font-['Outfit'] font-bold text-xl mb-2 line-clamp-2 min-h-[56px]">
                                     {course.title}
                                 </h3>
-                                <p className="text-gray-500 font-['DM_Sans'] text-sm mb-6">
+                                <p className="text-gray-500 font-['Outfit'] text-sm mb-6">
                                     {course.subtitle}
                                 </p>
 
