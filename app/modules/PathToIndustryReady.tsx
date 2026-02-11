@@ -156,7 +156,7 @@ export default function PathToIndustryReady() {
                             <div key={course.id} className='w-full md:w-1/2 lg:w-1/3 shrink-0 px-4'>
                                 <motion.div
                                     whileHover={{ y: -10 }}
-                                    className='bg-white rounded-[40px] p-6 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 h-full'
+                                    className='bg-white rounded-[40px] p-6 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col'
                                 >
                                     {/* Card Image Area */}
                                     <div className='relative mb-10 group'>
@@ -186,7 +186,7 @@ export default function PathToIndustryReady() {
                                     </div>
 
                                     {/* Card Content */}
-                                    <div className='px-2'>
+                                    <div className='px-2 flex-grow'>
                                         <h3 className='text-[#BB1F36] font-roboto font-bold mb-2 leading-tight text-lg tracking-tight'>
                                             {course.title}
                                         </h3>
@@ -233,15 +233,37 @@ export default function PathToIndustryReady() {
                                                 </p>
                                             </div>
                                         </div>
+                                    </div>
 
-                                {/* CTA Button */}
-                                <button className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2">
-                                    Explore this path
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </button>
+                                    {/* CTA Button */}
+                                    <button className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
+                                        Explore this path
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </button>
+                                </motion.div>
                             </div>
-                        </motion.div>
-                    ))}
+                        ))}
+                    </motion.div>
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className='flex justify-center gap-4 mt-8'>
+                    <button
+                        onClick={prevSlide}
+                        disabled={currentIndex === 0}
+                        className={`w-14 h-14 rounded-full border-2 border-white/30 flex items-center justify-center text-white transition-all ${currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-white/10 hover:border-white'
+                            }`}
+                    >
+                        <ChevronLeft className='w-6 h-6' />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        disabled={currentIndex >= maxIndex}
+                        className={`w-14 h-14 rounded-full border-2 border-white/30 flex items-center justify-center text-white transition-all ${currentIndex >= maxIndex ? 'opacity-30 cursor-not-allowed' : 'hover:bg-white/10 hover:border-white'
+                            }`}
+                    >
+                        <ChevronRight className='w-6 h-6' />
+                    </button>
                 </div>
             </div>
         </section>
