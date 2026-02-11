@@ -72,7 +72,7 @@ export default function BIMShowcase() {
                 </div>
 
                 {/* Main Slider Container */}
-                <div className="relative w-full max-w-6xl group">
+                <div className="relative w-full max-w-11xl group">
                     <div className="relative h-[600px] md:h-[450px] w-full bg-black rounded-[32px] overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
 
                         {/* Textured Background */}
@@ -116,20 +116,11 @@ export default function BIMShowcase() {
                                 {/* Left Side: Wireframe Visual */}
                                 <div className="absolute left-0 top-0 bottom-0 w-full md:w-[60%] overflow-hidden pointer-events-none">
                                     <div className="relative w-full h-full transform scale-110 md:scale-125 md:translate-x-[0%]">
-                                        {/* Red Wireframe Visuals shifted right */}
+                                        {/* Unified Wireframe Visual (Layered for depth) */}
                                         <img
-                                            src="/h1.png"
-                                            alt="House Structure 1"
-                                            className="absolute inset-0 w-full h-full object-contain object-right scale-95 translate-x-8 translate-y-6 opacity-80"
-                                            style={{
-                                                filter: 'invert(16%) sepia(96%) saturate(6871%) hue-rotate(352deg) brightness(97%) contrast(117%)',
-                                                mixBlendMode: 'screen'
-                                            }}
-                                        />
-                                        <img
-                                            src="/h2.png"
-                                            alt="House Structure 2"
-                                            className="absolute inset-0 w-full h-full object-contain object-right scale-100 translate-x-14 -translate-y-2 opacity-30"
+                                            src="/h.png"
+                                            alt="House Structure Base"
+                                            className="absolute inset-0 w-full h-full object-contain object-right scale-100 translate-x-12 -translate-y-2 opacity-30"
                                             style={{
                                                 filter: 'brightness(0) invert(1)',
                                                 mixBlendMode: 'screen'
@@ -142,7 +133,7 @@ export default function BIMShowcase() {
                                 </div>
 
                                 {/* Right Side: Job Card */}
-                                <div className="relative z-20 w-full md:w-[500px] md:ml-auto">
+                                <div className="relative z-20 w-full md:w-[650px] md:ml-auto">
                                     {/* Connection Line (Dotted Blue) */}
                                     <div className="hidden md:block absolute top-[80px] -left-[180px] w-[180px] h-px z-0">
                                         <svg width="100%" height="20" className="overflow-visible">
@@ -158,10 +149,6 @@ export default function BIMShowcase() {
                                             <circle cx="180" cy="10" r="3" fill="#3b82f6" />
                                         </svg>
                                     </div>
-
-                                    {/* Background Card Stack Effect */}
-                                    <div className="absolute top-4 left-[20px] w-[95%] h-full bg-white/5 rounded-2xl -z-10 transform rotate-3 border border-white/10" />
-                                    <div className="absolute top-2 left-[10px] w-[98%] h-full bg-white/10 rounded-2xl -z-10 transform rotate-1 border border-white/10" />
 
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
