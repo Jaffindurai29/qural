@@ -89,7 +89,7 @@ export default function WhyQural() {
             </div>
 
             {/* Content List */}
-            <div className="w-full max-w-6xl mx-auto px-6">
+            <div className="w-full max-w-[1400px] mx-auto px-6">
                 {sections.map((section) => {
                     const isActive = activeSection === section.id;
 
@@ -105,6 +105,7 @@ export default function WhyQural() {
                                 <div
                                     className="md:col-span-9 flex items-center justify-between cursor-pointer group"
                                     onClick={() => setActiveSection(isActive ? null : section.id)}
+                                    onMouseEnter={() => setActiveSection(section.id)}
                                 >
                                     <div className="flex items-center gap-6">
                                         <div className="flex flex-col">
@@ -193,11 +194,21 @@ export default function WhyQural() {
                                                         </p>
 
                                                         <div className="flex flex-wrap justify-center gap-4 mb-8">
-                                                            <button className="bg-white text-[#ed3543] px-6 py-3 rounded-2xl font-bold font-['Outfit'] text-base shadow-xl shadow-red-900/20 hover:scale-105 transition-transform">
-                                                                {section.content.ctaPrimary}
+                                                            <button className="relative bg-[#f4f4f4] px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all outline-none">
+                                                                <span className="font-['Outfit'] font-bold text-[#ed3543] text-base relative z-10">
+                                                                    {section.content.ctaPrimary}
+                                                                </span>
+                                                                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
                                                             </button>
-                                                            <button className="bg-white/10 backdrop-blur-sm border border-white/40 text-white px-6 py-3 rounded-2xl font-bold font-['Outfit'] text-base hover:bg-white/20 transition-all">
-                                                                {section.content.ctaSecondary}
+
+                                                            <button className="relative border border-solid border-white content-stretch flex items-center justify-center px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
+                                                                <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
+                                                                    <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
+                                                                </div>
+                                                                <p className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-[16px] text-white z-10">
+                                                                    {section.content.ctaSecondary}
+                                                                </p>
+                                                                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                                                             </button>
                                                         </div>
 
