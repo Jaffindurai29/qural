@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Architects_Daughter, Geist, Geist_Mono, Inter, Manrope, Outfit, Patrick_Hand } from "next/font/google";
+import { Geist, Geist_Mono, Outfit, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +14,17 @@ const geistMono = Geist_Mono({
 
 const outfit = Outfit({
     variable: '--font-outfit',
+    subsets: ['latin'],
+});
+
+const roboto = Roboto({
+    weight: ['400', '500', '700'],
+    variable: '--font-roboto',
+    subsets: ['latin'],
+});
+
+const archivo = Archivo({
+    variable: '--font-archivo',
     subsets: ['latin'],
 });
 
@@ -34,9 +45,9 @@ const inter = Inter({
 });
 
 const architectsDaughter = Architects_Daughter({
-  weight: "400",
-  variable: "--font-architects-daughter",
-  subsets: ["latin"],
+    weight: '400',
+    variable: '--font-architects-daughter',
+    subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -49,13 +60,13 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${patrickHand.variable} antialiased m-0 p-0 overflow-x-hidden`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang='en'>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${roboto.variable} ${archivo.variable} ${patrickHand.variable} antialiased m-0 p-0 overflow-x-hidden`}
+            >
+                {children}
+            </body>
+        </html>
+    );
 }

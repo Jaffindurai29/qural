@@ -2,6 +2,8 @@ import Hero from './modules/Hero';
 import BuiltThrough from './modules/BuiltThrough';
 import JourneysShaped from './modules/JourneysShaped';
 import WhyQural from './modules/WhyQural';
+import SpecializedPartner from './modules/SpecializedPartner';
+import RecruitmentProcess from './modules/RecruitmentProcess';
 import PathToIndustryReady from './modules/PathToIndustryReady';
 import QuralEcosystem from './modules/QuralEcosystem';
 import QuestionsThatMatter from './modules/QuestionsThatMatter';
@@ -20,10 +22,12 @@ export default function Home() {
                 <BuiltThrough />
                 <JourneysShaped />
             </section>
+            <SpecializedPartner />
+            <RecruitmentProcess />
             <PathToIndustryReady />
             <QuralEcosystem />
             <QuestionsThatMatter />
-            <BIMHRPartner />
+            {/* <BIMHRPartner /> */}
             <TalentCTA />
             <Footer />
         </>

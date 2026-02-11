@@ -2,9 +2,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const imgFrame1321314585 = 'https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e';
+
 export default function TalentCTA() {
     return (
-        <section className='w-full relative overflow-hidden bg-gradient-to-b from-[#CF0000]/90 to-[#030303] py-24 px-4'>
+        <section className='w-full relative overflow-hidden bg-linear-to-b from-[#CF0000]/90 to-[#030303] py-24 px-4'>
             {/* Decorative circles/rings overlay */}
             <div className='absolute inset-0 opacity-100 pointer-events-none z-0'>
                 <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] border border-white/5 bg-white/[0.02] rounded-full'></div>
@@ -13,7 +15,7 @@ export default function TalentCTA() {
             </div>
 
             {/* Background Radial Gradient to match the image style */}
-            <div className='absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#CF0000] via-[#a81b25] to-[#030303] opacity-90 z-10'></div>
+            <div className='absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-[#CF0000] via-[#a81b25] to-[#030303] opacity-90 z-10'></div>
 
             <div className='max-w-4xl mx-auto text-center relative z-10'>
                 <motion.h2
@@ -39,7 +41,7 @@ export default function TalentCTA() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="text-white/70 text-lg md:text-xl font-['Manrope'] mb-12 max-w-2xl mx-auto text-nowrap"
+                    className="text-white/70 text-lg md:text-xl font-['Manrope'] mb-12 max-w-none mx-auto text-center text-nowrap"
                 >
                     From sourcing to deployment — Qural powers BIM careers and global AEC teams.
                 </motion.p>
@@ -53,12 +55,21 @@ export default function TalentCTA() {
                         className='flex flex-col sm:flex-row items-center justify-center gap-6 mb-4 w-full'
                     >
                         {/* Primary Button */}
-                        <button className="px-8 py-4 bg-[#d92936] hover:bg-[#c4212d] text-white font-bold rounded-xl shadow-[inset_0_4px_20px_rgba(255,255,255,0.5),_0_4px_14px_0_rgba(0,0,0,0.39)] hover:shadow-[inset_0_4px_20px_rgba(255,255,255,0.5),_0_6px_20px_rgba(0,0,0,0.23)] hover:-translate-y-0.5 transition-all duration-200 min-w-[200px] ring-2 ring-white/20 border border-white text-xl font-['Outfit']">
-                            Hire BIM Talent
+                        <button className='relative border border-solid border-white content-stretch flex h-[60px] items-center justify-center px-5 rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] cursor-pointer hover:brightness-95 transition-all z-20 group'>
+                            <div aria-hidden='true' className='absolute inset-0 pointer-events-none rounded-[10px]'>
+                                <div className='absolute bg-linear-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]' />
+                                <div
+                                    className='absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[10px]'
+                                    style={{ backgroundImage: `url('${imgFrame1321314585}')` }}
+                                />
+                            </div>
+                            <p className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-xl text-white whitespace-nowrap">
+                                Hire BIM Talent
+                            </p>
+                            <div className='absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]' />
                         </button>
-
                         {/* Secondary Button */}
-                        <button className="px-8 py-4 bg-white hover:bg-gray-50 text-[#ed3543] font-bold rounded-xl shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 transition-all duration-200 min-w-[200px] text-xl font-['Outfit']">
+                        <button className="px-10 h-[60px] flex items-center justify-center bg-white hover:bg-gray-50 text-[#ed3543] font-bold rounded-xl shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 transition-all duration-200 text-xl font-['Outfit'] whitespace-nowrap">
                             Start Your Career Journey
                         </button>
                     </motion.div>
