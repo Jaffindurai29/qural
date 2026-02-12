@@ -17,7 +17,7 @@ const voices = [
     {
         id: 1,
         name: 'HR Head',
-        role: 'XYZ Engineering Ltd',
+        role: 'Engineering consultant',
         title: 'Corporate HR',
         quote: 'Qural helped us build a reliable BIM team within weeks. Their talent quality is exceptional.',
         image: imgAvatar1,
@@ -38,8 +38,8 @@ const voices = [
     // Middle Circle
     {
         id: 3,
-        name: 'Dean',
-        role: 'ABC College of Engineering',
+        name: 'Institute Trustee',
+        role: 'Engineering College, Tamil nadu',
         title: 'College Connect',
         quote: 'Qural’s industry collaboration bridges the gap between academics and real-world engineering.',
         image: imgAvatar3,
@@ -104,8 +104,14 @@ export default function QuralEcosystem() {
     const [stars, setStars] = useState<{ left: string; top: string; duration: number; delay: number }[]>([]);
     const [voiceDelays, setVoiceDelays] = useState<{ duration: number; delay: number }[]>([]);
     const [hoveredVoiceId, setHoveredVoiceId] = useState<number | null>(null);
+    const [activeVoiceIndex, setActiveVoiceIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
         setStars(
             [...Array(5)].map(() => ({
                 left: `${Math.random() * 100}%`,
@@ -121,11 +127,20 @@ export default function QuralEcosystem() {
                 delay: Math.random() * 1,
             })),
         );
+
+        const interval = setInterval(() => {
+            setActiveVoiceIndex((prev) => (prev + 1) % voices.length);
+        }, 5000);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            clearInterval(interval);
+        };
     }, []);
 
     return (
         <section
-            className='w-full bg-[#030303] py-32 relative overflow-hidden h-[800px] flex items-center justify-center border-t border-gray-900'
+            className='w-full bg-[#030303] py-20 md:py-32 relative overflow-hidden min-h-[700px] md:h-[800px] flex items-center justify-center border-t border-gray-900'
             data-section='qural-ecosystem'
         >
             {/* Honeycomb Background Design - Framed around center text */}
@@ -160,10 +175,10 @@ export default function QuralEcosystem() {
                             style={{
                                 left: `50%`,
                                 top: `50%`,
-                                width: '260px',
-                                height: '240px',
-                                x: `calc(-50% + ${pos.x}px)`,
-                                y: `calc(-50% + ${pos.y}px)`,
+                                width: isMobile ? '160px' : '260px',
+                                height: isMobile ? '140px' : '240px',
+                                x: `calc(-50% + ${pos.x * (isMobile ? 0.6 : 1)}px)`,
+                                y: `calc(-50% + ${pos.y * (isMobile ? 0.6 : 1)}px)`,
                             }}
                         >
                             <svg
@@ -284,20 +299,62 @@ export default function QuralEcosystem() {
             ></div>
 
             {/* Central Text */}
-            <div className='relative z-20 text-center'>
-                <p className="text-white/60 text-xl md:text-2xl font-['DM_Sans'] mb-2">Voices from the</p>
-                <h2 className="text-5xl md:text-7xl font-bold text-white font-['Outfit'] tracking-tight">
+            <div className='relative z-20 text-center max-w-full px-4'>
+                <p className="text-white/60 text-lg md:text-2xl font-['DM_Sans'] mb-2">Voices from the</p>
+                <h2 className="text-4xl md:text-7xl font-bold text-white font-['Outfit'] tracking-tight mb-8 md:mb-0">
                     <span className='text-[#ed3543]'>Qural</span> Ecosystem
                 </h2>
+
+                {/* Mobile voices Carousel */}
+                <div className='md:hidden relative h-64 mt-10'>
+                    <AnimatePresence mode='wait'>
+                        <motion.div
+                            key={activeVoiceIndex}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            className='bg-linear-to-b from-gray-900/40 to-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-6 text-left relative overflow-hidden'
+                        >
+                            <div className='flex items-center gap-4 mb-4'>
+                                <img
+                                    src={voices[activeVoiceIndex].image}
+                                    alt={voices[activeVoiceIndex].name}
+                                    className='w-12 h-12 rounded-full border border-[#ed3543]/40'
+                                />
+                                <div>
+                                    <h4 className='text-white font-bold text-sm'>{voices[activeVoiceIndex].name}</h4>
+                                    <p className='text-white/60 text-xs'>{voices[activeVoiceIndex].role}</p>
+                                </div>
+                            </div>
+                            <p className='text-white/90 text-sm italic leading-relaxed'>
+                                "{voices[activeVoiceIndex].quote}"
+                            </p>
+                            <div className='absolute bottom-4 right-6 text-[10px] text-[#ed3543] font-bold uppercase tracking-widest opacity-50 font-archivo'>
+                                {voices[activeVoiceIndex].title}
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                    {/* Dots */}
+                    <div className='flex justify-center gap-1.5 mt-6'>
+                        {voices.map((_, i) => (
+                            <div
+                                key={i}
+                                className={`h-1 rounded-full transition-all duration-300 ${i === activeVoiceIndex ? 'w-4 bg-[#ed3543]' : 'w-1 bg-white/20'
+                                    }`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
                 {/* Subtle glow behind text */}
-                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#ed3543] rounded-full filter blur-[100px] opacity-20 -z-10'></div>
+                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 bg-[#ed3543] rounded-full filter blur-[80px] md:blur-[100px] opacity-20 -z-10'></div>
             </div>
 
             {/* Orbits */}
             <div className='absolute inset-0 pointer-events-none flex items-center justify-center'>
-                <div className='w-[600px] h-[600px] border border-white/10 rounded-full absolute animate-[spin_60s_linear_infinite]'></div>
-                <div className='w-[900px] h-[900px] border border-white/5 rounded-full absolute animate-[spin_80s_linear_infinite_reverse]'></div>
-                <div className='w-[1200px] h-[1200px] border border-white/5 rounded-full absolute'></div>
+                <div className='w-[300px] md:w-[600px] h-[300px] md:h-[600px] border border-white/10 rounded-full absolute animate-[spin_60s_linear_infinite]'></div>
+                <div className='w-[450px] md:w-[900px] h-[450px] md:h-[900px] border border-white/5 rounded-full absolute animate-[spin_80s_linear_infinite_reverse]'></div>
+                <div className='w-[600px] md:w-[1200px] h-[600px] md:h-[1200px] border border-white/5 rounded-full absolute'></div>
             </div>
 
             {/* Floating Avatars */}
@@ -309,9 +366,8 @@ export default function QuralEcosystem() {
                         whileInView={{ opacity: 1, scale: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.04, duration: 0.4, ease: 'easeOut' }}
-                        className={`absolute hidden md:flex items-center gap-3 transform-gpu backface-hidden ${
-                            hoveredVoiceId === voice.id ? 'z-50' : 'z-10'
-                        }`}
+                        className={`absolute hidden md:flex items-center gap-3 transform-gpu backface-hidden ${hoveredVoiceId === voice.id ? 'z-50' : 'z-10'
+                            }`}
                         style={{
                             left: voice.x,
                             top: voice.y,
@@ -362,9 +418,8 @@ export default function QuralEcosystem() {
                                     }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: parseInt(voice.y) < 35 ? -10 : 10, scale: 0.9 }}
-                                    className={`absolute left-1/2 -translate-x-1/2 w-80 p-6 bg-black/90 backdrop-blur-lg border border-[#ed3543]/30 rounded-3xl shadow-[0_20px_50px_rgba(237,53,67,0.2)] pointer-events-none transform-gpu backface-hidden will-change-transform ${
-                                        parseInt(voice.y) < 35 ? 'top-full mt-6' : 'bottom-full mb-6'
-                                    }`}
+                                    className={`absolute left-1/2 -translate-x-1/2 w-80 p-6 bg-black/90 backdrop-blur-lg border border-[#ed3543]/30 rounded-3xl shadow-[0_20px_50px_rgba(237,53,67,0.2)] pointer-events-none transform-gpu backface-hidden will-change-transform ${parseInt(voice.y) < 35 ? 'top-full mt-6' : 'bottom-full mb-6'
+                                        }`}
                                 >
                                     <div className='relative antialiased'>
                                         <div className='absolute -top-2 -left-2 text-4xl text-[#ed3543]/20 font-serif'>
@@ -378,11 +433,10 @@ export default function QuralEcosystem() {
                                         </p>
                                     </div>
                                     <div
-                                        className={`absolute left-1/2 -translate-x-1/2 w-0 h-0 border-l-10 border-l-transparent border-r-10 border-r-transparent border-t-10 ${
-                                            parseInt(voice.y) < 35
-                                                ? 'bottom-full border-t-transparent border-b-10 border-b-black/90 -mb-px'
-                                                : 'top-full border-t-black/90 -mt-px'
-                                        }`}
+                                        className={`absolute left-1/2 -translate-x-1/2 w-0 h-0 border-l-10 border-l-transparent border-r-10 border-r-transparent border-t-10 ${parseInt(voice.y) < 35
+                                            ? 'bottom-full border-t-transparent border-b-10 border-b-black/90 -mb-px'
+                                            : 'top-full border-t-black/90 -mt-px'
+                                            }`}
                                     ></div>
                                 </motion.div>
                             )}

@@ -15,6 +15,28 @@ const profileData = [
 
 export default function JourneysShaped() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        if (containerRef.current) {
+            setContainerWidth(containerRef.current.offsetWidth);
+        }
+        const handleResize = () => {
+            if (containerRef.current) {
+                setContainerWidth(containerRef.current.offsetWidth);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const cardWidth = typeof window !== 'undefined' && window.innerWidth < 768 ? window.innerWidth * 0.85 : 400;
+    const gap = 24;
+
+    // Offset to center the active card
+    const centerOffset = (containerWidth / 2) - (cardWidth / 2);
+    const xOffset = centerOffset - (currentIndex * (cardWidth + gap));
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % profileData.length);
@@ -22,6 +44,15 @@ export default function JourneysShaped() {
 
     const prevSlide = () => {
         setCurrentIndex((prev) => (prev - 1 + profileData.length) % profileData.length);
+    };
+
+    const handleDragEnd = (event: any, info: any) => {
+        const threshold = 50;
+        if (info.offset.x < -threshold) {
+            nextSlide();
+        } else if (info.offset.x > threshold) {
+            prevSlide();
+        }
     };
 
     return (
@@ -52,15 +83,26 @@ export default function JourneysShaped() {
 
 
                 {/* Profile Cards Grid Area */}
-                <div className="w-full overflow-hidden pb-5 px-6">
+                <div className="w-full overflow-visible pb-5" ref={containerRef}>
                     <div className="relative w-full overflow-visible">
                         <motion.div
-                            animate={{ x: `-${currentIndex * (400 + 24)}px` }}
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            onDragEnd={handleDragEnd}
+                            animate={{ x: xOffset }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            className="flex gap-6 mx-auto"
+                            className="flex gap-6 cursor-grab active:cursor-grabbing"
+                            style={{ width: 'max-content' }}
                         >
                             {profileData.map((profile, i) => (
-                                <div key={i} className="shrink-0">
+                                <motion.div
+                                    key={i}
+                                    className="shrink-0"
+                                    animate={{
+                                        scale: currentIndex === i ? 1 : 0.9,
+                                        opacity: currentIndex === i ? 1 : 0.5
+                                    }}
+                                >
                                     <ProfileCard
                                         name={profile.name}
                                         beforeRole={profile.before}
@@ -68,14 +110,14 @@ export default function JourneysShaped() {
                                         profileImage={profile.profileImg}
                                         companyLogo={profile.logo}
                                     />
-                                </div>
+                                </motion.div>
                             ))}
                         </motion.div>
                     </div>
                 </div>
 
                 {/* Action Row: Nav and CTA Buttons */}
-                <div className="w-full flex flex-col items-center gap-10 -mt-8">
+                <div className="w-full flex flex-col items-center gap-10">
                     {/* Navigation Circles */}
                     <div className="flex items-center gap-4">
                         <button
@@ -84,6 +126,14 @@ export default function JourneysShaped() {
                         >
                             <span className="text-xl">‹</span>
                         </button>
+                        <div className="flex gap-2">
+                            {profileData.map((_, i) => (
+                                <div
+                                    key={i}
+                                    className={`w-2 h-2 rounded-full transition-all ${currentIndex === i ? 'bg-white w-6' : 'bg-white/30'}`}
+                                />
+                            ))}
+                        </div>
                         <button
                             onClick={nextSlide}
                             className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all z-30"

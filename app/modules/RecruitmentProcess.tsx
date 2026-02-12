@@ -28,13 +28,13 @@ const steps = [
 
 export default function RecruitmentProcess() {
     return (
-        <section className='w-full bg-[#030303] py-24 px-4 relative overflow-hidden'>
+        <section className='w-full bg-[#030303] py-16 md:py-24 px-4 relative overflow-hidden'>
             {/* Background Radial Glow */}
             <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#ed3543]/10 rounded-full blur-[120px] pointer-events-none z-0'></div>
 
             <div className='max-w-7xl mx-auto'>
                 {/* Header */}
-                <div className='text-center mb-20 relative'>
+                <div className='text-center mb-12 md:mb-20 relative'>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -44,14 +44,14 @@ export default function RecruitmentProcess() {
                         <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 font-['Outfit']">
                             Know Our <span className='text-[#ed3543]'>Recruitment Process</span>
                         </h2>
-                        <p className="text-white/60 text-lg md:text-xl font-['Manrope'] mb-8 max-w-none whitespace-nowrap">
+                        <p className="text-white/60 text-lg md:text-xl font-['Manrope'] mb-8 max-w-2xl mx-auto">
                             A seamless, data-driven process that converts potential into deployable performance.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* Steps Grid */}
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10'>
                     {/* Connecting Line (Desktop) - Positioned behind cards */}
                     <div className='hidden lg:block absolute top-14 left-[12.5%] w-[75%] h-px bg-linear-to-r from-transparent via-[#ed3543]/40 to-transparent z-0'>
                         {/* Traveling Bubble Animation - Circle shape */}
@@ -83,7 +83,7 @@ export default function RecruitmentProcess() {
                             className='relative group flex flex-col items-center h-full cursor-pointer z-10'
                         >
                             {/* Card */}
-                            <div className='bg-[#050511] border border-white/5 rounded-2xl p-8 w-full hover:border-[#ed3543]/30 transition-colors duration-300 relative flex-1 min-h-[280px] flex flex-col justify-start'>
+                            <div className='bg-[#050511] border border-white/5 rounded-2xl p-6 md:p-8 w-full hover:border-[#ed3543]/30 transition-colors duration-300 relative flex-1 min-h-[220px] md:min-h-[280px] flex flex-col justify-start'>
                                 <div className='w-12 h-12 rounded-full bg-[#ed3543]/10 border border-[#ed3543]/20 flex items-center justify-center mb-6 text-[#ed3543] font-bold relative z-20'>
                                     <span className="font-['Outfit']">{step.id}</span>
                                 </div>

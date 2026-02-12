@@ -8,7 +8,6 @@ import PathToIndustryReady from './modules/PathToIndustryReady';
 import QuralEcosystem from './modules/QuralEcosystem';
 import QuestionsThatMatter from './modules/QuestionsThatMatter';
 import BIMShowcase from './modules/BIMShowcase';
-import BIMHRPartner from './modules/BIMHRPartner';
 import TalentCTA from './modules/TalentCTA';
 import Footer from './modules/Footer';
 

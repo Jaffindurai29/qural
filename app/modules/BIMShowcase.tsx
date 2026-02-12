@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Crown, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Crown, User, X } from 'lucide-react';
 
 const talentSlides = [
     {
@@ -102,6 +102,27 @@ const swipePower = (offset: number, velocity: number) => {
 
 export default function BIMShowcase() {
     const [[currentIndex, direction], setPage] = useState([0, 0]);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedFile(file);
+        }
+    };
+
+    const triggerFileInput = () => {
+        fileInputRef.current?.click();
+    };
+
+    const clearFile = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setSelectedFile(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
 
     const paginate = (newDirection: number) => {
         const nextIndex = (currentIndex + newDirection + talentSlides.length) % talentSlides.length;
@@ -120,16 +141,13 @@ export default function BIMShowcase() {
                 {/* Header Text */}
                 <div className="text-center mb-16">
                     <h2 className="text-[#0a0a0a] text-3xl md:text-5xl font-bold font-['Outfit'] mb-4 tracking-tight">
-                        Build your BIM-ready talent pipeline
+                        Looking for a Future forward Career..
                     </h2>
-                    <p className="text-[#0a0a0a]/60 text-lg md:text-xl font-['Outfit']">
-                        Pre-trained engineers, ready to integrate into live projects.
-                    </p>
                 </div>
 
                 {/* Main Slider Container */}
                 <div className="relative w-full max-w-11xl group">
-                    <div className="relative h-[600px] md:h-[450px] w-full bg-black rounded-[32px] overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
+                    <div className="relative h-auto md:h-[450px] w-full bg-black rounded-[32px] overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
 
                         {/* Textured Background */}
                         <div className="absolute inset-0 z-0">
@@ -152,8 +170,8 @@ export default function BIMShowcase() {
                                 animate="center"
                                 exit="exit"
                                 transition={{
-                                    x: { type: "spring", stiffness: 300, damping: 30 },
-                                    opacity: { duration: 0.2 }
+                                    x: { type: "spring", stiffness: 200, damping: 25 },
+                                    opacity: { duration: 0.3 }
                                 }}
                                 drag="x"
                                 dragConstraints={{ left: 0, right: 0 }}
@@ -167,16 +185,16 @@ export default function BIMShowcase() {
                                         paginate(-1);
                                     }
                                 }}
-                                className="absolute inset-0 flex flex-col md:flex-row items-center justify-between p-6 md:p-10"
+                                className="relative md:absolute md:inset-0 flex flex-col md:flex-row items-center justify-between p-4 md:p-10"
                             >
                                 {/* Left Side: Wireframe Visual */}
-                                <div className="absolute left-0 top-0 bottom-0 w-full md:w-[60%] overflow-hidden pointer-events-none">
+                                <div className="relative md:absolute md:left-0 md:top-0 md:bottom-0 w-full md:w-[60%] h-[250px] md:h-full overflow-hidden pointer-events-none">
                                     <div className="relative w-full h-full transform scale-110 md:scale-125 md:translate-x-[0%]">
                                         {/* Unified Wireframe Visual (Layered for depth) */}
                                         <img
                                             src="/h.png"
                                             alt="House Structure Base"
-                                            className="absolute inset-0 w-full h-full object-contain object-right scale-100 translate-x-12 -translate-y-2 opacity-30"
+                                            className="absolute inset-0 w-full h-full object-contain object-center md:object-right scale-100 translate-x-0 md:translate-x-12 -translate-y-2 opacity-30"
                                             style={{
                                                 filter: 'brightness(0) invert(1)',
                                                 mixBlendMode: 'screen'
@@ -207,12 +225,16 @@ export default function BIMShowcase() {
                                     </div>
 
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.1 }}
-                                        className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl relative z-10"
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        transition={{
+                                            duration: 0.4,
+                                            layout: { type: "spring", stiffness: 300, damping: 30 }
+                                        }}
+                                        className="bg-white rounded-2xl p-4 md:p-8 shadow-2xl relative z-10 mt-[-40px] md:mt-0"
                                     >
-                                        <div className="flex justify-between items-start mb-6">
+                                        <div className="flex justify-between items-start mb-4 md:mb-6">
                                             <span className="text-[#0a0a0a]/60 text-xs font-medium font-['Outfit'] mt-1">
                                                 Pre-screened by Qural
                                             </span>
@@ -224,32 +246,53 @@ export default function BIMShowcase() {
                                             </div>
                                         </div>
 
-                                        <h3 className="text-[#0a0a0a] text-xl md:text-2xl font-bold font-['Outfit'] mb-6 leading-tight">
+                                        <h3 className="text-[#0a0a0a] text-xl md:text-2xl font-bold font-['Outfit'] mb-4 md:mb-6 leading-tight">
                                             {talentSlides[currentIndex].title}
                                         </h3>
 
-                                        <div className="space-y-4 mb-8">
-                                            <div className="flex items-baseline gap-2 pb-3 border-b border-gray-100">
+                                        <div className="space-y-2.5 md:space-y-4 mb-5 md:mb-8">
+                                            <div className="flex items-baseline gap-2 pb-2 md:pb-3 border-b border-gray-100">
                                                 <span className="text-[#0a0a0a]/50 text-sm font-['Outfit'] w-24 shrink-0">Experience :</span>
                                                 <span className="text-[#0a0a0a] text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].experience}</span>
                                             </div>
-                                            <div className="flex items-baseline gap-2 pb-3 border-b border-gray-100">
+                                            <div className="flex items-baseline gap-2 pb-2 md:pb-3 border-b border-gray-100">
                                                 <span className="text-[#0a0a0a]/50 text-sm font-['Outfit'] w-24 shrink-0">Skills :</span>
                                                 <span className="text-[#0a0a0a] text-sm font-semibold font-['Outfit']">{talentSlides[currentIndex].skills}</span>
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <div className="flex-1 h-12 px-4 border border-[#e5e7eb] rounded-lg flex items-center gap-3 cursor-text hover:border-[#ed3543] transition-colors bg-white">
-                                                <div className="w-5 h-6 border-[1.5px] border-[#ef4444] rounded-[3px] flex items-center justify-center relative opacity-70">
+                                        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 mb-4 md:mb-6">
+                                            <input
+                                                type="file"
+                                                ref={fileInputRef}
+                                                onChange={handleFileChange}
+                                                className="hidden"
+                                                accept=".pdf,.doc,.docx"
+                                            />
+                                            <div
+                                                onClick={triggerFileInput}
+                                                className="flex-1 h-12 px-4 border border-[#e5e7eb] rounded-lg flex items-center gap-3 cursor-pointer hover:border-[#ed3543] transition-colors bg-white overflow-hidden"
+                                            >
+                                                <div className="w-5 h-6 border-[1.5px] border-[#ef4444] rounded-[3px] flex items-center justify-center relative opacity-70 shrink-0">
                                                     <div className="absolute -top-1 right-[-4px] bg-white px-[1px]">
                                                         <div className="w-1 h-1 bg-[#ef4444] rounded-full" />
                                                     </div>
                                                     <div className="w-2 h-0.5 bg-[#ef4444]" />
                                                 </div>
-                                                <span className="text-gray-400 text-sm font-['Outfit']">Attach Resume</span>
+                                                <span className="text-gray-400 text-sm font-['Outfit'] truncate flex-1">
+                                                    {selectedFile ? selectedFile.name : "Attach Resume"}
+                                                </span>
+                                                {selectedFile && (
+                                                    <button
+                                                        onClick={clearFile}
+                                                        className="p-1 hover:bg-gray-100 rounded-full transition-colors shrink-0 group/cancel"
+                                                        aria-label="Remove resume"
+                                                    >
+                                                        <X className="w-4 h-4 text-gray-400 group-hover/cancel:text-red-500" />
+                                                    </button>
+                                                )}
                                             </div>
-                                            <button className="relative border border-solid border-white content-stretch flex items-center justify-center h-12 px-8 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
+                                            <button className="relative border border-solid border-white content-stretch flex items-center justify-center h-12 px-8 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden w-full md:w-auto">
                                                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                                     <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                                                 </div>

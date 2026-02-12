@@ -20,7 +20,7 @@ const imgVector = "https://www.figma.com/api/mcp/asset/d97d5497-7a91-4de4-8c2e-1
 const testimonials = [
     {
         id: 1,
-        text: "We design, deploy, and scale high-performance BIM & EPC talent for global AEC firms.",
+        text: "We design, deploy, and scale high-performance Talent Acquisition & EPC talent for global AEC firms.",
         avatar: imgEllipse1,
         position: "lg:top-[400px] lg:right-[20px] relative lg:absolute",
         color: "bg-[#8338ec]",
@@ -70,9 +70,10 @@ interface TestimonialBubbleProps {
     data: typeof testimonials[0];
     isActive: boolean;
     onInteract: (active: boolean) => void;
+    isMobile: boolean;
 }
 
-function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProps) {
+function TestimonialBubble({ data, isActive, onInteract, isMobile }: TestimonialBubbleProps) {
     // Generate a stable random duration for the float animation to avoid sync
     const [floatDuration] = useState(() => Math.random() * 2 + 4); // 4-6s
     const [floatDelay] = useState(() => Math.random() * 2);
@@ -83,8 +84,9 @@ function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProp
     return (
         <motion.div
             layout
-            onHoverStart={() => hasText && onInteract(true)}
-            onHoverEnd={() => hasText && onInteract(false)}
+            onHoverStart={() => !isMobile && hasText && onInteract(true)}
+            onHoverEnd={() => !isMobile && hasText && onInteract(false)}
+            onClick={() => isMobile && hasText && onInteract(!isActive)}
             initial={{ borderRadius: 30, width: isLogo ? 70 : 50, height: isLogo ? 70 : 50, zIndex: 10, y: 0 }}
             animate={{
                 borderRadius: isActive ? 20 : 30,
@@ -107,7 +109,7 @@ function TestimonialBubble({ data, isActive, onInteract }: TestimonialBubbleProp
                 zIndex: { delay: isActive ? 0 : 0.4 },
                 scale: { duration: 0.2 }
             }}
-            className={`${data.position} ${data.color} ${isLogo ? '' : 'border-2 border-white/40 shadow-xl hover:shadow-2xl backdrop-blur-sm hover:border-white/80'} flex items-center justify-center cursor-pointer transition-shadow overflow-visible shrink-0`}
+            className={`${isMobile ? '' : data.position} ${data.color} ${isLogo ? '' : 'border-2 border-white/40 shadow-xl hover:shadow-2xl backdrop-blur-sm hover:border-white/80'} flex items-center justify-center cursor-pointer transition-shadow overflow-visible shrink-0 ${isActive && isMobile ? 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-max max-w-[85vw] !zIndex-50' : ''}`}
         >
             <motion.div
                 layout
@@ -148,7 +150,16 @@ export default function Hero() {
     const [activeId, setActiveId] = useState<number | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isManual, setIsManual] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const nextIndexRef = useRef(0); // Track sequence
+
+    // Handle Resize/Mobile detection
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 1024);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Centralized Auto-Hover Logic
     useEffect(() => {
@@ -227,10 +238,9 @@ export default function Hero() {
             {/* Navigation Bar - Hidden on Mobile */}
             <div className="hidden lg:flex -translate-x-1/2 absolute content-stretch font-outfit font-normal gap-[70px] items-center leading-[normal] left-[calc(50%-0.5px)] text-[14px] top-[45px] z-50" data-node-id="163:7">
                 <Link href="#why-qural" className="relative shrink-0 text-white hover:text-white transition-colors" data-node-id="163:8">Why Qural</Link>
-                <Link href="#talent-pipeline" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:9">Talent Pipeline</Link>
-                <Link href="#hr-partner" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:10">HR Partner</Link>
-                <Link href="#career-paths" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:11">Career Paths</Link>
+                <Link href="#talent-pipeline" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:11">Career Paths</Link>
                 <Link href="#journey" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:12">Journeys</Link>
+                <Link href="#our-program" className="relative shrink-0 text-[rgba(255,255,255,0.8)] hover:text-white transition-colors" data-node-id="163:13">Our Program</Link>
             </div>
 
             {/* Right Button - Hidden on Mobile */}
@@ -266,7 +276,7 @@ export default function Hero() {
                         <span className="leading-[normal]">.</span>
                     </p>
                     <p className="mt-4 lg:mt-0 lg:absolute font-outfit font-normal leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[14px] lg:text-[14px] text-white lg:top-[305px] px-8 text-center" data-node-id="163:28">
-                        Building Talent. Powering Projects. Scaling Futures
+                        Your extended HR talent partner for end-to-end talent acquisition & development.
                     </p>
                 </div>
 
@@ -281,18 +291,20 @@ export default function Hero() {
                 </button>
             </div>
 
-            {/* Testimonials - Stacked on Mobile, Absolute on Desktop */}
-            <div className="relative w-full flex flex-wrap justify-center gap-4 mt-16 px-4 pb-20 lg:pb-0 lg:mt-0 lg:block lg:static z-20">
+            {/* Testimonials - Static Grid with slots for stability */}
+            <div className="relative w-full flex flex-wrap justify-center gap-6 mt-16 px-6 pb-20 lg:pb-0 lg:mt-0 lg:block lg:static z-20">
                 {testimonials.map((t) => (
-                    <TestimonialBubble
-                        key={t.id}
-                        data={t}
-                        isActive={activeId === t.id}
-                        onInteract={(active) => {
-                            setIsManual(active);
-                            setActiveId(active ? t.id : null);
-                        }}
-                    />
+                    <div key={t.id} className="relative lg:contents shrink-0" style={{ width: t.text ? 50 : 70, height: t.text ? 50 : 70 }}>
+                        <TestimonialBubble
+                            data={t}
+                            isActive={activeId === t.id}
+                            isMobile={isMobile}
+                            onInteract={(active) => {
+                                setIsManual(active);
+                                setActiveId(active ? t.id : null);
+                            }}
+                        />
+                    </div>
                 ))}
             </div>
 
@@ -325,10 +337,9 @@ export default function Hero() {
                         <nav className="flex flex-col items-center gap-6 text-2xl font-outfit font-semibold">
                             {[
                                 { name: 'Why Qural', href: '#why-qural' },
-                                { name: 'Talent Pipeline', href: '#talent-pipeline' },
-                                { name: 'HR Partner', href: '#hr-partner' },
-                                { name: 'Career Paths', href: '#career-paths' },
-                                { name: 'Journeys', href: '#journey' }
+                                { name: 'Career Paths', href: '#talent-pipeline' },
+                                { name: 'Journeys', href: '#journey' },
+                                { name: 'Our Program', href: '#our-program' }
                             ].map((item) => (
                                 <Link
                                     key={item.name}
@@ -342,8 +353,9 @@ export default function Hero() {
                         </nav>
 
                         <div className="mt-8">
-                            <button className="bg-[#ed3543] text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-red-500/20 hover:scale-105 transition-transform">
-                                Want to Upskill?
+                            <button className="bg-[#f4f4f4] relative content-stretch h-[48px] items-center justify-center flex px-8 rounded-[12px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] cursor-pointer hover:brightness-95 transition-all z-50">
+                                <p className="font-outfit font-semibold leading-[normal] relative shrink-0 text-[#ed3543] text-lg">Want to Upskill ? </p>
+                                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
                             </button>
                         </div>
                     </motion.div>

@@ -21,7 +21,7 @@ export default function Footer() {
                         />
                     </div>
                     <p className='text-white/60 leading-relaxed text-sm md:text-base max-w-sm'>
-                        Qural bridges industry, academia, and talent through structured BIM pathways and specialized
+                        Qural bridges industry, academia, and talent through structured Talent Acquisition pathways and specialized
                         talent deployment solutions.
                     </p>
                     <div className='flex gap-4 pt-4'>
@@ -86,7 +86,7 @@ export default function Footer() {
                         <ul className='space-y-4 text-sm text-white/60'>
                             <li>
                                 <a href='#' className='hover:text-[#ed3543] transition-colors'>
-                                    Hire BIM Talent
+                                    Hire Talent Acquisition
                                 </a>
                             </li>
                             <li>

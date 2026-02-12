@@ -64,7 +64,7 @@ export default function TalentCTA() {
                                 />
                             </div>
                             <p className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-xl text-white whitespace-nowrap">
-                                Hire BIM Talent
+                                Hire Talent Acquisition
                             </p>
                             <div className='absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]' />
                         </button>

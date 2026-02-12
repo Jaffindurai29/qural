@@ -14,14 +14,14 @@ const features = [
     },
     {
         id: "02",
-        title: "Global BIM Talent Network",
+        title: "Global Talent Acquisition Network",
         desc: "Active & passive talent across India, Middle East, UK, and APAC.",
         icon: Globe
     },
     {
         id: "03",
-        title: "AEC Industry Experts as HR Leaders",
-        desc: "Hiring led by professionals who've worked on real BIM projects.",
+        title: "AEC Industry Experts as Hiring Leaders",
+        desc: "Hiring led by professionals who've worked on real AEC projects.",
         icon: Briefcase,
         highlight: true
     },
@@ -70,7 +70,7 @@ export default function BIMHRPartner() {
                         viewport={{ once: true }}
                         className="text-4xl md:text-6xl font-bold text-white mb-6 font-['Outfit'] tracking-tight"
                     >
-                        Your Specialized <span className="text-[#ed3543]">BIM HR</span> Partner
+                        Your Specialized <span className="text-[#ed3543]">Talent Acquisition</span> Partner
                     </motion.h2>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -105,7 +105,7 @@ export default function BIMHRPartner() {
 
                             <div className="px-4">
                                 <p className="mb-6">
-                                    Qural serves as your <span className="text-white font-bold underline decoration-red-500/50 underline-offset-4">single point of contact</span> for fast, reliable, and seamless BIM talent delivery.
+                                    Qural serves as your <span className="text-white font-bold underline decoration-red-500/50 underline-offset-4">single point of contact</span> for fast, reliable, and seamless talent acquisition.
                                 </p>
                                 <p>
                                     Our domain experts conduct rigorous technical pre-screening to ensure you receive project-ready professionals — reducing hiring time and operational risk.
@@ -118,7 +118,7 @@ export default function BIMHRPartner() {
                                         <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[12px] to-[#bb1f36]" />
                                     </div>
                                     <div className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-white z-10 flex items-center">
-                                        Speak to a BIM Hiring Expert
+                                        Speak to a Talent Acquisition Expert
                                         <ArrowRight className="ml-3 group-hover:translate-x-1 transition-transform" size={20} />
                                     </div>
                                     <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />

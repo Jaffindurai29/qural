@@ -18,7 +18,7 @@ export default function ProfileCard({
   companyLogo,
 }: ProfileCardProps) {
   return (
-    <div className="relative group w-[400px] h-[450px]">
+    <div className="relative group w-[85vw] max-w-[400px] md:w-[400px] h-[450px]">
       {/* Red Border / Outer Container */}
       <div className="absolute inset-[16px] border border-white/20 rounded-[8px] bg-[#ed3543] shadow-lg overflow-hidden">
 

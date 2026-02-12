@@ -15,7 +15,7 @@ const questions = [
     {
         id: 2,
         question: "Who are these career paths meant for?",
-        answer: "Our paths are tailored for engineering graduates and professionals who want to specialize in BIM and digital construction roles, looking to bridge the gap between academic knowledge and industry application."
+        answer: "Our paths are tailored for engineering graduates and professionals who want to specialize in Talent Acquisition and digital construction roles, looking to bridge the gap between academic knowledge and industry application."
     },
     {
         id: 3,
@@ -34,13 +34,13 @@ const questions = [
     },
     {
         id: 6,
-        question: "How are Qural paths different from regular BIM courses?",
+        question: "How are Qural paths different from regular Industry courses?",
         answer: "Regular courses often focus on software commands. Qural focuses on roles and workflows, teaching you 'how to think and work' like a professional, not just 'how to use a tool'."
     },
     {
         id: 7,
         question: "What kind of roles can I expect after completing a path?",
-        answer: "Depending on your chosen path, you can aim for roles like BIM Modeler, BIM Coordinator, Structural BIM Engineer, or MEP BIM Specialist in top AEC firms."
+        answer: "Depending on your chosen path, you can aim for roles like Digital Modeler, Construction Coordinator, Structural Engineer, or MEP Specialist in top AEC firms."
     }
 ];
 

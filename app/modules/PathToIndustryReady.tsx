@@ -16,7 +16,7 @@ const courses = [
         image: '/course-1.png',
         stats: { likes: '18.4K', comments: '10.2K' },
         details: {
-            duration: '7 Months',
+            duration: '90-Days',
             mode: 'Offline',
             rating: 4.8,
             alignment: 'Project-Based',
@@ -29,7 +29,7 @@ const courses = [
         image: '/course-2.png',
         stats: { likes: '15.7K', comments: '8.4K' },
         details: {
-            duration: '7 Months',
+            duration: '90-Days',
             mode: 'Offline',
             rating: 4.8,
             alignment: 'Project-Based',
@@ -42,7 +42,7 @@ const courses = [
         image: '/course-3.png',
         stats: { likes: '22.1K', comments: '14.3K' },
         details: {
-            duration: '7 Months',
+            duration: '90-Days',
             mode: 'Offline',
             rating: 4.8,
             alignment: 'Project-Based',
@@ -55,7 +55,7 @@ const courses = [
         image: '/course-4.png',
         stats: { likes: '12.9K', comments: '7.1K' },
         details: {
-            duration: '7 Months',
+            duration: '90-Days',
             mode: 'Offline',
             rating: 4.8,
             alignment: 'Project-Based',
@@ -68,7 +68,7 @@ const courses = [
         image: '/course-5.png',
         stats: { likes: '19.8K', comments: '11.5K' },
         details: {
-            duration: '7 Months',
+            duration: '90-Days',
             mode: 'Offline',
             rating: 4.8,
             alignment: 'Project-Based',
@@ -77,16 +77,16 @@ const courses = [
 ];
 
 const RatingStars = ({ rating }: { rating: number }) => (
-    <div className='flex items-center gap-1'>
+    <div className='flex items-center gap-0.5 md:gap-1'>
         {[...Array(5)].map((_, i) => (
             <img
                 key={i}
                 src='/star.svg'
                 alt='star'
-                className={`w-5 h-5 ${i < Math.floor(rating) ? '' : 'opacity-20 grayscale'}`}
+                className={`w-3.5 h-3.5 md:w-5 md:h-5 ${i < Math.floor(rating) ? '' : 'opacity-20 grayscale'}`}
             />
         ))}
-        <span className='text-sm text-[#ed3543] font-archivo font-bold ml-1'>{rating}</span>
+        <span className='text-[10px] md:text-sm text-[#ed3543] font-archivo font-bold ml-0.5 md:ml-1'>{rating}</span>
     </div>
 );
 
@@ -119,7 +119,7 @@ export default function PathToIndustryReady() {
     };
     return (
         <section
-            id='career-paths'
+            id='our-program'
             className='w-full bg-[#ed3543] py-24 relative overflow-hidden'
             data-section='path-to-industry-ready'
         >
@@ -129,12 +129,12 @@ export default function PathToIndustryReady() {
             </div>
 
             {/* Header Content */}
-            <div className='relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16'>
-                <h2 className='text-4xl md:text-6xl font-bold text-white font-outfit mb-4'>
-                    Paths to <br className='md:hidden' /> Industry-Ready Roles
+            <div className='relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10 md:mb-16'>
+                <h2 className='text-3xl md:text-6xl font-bold text-white font-outfit mb-4'>
+                    Industry demanded program by <br /> Qural Academy.
                 </h2>
                 <p className='text-white/80 text-lg md:text-xl font-outfit max-w-2xl mx-auto'>
-                    We transform engineering graduates into BIM-ready professionals across Architecture, Structure, and
+                    We transform engineering graduates into Job Ready professionals across Architecture, Structure, and
                     MEP Construction.
                 </p>
 
@@ -156,11 +156,11 @@ export default function PathToIndustryReady() {
                             <div key={course.id} className='w-full md:w-1/2 lg:w-1/3 shrink-0 px-4'>
                                 <motion.div
                                     whileHover={{ y: -10 }}
-                                    className='bg-white rounded-[40px] p-6 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col'
+                                    className='bg-white rounded-[32px] md:rounded-[40px] p-4 md:p-6 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col'
                                 >
                                     {/* Card Image Area */}
-                                    <div className='relative mb-10 group'>
-                                        <div className='relative h-48 rounded-2xl overflow-hidden shadow-[0px_8px_30px_rgba(0,0,0,0.1)]'>
+                                    <div className='relative mb-6 md:mb-10 group'>
+                                        <div className='relative h-32 md:h-48 rounded-2xl overflow-hidden shadow-[0px_8px_30px_rgba(0,0,0,0.1)]'>
                                             <img
                                                 src={course.image}
                                                 alt={course.title}
@@ -169,16 +169,16 @@ export default function PathToIndustryReady() {
                                         </div>
 
                                         {/* Floating stats badges - Centered & Overlapping */}
-                                        <div className='absolute bottom-0 left-0 right-0 flex justify-center gap-4 translate-y-1/2 z-10'>
-                                            <div className='bg-white px-5 py-3 rounded-2xl flex items-center gap-2.5 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50'>
-                                                <Heart className='w-6 h-6 text-[#ed3543] fill-[#ed3543]' />
-                                                <span className='text-base font-bold text-[#353535] font-archivo'>
+                                        <div className='absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 translate-y-1/2 z-10'>
+                                            <div className='bg-white px-3 py-2 md:px-5 md:py-3 rounded-2xl flex items-center gap-2 md:gap-2.5 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50'>
+                                                <Heart className='w-5 h-5 md:w-6 md:h-6 text-[#ed3543] fill-[#ed3543]' />
+                                                <span className='text-sm md:text-base font-bold text-[#353535] font-archivo'>
                                                     {course.stats.likes}
                                                 </span>
                                             </div>
-                                            <div className='bg-white px-5 py-3 rounded-2xl flex items-center gap-2.5 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50'>
-                                                <MessageSquare className='w-6 h-6 text-[#58c2a3] fill-[#58c2a3]' />
-                                                <span className='text-base font-bold text-[#353535] font-archivo'>
+                                            <div className='bg-white px-3 py-2 md:px-5 md:py-3 rounded-2xl flex items-center gap-2 md:gap-2.5 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50'>
+                                                <MessageSquare className='w-5 h-5 md:w-6 md:h-6 text-[#58c2a3] fill-[#58c2a3]' />
+                                                <span className='text-sm md:text-base font-bold text-[#353535] font-archivo'>
                                                     {course.stats.comments}
                                                 </span>
                                             </div>
@@ -186,49 +186,49 @@ export default function PathToIndustryReady() {
                                     </div>
 
                                     {/* Card Content */}
-                                    <div className='px-2 flex-grow'>
-                                        <h3 className='text-[#BB1F36] font-roboto font-bold mb-2 leading-tight text-lg tracking-tight'>
+                                    <div className='px-1 md:px-2 flex-grow'>
+                                        <h3 className='text-[#BB1F36] font-roboto font-bold mb-1 md:mb-2 leading-tight text-base md:text-lg tracking-tight'>
                                             {course.title}
                                         </h3>
-                                        <p className='text-[#42445D] font-roboto text-base mb-6 tracking-tight'>
+                                        <p className='text-[#42445D] font-roboto text-xs md:text-base mb-4 md:mb-6 tracking-tight'>
                                             {course.subtitle}
                                         </p>
 
                                         {/* Details Grid - 2x2 with thin dividers */}
-                                        <div className='grid grid-cols-2 gap-0 mb-6 border border-gray-100/70 rounded-2xl overflow-hidden'>
-                                            <div className='p-4 border-r border-b border-gray-100 relative'>
-                                                <div className='absolute left-0 top-4 bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
-                                                <p className='text-[12px] text-[#353535] font-archivo font-regular mb-1 uppercase tracking-widest whitespace-nowrap'>
+                                        <div className='grid grid-cols-2 gap-0 mb-4 md:mb-6 border border-gray-100/70 rounded-2xl overflow-hidden'>
+                                            <div className='p-2.5 md:p-4 border-r border-b border-gray-100 relative'>
+                                                <div className='absolute left-0 top-3 md:top-4 bottom-3 md:bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
+                                                <p className='text-[9px] md:text-[12px] text-[#353535] font-archivo font-regular mb-0.5 md:mb-1 uppercase tracking-widest'>
                                                     Program Duration
                                                 </p>
-                                                <p className='text-xl font-archivo font-medium text-[#0B090A]'>
+                                                <p className='text-base md:text-xl font-archivo font-medium text-[#0B090A] leading-tight'>
                                                     {course.details.duration}
                                                 </p>
                                             </div>
-                                            <div className='p-4 border-b border-gray-100 relative'>
-                                                <div className='absolute left-0 top-4 bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
-                                                <p className='text-[12px] text-[#353535] font-archivo font-regular mb-1 uppercase whitespace-nowrap'>
+                                            <div className='p-2.5 md:p-4 border-b border-gray-100 relative'>
+                                                <div className='absolute left-0 top-3 md:top-4 bottom-3 md:bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
+                                                <p className='text-[9px] md:text-[12px] text-[#353535] font-archivo font-regular mb-0.5 md:mb-1 uppercase'>
                                                     Delivery Mode
                                                 </p>
-                                                <p className='text-xl font-archivo font-medium text-[#0B090A]'>
+                                                <p className='text-base md:text-xl font-archivo font-medium text-[#0B090A] leading-tight'>
                                                     {course.details.mode}
                                                 </p>
                                             </div>
-                                            <div className='p-4 border-r border-gray-100 relative'>
-                                                <div className='absolute left-0 top-4 bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
-                                                <p className='text-[12px] text-[#353535] font-archivo font-regular mb-1 uppercase tracking-widest whitespace-nowrap'>
+                                            <div className='p-2.5 md:p-4 border-r border-gray-100 relative'>
+                                                <div className='absolute left-0 top-3 md:top-4 bottom-3 md:bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
+                                                <p className='text-[9px] md:text-[12px] text-[#353535] font-archivo font-regular mb-0.5 md:mb-1 uppercase tracking-widest'>
                                                     Program Rating
                                                 </p>
-                                                <div className='mt-1'>
+                                                <div className='mt-0.5'>
                                                     <RatingStars rating={course.details.rating} />
                                                 </div>
                                             </div>
-                                            <div className='p-4 relative'>
-                                                <div className='absolute left-0 top-4 bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
-                                                <p className='text-[12px] text-[#353535] font-archivo font-regular mb-1 uppercase whitespace-nowrap'>
+                                            <div className='p-2.5 md:p-4 relative'>
+                                                <div className='absolute left-0 top-3 md:top-4 bottom-3 md:bottom-4 w-0.5 bg-[#ed3543] rounded-full' />
+                                                <p className='text-[9px] md:text-[12px] text-[#353535] font-archivo font-regular mb-0.5 md:mb-1 uppercase'>
                                                     Industry Alignment
                                                 </p>
-                                                <p className='text-xl font-archivo font-medium text-[#0B090A]'>
+                                                <p className='text-sm md:text-xl font-archivo font-medium text-[#0B090A] leading-tight'>
                                                     {course.details.alignment}
                                                 </p>
                                             </div>
@@ -237,7 +237,7 @@ export default function PathToIndustryReady() {
 
                                     {/* CTA Button */}
                                     <button className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
-                                        Explore this path
+                                        Join Course now
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </motion.div>
