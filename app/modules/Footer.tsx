@@ -26,19 +26,19 @@ export default function Footer() {
                     </p>
                     <div className='flex gap-4 pt-4'>
                         <a
-                            href='#'
+                            href='https://www.facebook.com/61560652351853/'
                             className='w-10 h-10 rounded-xl bg-[#1877F2] flex items-center justify-center hover:opacity-80 transition-opacity'
                         >
                             <Facebook size={20} className='text-white' />
                         </a>
                         <a
-                            href='#'
+                            href='https://www.instagram.com/quraltalent?igsh=aDM2djk1a3h5enNt'
                             className='w-10 h-10 rounded-xl bg-[#E4405F] flex items-center justify-center hover:opacity-80 transition-opacity'
                         >
                             <Instagram size={20} className='text-white' />
                         </a>
                         <a
-                            href='#'
+                            href='https://in.linkedin.com/company/qural-talent'
                             className='w-10 h-10 rounded-xl bg-[#0A66C2] flex items-center justify-center hover:opacity-80 transition-opacity'
                         >
                             <Linkedin size={20} className='text-white' />
