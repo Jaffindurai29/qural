@@ -17,7 +17,7 @@ export default function Home() {
             <Hero />
             <WhyQural />
             <BIMShowcase />
-            <section className='w-full bg-[#ed3543] flex flex-col items-center px-2 md:px-0 isolate z-0'>
+            <section className='w-full bg-[#ed3543] flex flex-col items-center px-2 md:px-0 relative z-50'>
                 <BuiltThrough />
                 <JourneysShaped />
             </section>

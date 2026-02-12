@@ -250,7 +250,7 @@ Resume: ${formData.resume ? formData.resume.name : 'Not provided'}
                             <span className="text-white font-bold font-['Outfit']">Submitting...</span>
                         </>
                     ) : (
-                        <span className="text-white font-bold text-lg font-['Outfit'] tracking-wide">Submit Inquiry</span>
+                        <span className="text-white font-bold text-lg font-['Outfit'] tracking-wide">Submit</span>
                     )}
                 </div>
                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_rgba(255,217,232,0.3)]" />

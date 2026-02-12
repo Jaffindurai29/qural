@@ -21,7 +21,7 @@ export default function JourneysShaped() {
     const [modalOption, setModalOption] = useState('');
     const containerRef = React.useRef<HTMLDivElement>(null);
 
-    const openModal = (option: string) => {
+    const openModal = (option: string = '') => {
         setModalOption(option);
         setIsModalOpen(true);
     };
@@ -63,7 +63,7 @@ export default function JourneysShaped() {
     };
 
     return (
-        <div id="journey" className="relative w-full min-h-screen flex items-center justify-center bg-[#ed3543] py-20 px-4 isolate overflow-hidden">
+        <div id="journey" className="relative w-full min-h-screen flex items-center justify-center bg-[#ed3543] py-20 px-4 overflow-hidden">
             {/* 1. Background Decoration - Spanning Ring Image (Bottom Half) */}
             <div className="absolute top-0 left-[65%] -translate-x-1/2 w-[1200px] pointer-events-none overflow-visible">
                 <img
@@ -154,7 +154,7 @@ export default function JourneysShaped() {
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <button
                             onClick={() => openModal('Interested in Course')}
-                            className="relative border border-solid border-white content-stretch flex items-center justify-center px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden"
+                            className="relative border border-solid border-white content-stretch flex items-center justify-center px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20"
                         >
                             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                 <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
@@ -166,7 +166,7 @@ export default function JourneysShaped() {
                         </button>
 
                         <button
-                            onClick={() => openModal('Looking for a Job')}
+                            onClick={() => openModal()}
                             className="relative bg-[#f4f4f4] px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all outline-none"
                         >
                             <span className="font-['Outfit'] font-bold text-[#ed3543] text-lg relative z-10">

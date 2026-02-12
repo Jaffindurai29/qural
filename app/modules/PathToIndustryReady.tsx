@@ -248,7 +248,7 @@ export default function PathToIndustryReady() {
                                         onClick={() => openModal('Interested in Course')}
                                         className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 mt-auto"
                                     >
-                                        Join Course now
+                                        Join Course
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </motion.div>
