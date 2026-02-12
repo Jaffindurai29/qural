@@ -9,38 +9,53 @@ const imgBeeSmall = "/bee.png";
 const questions = [
     {
         id: 1,
-        question: "Is Qural a training institute or something different?",
-        answer: "Qural is not just about learning tools. We focus on industry readiness — how engineers actually work on real projects. Our paths are designed around roles, workflows, and execution standards used in the industry."
+        question: "How do you ensure candidate quality?",
+        answer: "We do not forward profiles. Each candidate undergoes a tailored technical pre-screening aligned to your project scope, BIM standards, and software stack. An exclusive SPOC validates technical depth, coordination ability, and project readiness before submission."
     },
     {
         id: 2,
-        question: "Who are these career paths meant for?",
-        answer: "Our paths are tailored for engineering graduates and professionals who want to specialize in Talent Acquisition and digital construction roles, looking to bridge the gap between academic knowledge and industry application."
+        question: "Do you customize screening for each project?",
+        answer: "Yes. Every requirement is assessed against specific deliverables, LOD expectations, regional standards, and coordination workflows. Screening is project-driven, not generic."
     },
     {
         id: 3,
-        question: "Do I need prior experience with AutoCAD or Revit?",
-        answer: "While prior experience is helpful, it is not mandatory. Our modules are structured to take you from foundational concepts to advanced industry workflows."
+        question: "How large is your talent pool?",
+        answer: "We maintain a global, continuously mapped BIM database across Electrical, Mechanical, Structural, Architectural, and BIM Coordination roles. Quantity is scalable. Quality remains controlled."
     },
     {
         id: 4,
-        question: "Will I work on real projects or only examples?",
-        answer: "You will work on simulated real-world projects that mimic actual industry scenarios, ensuring you gain practical experience relevant to job roles."
+        question: "How fast can you close a position?",
+        answer: "Shortlists & Closures are delivered within 24 - 48 hours. Our structured pipeline ensures best-in-class turnaround time."
     },
     {
         id: 5,
-        question: "Does Qural guarantee placement?",
-        answer: "We provide extensive placement assistance, including portfolio building and interview prep. While we don't guarantee jobs, our industry network actively seeks our ready-to-deploy talent."
+        question: "Can you support bulk or fast-track hiring?",
+        answer: "Yes. We build coordination-ready BIM teams for fast-track and mega projects without compromising technical standards."
     },
     {
         id: 6,
-        question: "How are Qural paths different from regular Industry courses?",
-        answer: "Regular courses often focus on software commands. Qural focuses on roles and workflows, teaching you 'how to think and work' like a professional, not just 'how to use a tool'."
+        question: "What makes Qural different from traditional recruiters?",
+        answer: "We combine domain-specific technical expertise with specialized HR intelligence. We understand talent needs with a deep understanding of project requirements, making our hiring precise and delivery-focused."
     },
     {
         id: 7,
-        question: "What kind of roles can I expect after completing a path?",
-        answer: "Depending on your chosen path, you can aim for roles like Digital Modeler, Construction Coordinator, Structural Engineer, or MEP Specialist in top AEC firms."
+        question: "How do you ensure long-term reliability?",
+        answer: "We assess beyond software skills—including coordination mindset, documentation discipline, and communication clarity. We hire for project continuity, not just placement."
+    },
+    {
+        id: 8,
+        question: "Are you only an HR agency?",
+        answer: "No. Qural integrates Talent Acquisition and Talent Development, building an ecosystem where talent is trained, hired, and deployed—giving us deeper control over skill quality."
+    },
+    {
+        id: 9,
+        question: "What is Qural’s College Connect model?",
+        answer: "We bridge academia and industry by aligning curriculum with real-world engineering delivery. This creates placement-ready, industry-oriented graduates."
+    },
+    {
+        id: 10,
+        question: "How does Qural support students?",
+        answer: "As an Autodesk authorised training centre, we provide industry-driven training, live project exposure, mentorship, and structured skill assessment. We transform engineering graduates into job-ready professionals who are deployable—not just certified."
     }
 ];
 
@@ -126,12 +141,7 @@ const QuestionCard = ({ item, isOpen, onToggle }: { item: any, isOpen: boolean, 
                                 className="overflow-hidden"
                             >
                                 <p className="text-gray-600 font-['Outfit'] text-sm leading-relaxed mt-2">
-                                    {item.answer.split('industry readiness').map((part: string, i: number, arr: any[]) => (
-                                        <React.Fragment key={i}>
-                                            {part}
-                                            {i < arr.length - 1 && <span className="text-[#ed3543] font-bold">industry readiness</span>}
-                                        </React.Fragment>
-                                    ))}
+                                    {item.answer}
                                 </p>
                             </motion.div>
                         )}

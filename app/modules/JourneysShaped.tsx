@@ -97,7 +97,8 @@ export default function JourneysShaped() {
                             {profileData.map((profile, i) => (
                                 <motion.div
                                     key={i}
-                                    className="shrink-0"
+                                    onClick={() => setCurrentIndex(i)}
+                                    className={`shrink-0 ${currentIndex !== i ? 'cursor-pointer' : ''}`}
                                     animate={{
                                         scale: currentIndex === i ? 1 : 0.9,
                                         opacity: currentIndex === i ? 1 : 0.5

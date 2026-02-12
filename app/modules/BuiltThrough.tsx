@@ -86,10 +86,10 @@ export default function BuiltThrough() {
                             </div>
                             {/* Card 2 */}
                             <div className="bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center text-center shadow-lg hover:scale-[1.02] transition-transform">
-                                <h2 className="font-['Outfit'] font-black text-[#ed3543] text-2xl sm:text-4xl lg:text-7xl">
-                                    <Counter value={9} suffix="+" />
+                                <h2 className="font-['Outfit'] font-black text-[#ed3543] text-2xl sm:text-4xl lg:text-5xl">
+                                    ₹<Counter value={170} suffix="+ Crore" />
                                 </h2>
-                                <p className="font-['Outfit'] text-gray-500 text-[8px] sm:text-[10px] lg:text-xs font-semibold mt-2 uppercase tracking-wide">Markets Operated</p>
+                                <p className="font-['Outfit'] text-gray-500 text-[8px] sm:text-[10px] lg:text-xs font-semibold mt-2 uppercase tracking-wide">CTC Created for Industry</p>
                             </div>
                             {/* Card 3 */}
                             <div className="bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center text-center shadow-lg hover:scale-[1.02] transition-transform">
@@ -107,12 +107,12 @@ export default function BuiltThrough() {
                             </div>
 
                             {/* CTC Stat - Horizontal Pill Inside Card */}
-                            <div className="col-span-2 mt-2 sm:mt-4 bg-white rounded-full p-1.5 sm:p-2 flex items-center justify-between shadow-lg border border-white/30 overflow-hidden">
+                            {/* <div className="col-span-2 mt-2 sm:mt-4 bg-white rounded-full p-1.5 sm:p-2 flex items-center justify-between shadow-lg border border-white/30 overflow-hidden">
                                 <div className="bg-[#b71f38] text-white px-4 sm:px-8 py-2 sm:py-4 rounded-full shadow-lg">
                                     <span className="font-['Outfit'] text-base sm:text-xl lg:text-3xl font-black whitespace-nowrap">₹170+ Crore</span>
                                 </div>
-                                <span className="font-['Outfit'] text-gray-800 text-[10px] sm:text-sm lg:text-lg font-bold pr-4 sm:pr-8 lg:pr-12 text-right">CTC Created for Industry</span>
-                            </div>
+                                <span className="font-['Outfit'] text-gray-800 text-[10px] sm:text-sm lg:text-lg font-bold pr-4 sm:pr-8 lg:pr-12 text-right">Global Presence</span>
+                            </div> */}
                         </div>
                     </div>
 

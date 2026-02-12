@@ -188,8 +188,8 @@ export default function BIMShowcase() {
                                 className="relative md:absolute md:inset-0 flex flex-col md:flex-row items-center justify-between p-4 md:p-10"
                             >
                                 {/* Left Side: Wireframe Visual */}
-                                <div className="relative md:absolute md:left-0 md:top-0 md:bottom-0 w-full md:w-[60%] h-[250px] md:h-full overflow-hidden pointer-events-none">
-                                    <div className="relative w-full h-full transform scale-110 md:scale-125 md:translate-x-[0%]">
+                                <div className="relative md:absolute md:left-0 md:top-0 md:bottom-0 w-full md:w-[60%] h-[200px] md:h-full overflow-hidden pointer-events-none rounded-2xl md:rounded-none">
+                                    <div className="relative w-full h-full transform scale-100 md:scale-125 md:translate-x-[0%]">
                                         {/* Unified Wireframe Visual (Layered for depth) */}
                                         <img
                                             src="/h.png"
@@ -202,8 +202,8 @@ export default function BIMShowcase() {
                                         />
                                     </div>
 
-                                    {/* Vignette to fade wireframe edges */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black/80 z-10" />
+                                    {/* Vignette to fade wireframe edges
+                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black/80 z-10" /> */}
                                 </div>
 
                                 {/* Right Side: Job Card */}
@@ -262,7 +262,7 @@ export default function BIMShowcase() {
                                         </div>
 
                                         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 mb-4 md:mb-6">
-                                            <input
+                                            {/* <input
                                                 type="file"
                                                 ref={fileInputRef}
                                                 onChange={handleFileChange}
@@ -291,19 +291,19 @@ export default function BIMShowcase() {
                                                         <X className="w-4 h-4 text-gray-400 group-hover/cancel:text-red-500" />
                                                     </button>
                                                 )}
-                                            </div>
+                                            </div> */}
                                             <button className="relative border border-solid border-white content-stretch flex items-center justify-center h-12 px-8 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden w-full md:w-auto">
                                                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                                     <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                                                 </div>
                                                 <p className="font-['Outfit'] font-bold leading-[normal] relative shrink-0 text-sm text-white z-10">
-                                                    Submit
+                                                    Apply Now
                                                 </p>
                                                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                                             </button>
                                         </div>
 
-                                        <div className="flex items-center gap-2">
+                                        {/* <div className="flex items-center gap-2">
                                             <div className="relative flex h-2 w-2">
                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -311,7 +311,7 @@ export default function BIMShowcase() {
                                             <span className="text-red-500 text-xs font-medium font-['Outfit']">
                                                 We'll connect you with the right BIM talent.
                                             </span>
-                                        </div>
+                                        </div> */}
                                     </motion.div>
                                 </div>
                             </motion.div>

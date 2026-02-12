@@ -275,13 +275,13 @@ export default function Hero() {
                         <span className="leading-[normal] text-[#ee3042]">ENGINEERED</span>
                         <span className="leading-[normal]">.</span>
                     </p>
-                    <p className="mt-4 lg:mt-0 lg:absolute font-outfit font-normal leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[14px] lg:text-[14px] text-white lg:top-[305px] px-8 text-center" data-node-id="163:28">
+                    <p className="mt-4 lg:mt-0 lg:absolute font-outfit font-normal leading-[normal] lg:left-1/2 lg:-translate-x-1/2 whitespace-normal lg:whitespace-nowrap text-[16px] lg:text-[18px] text-white lg:top-[330px] px-8 text-center" data-node-id="163:28">
                         Your extended HR talent partner for end-to-end talent acquisition & development.
                     </p>
                 </div>
 
                 {/* Main CTA Button */}
-                <button className="relative mt-8 lg:mt-0 lg:-translate-x-1/2 lg:absolute border border-solid border-white content-stretch flex h-[56px] items-center justify-center lg:left-[calc(50%+0.5px)] p-[8px] rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] lg:top-[350px] w-[280px] lg:w-[300px] cursor-pointer hover:brightness-95 transition-all z-20" data-node-id="169:743">
+                <button className="relative mt-8 lg:mt-0 lg:-translate-x-1/2 lg:absolute border border-solid border-white content-stretch flex h-[56px] items-center justify-center lg:left-[calc(50%+0.5px)] p-[8px] rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] lg:top-[385px] w-[280px] lg:w-[300px] cursor-pointer hover:brightness-95 transition-all z-20" data-node-id="169:743">
                     <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                         <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                         <div className="absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[10px]" style={{ backgroundImage: `url('${imgFrame1321314585}')` }} />
@@ -309,12 +309,12 @@ export default function Hero() {
             </div>
 
             {/* Decorative Images and Vectors */}
-            <div className="-translate-x-1/2 absolute left-1/2 w-[120%] h-[300px] -bottom-10 lg:w-auto lg:h-auto lg:size-[1556px] lg:top-[664px] lg:bottom-auto opacity-50 lg:opacity-100 pointer-events-none" data-node-id="163:29">
+            {/* <div className="-translate-x-1/2 absolute left-1/2 w-[120%] h-[300px] -bottom-10 lg:w-auto lg:h-auto lg:size-[1556px] lg:top-[664px] lg:bottom-auto opacity-50 lg:opacity-100 pointer-events-none" data-node-id="163:29">
                 <img alt="" className="block size-full object-cover lg:object-fill" src={imgEllipse7} />
             </div>
             <div className="hidden lg:block absolute lg:left-[31px] lg:size-[1389px] lg:top-[947px] lg:opacity-100 pointer-events-none" data-node-id="163:30">
                 <img alt="" className="block size-full object-contain lg:object-fill" src={imgEllipse8} />
-            </div>
+            </div> */}
             <div className="absolute bg-black blur-[75px] h-[318px] left-0 top-[889px] w-full lg:w-[1440px] pointer-events-none" data-node-id="163:31" />
             <div className="-translate-x-1/2 absolute bottom-[-10px] lg:bottom-[-10px] flex h-[200px] lg:h-[474px] items-center justify-center left-1/2 lg:left-[calc(53.13%-30.5px)] w-full lg:w-[1527px] pointer-events-none">
                 <div className="-scale-y-100 flex-none rotate-180 w-full lg:w-auto h-full">

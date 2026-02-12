@@ -117,7 +117,7 @@ export default function WhyQural() {
                                             <motion.h3
                                                 animate={{ color: isActive ? '#1a1a1a' : '#d1d5db' }}
                                                 transition={{ duration: 0.3 }}
-                                                className="text-3xl md:text-8xl font-['Architects_Daughter']"
+                                                className="text-3xl md:text-6xl font-['Roboto'] font-bold"
                                             >
                                                 {section.title}
                                             </motion.h3>
@@ -210,13 +210,6 @@ export default function WhyQural() {
                                                         </p>
 
                                                         <div className="flex flex-wrap justify-center gap-4 mb-4 md:mb-8">
-                                                            <button className="relative bg-[#f4f4f4] px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all outline-none">
-                                                                <span className="font-['Outfit'] font-bold text-[#ed3543] text-base relative z-10">
-                                                                    {section.content.ctaPrimary}
-                                                                </span>
-                                                                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
-                                                            </button>
-
                                                             <button className="relative border border-solid border-white content-stretch flex items-center justify-center px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
                                                                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                                                     <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
