@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
+import LeadModal from '../components/LeadModal';
 
 // Placeholder Assets
 const imgBee = '/bee.png';
@@ -93,6 +94,13 @@ const RatingStars = ({ rating }: { rating: number }) => (
 export default function PathToIndustryReady() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
     const maxIndex = Math.max(0, courses.length - visibleCards);
 
     useEffect(() => {
@@ -236,7 +244,10 @@ export default function PathToIndustryReady() {
                                     </div>
 
                                     {/* CTA Button */}
-                                    <button className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 mt-auto">
+                                    <button
+                                        onClick={() => openModal('Interested in Course')}
+                                        className="w-full bg-gradient-to-r from-[#ed3543] to-[#C41C30] text-white py-3 rounded-xl font-['Outfit'] font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 mt-auto"
+                                    >
                                         Join Course now
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
@@ -266,6 +277,13 @@ export default function PathToIndustryReady() {
                     </button>
                 </div>
             </div>
+
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+                title="Join Our Industry-Ready Program"
+            />
         </section>
     );
 }

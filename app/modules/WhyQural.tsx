@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HexagonNumber from '../components/HexagonNumber';
+import LeadModal from '../components/LeadModal';
 
 const sections = [
     {
@@ -57,6 +58,13 @@ const sections = [
 
 export default function WhyQural() {
     const [activeSection, setActiveSection] = useState<string | null>('corporates');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
 
     return (
         <section id="why-qural" className="w-full bg-white py-24 flex flex-col items-center relative overflow-hidden" data-section="why-qural">
@@ -210,7 +218,10 @@ export default function WhyQural() {
                                                         </p>
 
                                                         <div className="flex flex-wrap justify-center gap-4 mb-4 md:mb-8">
-                                                            <button className="relative border border-solid border-white content-stretch flex items-center justify-center px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
+                                                            <button
+                                                                onClick={() => openModal(section.id === 'corporates' ? 'Finding a Talent' : section.id === 'students' ? 'Looking for a Job' : 'Interested in Course')}
+                                                                className="relative border border-solid border-white content-stretch flex items-center justify-center px-6 py-3 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden"
+                                                            >
                                                                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                                                     <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                                                                 </div>
@@ -235,6 +246,12 @@ export default function WhyQural() {
                     );
                 })}
             </div>
+
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+            />
         </section >
     );
 }

@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import LeadModal from '../components/LeadModal';
 
 const imgFrame1321314585 = "https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e";
 const imgEllipse1 = "https://www.figma.com/api/mcp/asset/7ad97e0b-b0d4-4d95-b410-1b2f393129d6";
@@ -151,7 +152,14 @@ export default function Hero() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isManual, setIsManual] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
     const nextIndexRef = useRef(0); // Track sequence
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
 
     // Handle Resize/Mobile detection
     useEffect(() => {
@@ -244,7 +252,10 @@ export default function Hero() {
             </div>
 
             {/* Right Button - Hidden on Mobile */}
-            <button className="hidden lg:flex absolute bg-[#f4f4f4] content-stretch h-[38px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[6px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[37px] cursor-pointer hover:brightness-95 transition-all z-50" data-name="Button" data-node-id="169:746">
+            <button
+                onClick={() => openModal('Interested in Course')}
+                className="hidden lg:flex absolute bg-[#f4f4f4] content-stretch h-[38px] items-center justify-center left-[calc(81.25%-17px)] px-[22.448px] py-[6px] rounded-[8.418px] shadow-[0.312px_0.312px_0.441px_0px_rgba(0,0,0,0.26),0.849px_0.849px_1.201px_0px_rgba(0,0,0,0.25),1.865px_1.865px_2.637px_0px_rgba(0,0,0,0.23),4.139px_4.139px_5.854px_0px_rgba(0,0,0,0.19),7.015px_7.015px_14.881px_0px_rgba(0,0,0,0.05),-0.351px_-0.351px_0px_0px_rgba(0,0,0,0.05)] top-[37px] cursor-pointer hover:brightness-95 transition-all z-50" data-name="Button" data-node-id="169:746"
+            >
                 <p className="font-outfit font-semibold leading-[normal] relative shrink-0 text-[#ed3543] text-[12px]" data-node-id="169:747">Want to Upskill ? </p>
                 <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0.701px_0.701px_0.701px_0px_white,inset_-0.701px_-0.701px_0.701px_0px_rgba(0,0,0,0.15)]" />
             </button>
@@ -281,7 +292,10 @@ export default function Hero() {
                 </div>
 
                 {/* Main CTA Button */}
-                <button className="relative mt-8 lg:mt-0 lg:-translate-x-1/2 lg:absolute border border-solid border-white content-stretch flex h-[56px] items-center justify-center lg:left-[calc(50%+0.5px)] p-[8px] rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] lg:top-[385px] w-[280px] lg:w-[300px] cursor-pointer hover:brightness-95 transition-all z-20" data-node-id="169:743">
+                <button
+                    onClick={() => openModal('Finding a Talent')}
+                    className="relative mt-8 lg:mt-0 lg:-translate-x-1/2 lg:absolute border border-solid border-white content-stretch flex h-[56px] items-center justify-center lg:left-[calc(50%+0.5px)] p-[8px] rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] lg:top-[385px] w-[280px] lg:w-[300px] cursor-pointer hover:brightness-95 transition-all z-20" data-node-id="169:743"
+                >
                     <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                         <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                         <div className="absolute bg-size-[307.20001220703125px_307.20001220703125px] bg-top-left inset-0 mix-blend-plus-lighter opacity-40 rounded-[10px]" style={{ backgroundImage: `url('${imgFrame1321314585}')` }} />
@@ -362,6 +376,12 @@ export default function Hero() {
                 )}
             </AnimatePresence>
 
+            {/* Lead Modal */}
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+            />
         </div>
     );
 }

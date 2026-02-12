@@ -1,10 +1,19 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import LeadModal from '../components/LeadModal';
 
 const imgFrame1321314585 = 'https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e';
 
 export default function TalentCTA() {
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const [modalOption, setModalOption] = React.useState('');
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
+
     return (
         <section className='w-full relative overflow-hidden bg-linear-to-b from-[#CF0000]/90 to-[#030303] py-24 px-4'>
             {/* Decorative circles/rings overlay */}
@@ -55,7 +64,10 @@ export default function TalentCTA() {
                         className='flex flex-col sm:flex-row items-center justify-center gap-6 mb-4 w-full'
                     >
                         {/* Primary Button */}
-                        <button className='relative border border-solid border-white content-stretch flex h-[60px] items-center justify-center px-5 rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] cursor-pointer hover:brightness-95 transition-all z-20 group'>
+                        <button
+                            onClick={() => openModal('Finding a Talent')}
+                            className='relative border border-solid border-white content-stretch flex h-[60px] items-center justify-center px-5 rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] cursor-pointer hover:brightness-95 transition-all z-20 group'
+                        >
                             <div aria-hidden='true' className='absolute inset-0 pointer-events-none rounded-[10px]'>
                                 <div className='absolute bg-linear-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]' />
                                 <div
@@ -69,7 +81,10 @@ export default function TalentCTA() {
                             <div className='absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]' />
                         </button>
                         {/* Secondary Button */}
-                        <button className="px-10 h-[60px] flex items-center justify-center bg-white hover:bg-gray-50 text-[#ed3543] font-bold rounded-xl shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 transition-all duration-200 text-xl font-['Outfit'] whitespace-nowrap">
+                        <button
+                            onClick={() => openModal('Looking for a Job')}
+                            className="px-10 h-[60px] flex items-center justify-center bg-white hover:bg-gray-50 text-[#ed3543] font-bold rounded-xl shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 transition-all duration-200 text-xl font-['Outfit'] whitespace-nowrap"
+                        >
                             Start Your Career Journey
                         </button>
                     </motion.div>
@@ -91,6 +106,12 @@ export default function TalentCTA() {
                     </motion.div>
                 </div>
             </div>
+
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+            />
         </section>
     );
 }

@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import ProfileCard from '../components/ProfileCard';
+import LeadModal from '../components/LeadModal';
 
 const profileData = [
     { name: "Rahul K", before: "Graduate", after: "Electrical BIM Professional", profileImg: "/person/p1.png", logo: "/company/c1.png" },
@@ -16,7 +17,14 @@ const profileData = [
 export default function JourneysShaped() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [containerWidth, setContainerWidth] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
     const containerRef = React.useRef<HTMLDivElement>(null);
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
 
     React.useEffect(() => {
         if (containerRef.current) {
@@ -34,9 +42,8 @@ export default function JourneysShaped() {
     const cardWidth = typeof window !== 'undefined' && window.innerWidth < 768 ? window.innerWidth * 0.85 : 400;
     const gap = 24;
 
-    // Offset to center the active card
-    const centerOffset = (containerWidth / 2) - (cardWidth / 2);
-    const xOffset = centerOffset - (currentIndex * (cardWidth + gap));
+    // Offset to align to start
+    const xOffset = -(currentIndex * (cardWidth + gap));
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % profileData.length);
@@ -100,8 +107,8 @@ export default function JourneysShaped() {
                                     onClick={() => setCurrentIndex(i)}
                                     className={`shrink-0 ${currentIndex !== i ? 'cursor-pointer' : ''}`}
                                     animate={{
-                                        scale: currentIndex === i ? 1 : 0.9,
-                                        opacity: currentIndex === i ? 1 : 0.5
+                                        scale: 1,
+                                        opacity: 1
                                     }}
                                 >
                                     <ProfileCard
@@ -145,7 +152,10 @@ export default function JourneysShaped() {
 
                     {/* Main CTA Pair */}
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <button className="relative border border-solid border-white content-stretch flex items-center justify-center px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden">
+                        <button
+                            onClick={() => openModal('Interested in Course')}
+                            className="relative border border-solid border-white content-stretch flex items-center justify-center px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden"
+                        >
                             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                 <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                             </div>
@@ -155,7 +165,10 @@ export default function JourneysShaped() {
                             <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_18px_0px_#ffd9e8,inset_0px_1px_4px_0px_#ffd9e8]" />
                         </button>
 
-                        <button className="relative bg-[#f4f4f4] px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all outline-none">
+                        <button
+                            onClick={() => openModal('Looking for a Job')}
+                            className="relative bg-[#f4f4f4] px-8 py-4 rounded-[10px] cursor-pointer hover:brightness-95 transition-all outline-none"
+                        >
                             <span className="font-['Outfit'] font-bold text-[#ed3543] text-lg relative z-10">
                                 Get Career Guidance
                             </span>
@@ -168,6 +181,11 @@ export default function JourneysShaped() {
                     </p>
                 </div>
             </div>
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+            />
         </div>
     );
 }

@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Crown, User, X } from 'lucide-react';
+import LeadModal from '../components/LeadModal';
 
 const talentSlides = [
     {
@@ -103,7 +104,14 @@ const swipePower = (offset: number, velocity: number) => {
 export default function BIMShowcase() {
     const [[currentIndex, direction], setPage] = useState([0, 0]);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -292,7 +300,10 @@ export default function BIMShowcase() {
                                                     </button>
                                                 )}
                                             </div> */}
-                                            <button className="relative border border-solid border-white content-stretch flex items-center justify-center h-12 px-8 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden w-full md:w-auto">
+                                            <button
+                                                onClick={() => openModal('Looking for a Job')}
+                                                className="relative border border-solid border-white content-stretch flex items-center justify-center h-12 px-8 rounded-[10px] cursor-pointer hover:brightness-95 transition-all z-20 overflow-hidden w-full md:w-auto"
+                                            >
                                                 <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[10px]">
                                                     <div className="absolute bg-gradient-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]" />
                                                 </div>
@@ -350,6 +361,12 @@ export default function BIMShowcase() {
                 </div>
 
             </div>
+
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+            />
         </section>
     );
 }

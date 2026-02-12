@@ -1,7 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Globe, Award, Users } from 'lucide-react';
+import LeadModal from '../components/LeadModal';
 
 const imgFrame1321314585 = 'https://www.figma.com/api/mcp/asset/8fb099de-3579-46e3-9ec7-9c3631f2af2e';
 
@@ -33,6 +34,14 @@ const features = [
 ];
 
 export default function SpecializedPartner() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
+
+    const openModal = (option: string) => {
+        setModalOption(option);
+        setIsModalOpen(true);
+    };
+
     return (
         <section className='w-full bg-[#030303] py-16 md:py-24 px-4 relative overflow-hidden'>
             {/* Decorative Background Elements for Differentiation */}
@@ -77,7 +86,10 @@ export default function SpecializedPartner() {
                         <span className='text-[#ed3543]'>Uncompromised talent quality.</span>
                     </div>
 
-                    <button className='relative border border-solid border-white content-stretch flex h-auto min-h-[60px] items-center justify-center px-6 sm:px-10 py-4 rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] cursor-pointer hover:brightness-95 transition-all z-20 group w-full sm:w-auto'>
+                    <button
+                        onClick={() => openModal('Finding a Talent')}
+                        className='relative border border-solid border-white content-stretch flex h-auto min-h-[60px] items-center justify-center px-6 sm:px-10 py-4 rounded-[10px] shadow-[0px_24.721px_32.257px_0px_rgba(229,0,92,0.19),0px_3.714px_4.846px_0px_rgba(229,0,92,0.15),0px_0px_0px_0px_#f8eaf0,0px_0px_0px_0px_white] cursor-pointer hover:brightness-95 transition-all z-20 group w-full sm:w-auto'
+                    >
                         <div aria-hidden='true' className='absolute inset-0 pointer-events-none rounded-[10px]'>
                             <div className='absolute bg-linear-to-b from-[#ed3543] inset-0 rounded-[10px] to-[#bb1f36]' />
                             <div
@@ -119,6 +131,13 @@ export default function SpecializedPartner() {
                     ))}
                 </div>
             </div>
+
+            <LeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                defaultOption={modalOption}
+                title="Speak to a Specialized Partner"
+            />
         </section>
     );
 }
